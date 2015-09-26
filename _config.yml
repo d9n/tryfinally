@@ -12,3 +12,15 @@ github_username:  d9n
 
 # Build settings
 markdown: kramdown
+sass:
+  style: compressed
+
+include:
+  - ".nojekyll" # Tell github pages we build jekyll ourselves
+exclude:
+  - "README.md"
+  - "node_modules"
+  - "package.json"
+  - "bower_components"
+  - "bower.json"
+  - "scripts"

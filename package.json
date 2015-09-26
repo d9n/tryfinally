@@ -1,0 +1,13 @@
+{
+  "name": "d9n.coding",
+  "version": "0.1.0",
+  "description": "npm managed scripts for fetching components and building the site",
+  "main": "index.js",
+  "scripts": {
+    "firstrun": "bower install && npm run updatedeps && npm install watchy",
+    "updatedeps": "ruby scripts/copy_bower_dependencies.rb",
+    "serve": "node_modules/watchy/bin/watchy -w _config.yml -- jekyll serve"
+  },
+  "author": "David Herman",
+  "license": "MIT"
+}
