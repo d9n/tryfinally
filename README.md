@@ -21,6 +21,9 @@ All remaining dependencies are local and maintained by Bower.
 # Fetch dependencies and set them up
 $ npm run firstrun
 
+# Verify config
+$ less _config.yml
+
 # Initialize _site and sync with github repo
 # !!! Github repo name should be replaced with your fork !!!
 $ mkdir _site && cd _site

@@ -3,9 +3,16 @@ layout: page
 title: About
 permalink: /about/
 ---
+My name is David Herman, but you can call me [d9n](https://en.wikipedia.org/wiki/Numeronym) (denine). It's shorter.
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+This blog is my home for **carefully crafted coding tutorials**. You can rely on all entries to provide:
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+* A clear goal
+* Concrete examples
+* Git clone links - follow along at home!
+* Clearly labelled tips and warnings
+* Approachable explanations
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+So make yourself comfortable, and share in some of the knowledge and patterns I've picked up over the course of a 20 year long programming career.
+
+**Learn, discuss, and enjoy!**
