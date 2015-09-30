@@ -1,5 +1,6 @@
 # Site settings
-title: Try { Finally }
+title: Try{Finally}
+subtitle: Coding Tutorials
 email: d9n.coding@gmail.com
 description: >
   <b>Carefully crafted coding tutorials</b>
@@ -7,8 +8,17 @@ description: >
   Learn, discuss, and enjoy!
 baseurl: "/tutorials"
 url: "http://d9n.github.io"
-#twitter_username: 
-github_username:  d9n 
+github_username: d9n
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: "series/kotlin"
+    values:
+      series_title: "Making an Android Game with Kotlin and LibGdx"
+      github_repo: "kotlin_keep"
+      github_branch: "master"
 
 # Build settings
 markdown: kramdown
