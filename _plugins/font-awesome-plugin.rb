@@ -60,9 +60,9 @@ eos
 
     def icon_tag(icon_class, icon_extra = nil)
       if icon_extra.empty?
-        "<i class=\"fa #{icon_class}\"></i>"
+        "<span class=\"fa #{icon_class}\"></span>"
       else
-        "<i class=\"fa #{icon_class} #{icon_extra}\"></i>"
+        "<span class=\"fa #{icon_class} #{icon_extra}\"></span>"
       end
     end
   end
