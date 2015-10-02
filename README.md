@@ -45,6 +45,13 @@ $ jekyll build
 $ npm run serve # "jekyll serve" is also OK
 ```
 
+<!-- Make this obsolete by using Jekyll hook on build? -->
+### Pretty print your html
+```bash
+# requires up-to-date tidy, to handle html5!
+$ npm run tidy
+```
+
 ### Push to github
 ```bash
 $ cd _site
