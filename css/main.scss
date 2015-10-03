@@ -40,10 +40,10 @@ $on-laptop:        800px;
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
-	"third-party/normalize",
-        "base",
-        "layout",
-        "syntax-highlighting",
-	"third-party/gridism",
-	"third-party/font-awesome"
+    "third-party/normalize",
+    "base",
+    "layout",
+    "third-party/syntax-highlighting",
+    "third-party/gridism",
+    "third-party/font-awesome"
 ;
