@@ -6,10 +6,34 @@ layout: default
   <article class="post-content">
   	<div class="post-header">
 	    <h1>{{ page.series_title | default: '(Missing Title)' }}</h1>
-	    <div class="post-goal">
+		{% goal %}
 			{{ page.goal | default: '(Missing goal)' }}
-		</div>
-	</div>
+		{% endgoal %}
+
+		{% goal %}
+			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
+		{% endgoal %}
+
+		{% goal HEADER TEST %}
+			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
+		{% endgoal %}
+
+		{% warn %}
+			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
+		{% endwarn %}
+
+		{% tip %}
+			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
+		{% endtip %}
+
+		{% warn HEADER TEST %}
+			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
+		{% endwarn %}
+
+		{% tip HEADER TEST %}
+			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
+		{% endtip %}
+ 	</div>
 	<p>
     {{ content }}
   </article>
