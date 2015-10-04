@@ -3,39 +3,33 @@ layout: default
 ---
 <div class="post">
 
-  <article class="post-content">
-  	<div class="post-header">
-	    <h1>{{ page.series_title | default: '(Missing Title)' }}</h1>
-		{% goal %}
-			{{ page.goal | default: '(Missing goal)' }}
-		{% endgoal %}
+	<div class="post-intro">
+	    <div class="post-series-title">{{ page.series_title | default: '(page missing: series_title)' }}</div>
 
-		{% goal %}
-			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
-		{% endgoal %}
+		<h1 class="post-title">{{ page.title | default: '(page missing: title)' '}}</h1>
 
-		{% goal HEADER TEST %}
-			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
-		{% endgoal %}
+		<div class="goal">
+			<span class="goal-header">In this lesson, we'll...</span>
+			<!-- <ul class="fa-ul">	 -->
+			<ul>
+		    {% for goal in page.goals %}
+				<!-- <li><span class="fa-li fa fa-square-o"/></span>{{ goal }}</li> -->
+				<li>{{goal}}</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
 
-		{% warn %}
-			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
-		{% endwarn %}
+	<div class="post-content">
+		Test {{ page.github_repo? }} test
+		{% if page.github_repo? %}
+{% highlight bash %}
+$ {{ page.github_repo }}
+{% endhighlight %}
+		{% endif %}
 
-		{% tip %}
-			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
-		{% endtip %}
-
-		{% warn HEADER TEST %}
-			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
-		{% endwarn %}
-
-		{% tip HEADER TEST %}
-			Lorem ipsum dolor sit amet, purto tincidunt no has, nusquam fierent at vim, eos summo sadipscing te. Ea eros efficiantur est, his erant docendi pericula ne, semper tamquam complectitur est te. Scribentur consequuntur ea eum, cum ut justo dictas. Pro quodsi timeam malorum te, bonorum pertinax sit ad. Nam eu ridens vidisse, prima audire eum te, integre albucius torquatos at per. Eos ex adhuc nostrum, ut sit natum assueverit, adhuc quaeque te sed.
-		{% endtip %}
- 	</div>
-	<p>
-    {{ content }}
+	    {{ content }}
+    </div>
   </article>
 
 </div>

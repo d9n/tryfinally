@@ -11,8 +11,25 @@
     }
 }
 
-// Mixins taken from the jekyll site
-// https://github.com/jekyll/jekyll/blob/master/site/_sass/_mixins.scss
+@mixin gradient($gradient...) {
+  background: -webkit-linear-gradient($gradient);
+  background: -o-linear-gradient($gradient);
+  background: -moz-linear-gradient($gradient);
+  background: linear-gradient($gradient);
+}
+
+@mixin responsive-font($font-size) {
+  font-size: $font-size;
+
+  @include media-query($on-mobile) {
+      font-size: $font-size * 0.8;
+  }
+}
+
+@mixin max-width($width) {
+  max-width: -webkit-calc(#{$width});
+  max-width:         calc(#{$width});
+}
 
 @mixin box-shadow($shadow...) {
   -webkit-box-shadow: $shadow;
