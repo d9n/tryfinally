@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+// Our variables
+$base-font-family: Helvetica, Arial, sans-serif;
+$base-font-size:   20px;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.5;
+
+$title-font-size:  30px;
+$title-bar-height: 56px;
+$navbar-font-size: $title-font-size * 0.5;
+
+// Buffer that surrounds main content area and divides sections
+$spacing-unit:     25px;
+
+$text-color:       #000000;
+$background-color: #fbfbfb;
+$brand-color:      #2e598a;
+
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+// Width of the content area
+$content-width:    800px;
+
+$on-mobile:        600px;
+$on-laptop:        800px;
+

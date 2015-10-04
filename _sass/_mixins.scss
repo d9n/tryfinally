@@ -1,0 +1,54 @@
+// Using media queries with like this:
+// @include media-query($on-mobile) {
+//     .wrapper {
+//         padding-right: $spacing-unit / 2;
+//         padding-left: $spacing-unit / 2;
+//     }
+// }
+@mixin media-query($device) {
+    @media screen and (max-width: $device) {
+        @content;
+    }
+}
+
+// Mixins taken from the jekyll site
+// https://github.com/jekyll/jekyll/blob/master/site/_sass/_mixins.scss
+
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+     -moz-box-shadow: $shadow;
+          box-shadow: $shadow;
+}
+
+@mixin border-radius($radius...) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin border-top-left-radius($radius...) {
+  -webkit-border-top-left-radius: $radius;
+     -moz-border-radius-topleft:  $radius;
+          border-top-left-radius: $radius;
+}
+
+@mixin border-top-right-radius($radius...) {
+  -webkit-border-top-right-radius: $radius;
+     -moz-border-radius-topright:  $radius;
+          border-top-right-radius: $radius;
+}
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+@mixin user-select($select...) {
+  -webkit-user-select: $select;    /* Chrome all / Safari all */
+     -moz-user-select: $select;    /* Firefox all */
+      -ms-user-select: $select;    /* IE 10+ */
+       -o-user-select: $select;
+          user-select: $select;
+}
