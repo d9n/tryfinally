@@ -4,4 +4,5 @@ node_modules
 bower_components
 fonts
 _sass/third-party
+js/third-party
 .DS_Store

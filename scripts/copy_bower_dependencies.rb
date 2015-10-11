@@ -7,6 +7,8 @@
 
 require 'fileutils'
 
+# Copy sass components
+
 sass_dir = '_sass/third-party'
 FileUtils.mkdir(sass_dir) if !File.exists?(sass_dir)
 FileUtils.cp('bower_components/gridism/gridism.css', "#{sass_dir}/_gridism.scss")
@@ -20,3 +22,8 @@ FileUtils.cp_r('bower_components/font-awesome/fonts', '.')
 FileUtils.cp_r('bower_components/font-awesome/scss/.', fa_dir)
 system("sass #{fa_dir}/font-awesome.scss > #{sass_dir}/_font-awesome.scss")
 FileUtils.rm_r(fa_dir)
+
+# Copy jquery
+
+FileUtils.cp('bower_components/jquery/dist/jquery.min.js', 'js/third-party')
+

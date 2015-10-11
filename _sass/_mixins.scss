@@ -55,6 +55,28 @@
           border-top-right-radius: $radius;
 }
 
+@mixin border-bottom-left-radius($radius...) {
+  -webkit-border-bottom-left-radius:  $radius;
+     -moz-border-radius-bottomright:  $radius;
+          border-bottom-right-radius: $radius;
+}
+
+@mixin border-bottom-right-radius($radius...) {
+  -webkit-border-bottom-right-radius: $radius;
+     -moz-border-radius-bottomright:  $radius;
+          border-bottom-right-radius: $radius;
+}
+
+@mixin border-top-radius($radius...) {
+  @include border-top-left-radius($radius);
+  @include border-top-right-radius($radius);
+}
+
+@mixin border-bottom-radius($radius...) {
+  @include border-bottom-left-radius($radius);
+  @include border-bottom-right-radius($radius);
+}
+
 @mixin transition($transition...) {
   -webkit-transition: $transition;
      -moz-transition: $transition;

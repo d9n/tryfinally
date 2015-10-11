@@ -196,14 +196,15 @@
     color: $text-color;
 }
 
+$floating-post-radius: 10px;
+
+
 .post-intro {
-    $post-intro-border-radius: 10px;
     margin-top: 20px;
     padding: 20px;
     color: $intro-area-fg;
     @include gradient(lighten($intro-area-bg, 10%) 0%, $intro-area-bg 100%);
-    @include border-top-left-radius($post-intro-border-radius);
-    @include border-top-right-radius($post-intro-border-radius);
+    @include border-top-radius($floating-post-radius);
 }
 
 .post-title {
@@ -217,5 +218,33 @@
 .post-content {
     background-color: #ffffff;
     padding: 20px;
+    margin-bottom: $spacing-unit;
+    @include border-bottom-radius($floating-post-radius);
 
+    // aside {
+    //     absolute
+    // }
+
+}
+
+/**
+ * Debug
+ */
+#debug-console {
+    position: fixed;
+    background-color: yellow;
+    border-style: solid;
+    border-width: 1px;
+    width: 80%;
+    margin: 0 0 0 -40%;
+    padding-left: 5px;
+    overflow-y: auto;
+    top: 98%;
+    left:50%;
+    @include border-top-radius(5px);
+
+    &:hover {
+        top: initial;
+        bottom: -1px;
+    }
 }

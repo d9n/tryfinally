@@ -3,8 +3,6 @@
 
   {% include head.html %}
 
-  <body onload="testalert()">
-
     {% include header.html %}
 
     <div class="page-content">
@@ -14,7 +12,13 @@
     </div>
 
 
-	<script src="/tutorials/js/page.js"></script>
+	<script src={{ "/js/third-party/jquery.min.js" | prepend: site.baseurl }}></script>
+	<script src={{ "/js/initpage.js" | prepend: site.baseurl}}></script>
+
+  {% if jekyll.environment == "development" %}
+    <div id="debug-console" onclick="clearlog()"></div>
+  {% endif %}
+
   </body>
 
 </html>
