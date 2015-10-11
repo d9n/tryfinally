@@ -1,20 +1,14 @@
 <header class="site-header">
+  <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
 
-  <div class="wrapper">
+  <nav class="site-nav">
+    <!-- navbar shrinks to menu icon if space is reduced -->
+    <a href="#" class="menu-icon">
+      {% icon fa-bars fa-lg %}
+    </a>
 
-    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
-
-    <nav class="site-nav">
-      <!-- navbar shrinks to menu icon if space is reduced -->
-      <a href="#" class="menu-icon">
-        {% icon fa-bars fa-lg %}
-      </a>
-
-      <div class="trigger">
-        {% include header-nav.html %}
-      </div>
-    </nav>
-  
-  </div>
-
+    <div class="trigger">
+      {% include header-nav.html %}
+    </div>
+  </nav>
 </header>

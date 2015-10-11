@@ -3,33 +3,38 @@ layout: default
 ---
 <div class="post">
 
-	<div class="post-intro">
-	    <div class="post-series-title">{{ page.series_title | default: '(page missing: series_title)' }}</div>
+    <div class="post-intro">
+        <div class="post-series-title">{{ page.series_title | default: '(page missing: series_title)' }}</div>
 
-		<h1 class="post-title">{{ page.title | default: '(page missing: title)' '}}</h1>
+        <h1 class="post-title">{{ page.title | default: '(page missing: title)' '}}</h1>
 
-		<div class="goal">
-			<span class="goal-header">In this lesson, we'll...</span>
-			<!-- <ul class="fa-ul">	 -->
-			<ul>
-		    {% for goal in page.goals %}
-				<!-- <li><span class="fa-li fa fa-square-o"/></span>{{ goal }}</li> -->
-				<li>{{goal}}</li>
-			{% endfor %}
-			</ul>
-		</div>
-	</div>
-
-	<div class="post-content">
-		Test {{ page.github_repo? }} test
-		{% if page.github_repo? %}
-{% highlight bash %}
-$ {{ page.github_repo }}
-{% endhighlight %}
-		{% endif %}
-
-	    {{ content }}
+        <div class="goal">
+            <span class="goal-header">In this lesson, we'll...</span>
+            <!-- <ul class="fa-ul">  -->
+            <ul>
+            {% for goal in page.goals %}
+                <!-- <li><span class="fa-li fa fa-square-o"/></span>{{ goal }}</li> -->
+                <li>{{goal}}</li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
+
+    <div class="grid no-gutters">
+        <div class="post-content unit three-quarters">
+            {% if page.github_repo? %}
+                {% highlight bash %}
+$ {{ page.github_repo }}
+                {% endhighlight %}
+            {% endif %}
+
+            {{ content }}
+        </div>
+
+        <!-- Asides will be positioned relative to this column  -->
+        <div class="post-asides unit one-quarter">
+            
+        </div>
   </article>
 
 </div>

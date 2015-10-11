@@ -1,17 +1,32 @@
 @charset "utf-8";
 
-@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700);
+// @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700);
 
 // Our variables
 
 $code-font-family: 'Courier New', Courier, monospace;
 $title-font-family: $code-font-family;
 
-// $base-font-family: Helvetica, Arial, sans-serif;
 $base-font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 $base-font-size:   16px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
+
+// Material design inspired colors
+// See also: https://www.google.com/design/spec/style/color.html
+$primary-color:         #3f51b5;
+$primary-color-light:   #c5cae9;
+$primary-color-dark:    #303f9f;
+$accent-color:          #795548;
+$accent-color-fallback: lighten($accent-color, 10%);
+$primary-text-color:    rgba(0, 0, 0, .87);
+$secondary-text-color:  rgba(0, 0, 0, .54);
+$disabled-text-color:   rgba(0, 0, 0, .38);
+
+
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
 
 $title-font-size:  30px;
 $title-bar-height: 60px;
@@ -19,32 +34,34 @@ $navbar-font-size: $title-font-size * 0.5;
 
 // Buffer that surrounds main content area and divides sections
 $spacing-unit:     25px;
+$vert-pad:         5px;
+$horiz-pad:        8px;
 
 // $title-bar-bg:     #305060;
-$title-bar-bg:     #305060;
+// $title-bar-fg:     #cccccc;
+// $intro-area-bg:    $title-bar-bg;
+// $intro-area-fg:    #ffffff;
+$title-bar-bg:     $primary-color;
 $title-bar-fg:     #cccccc;
-// $intro-area-bg:    darken($title-bar-bg, 20%);
-$intro-area-bg:    #111111;
+$intro-area-bg:    $primary-color-dark;
 $intro-area-fg:    #ffffff;
 
 $text-color:       #000000;
-$body-color:          $title-bar-bg;
+
+$body-color:       #ffffff;
 
 $content-color:    #ffffff;
 $heading-color:    $title-bar-bg;
 
-// $background-color: #fbfbfb;
-// $background-color: lighten($title-bar-bg, 60%);
-$aside-color:      #ff0000;
+$aside-color:      darken(#F0EAD6, 10%);
+$aside-col-color:  $grey-color-dark;
 $link-color:       #2e598a;
 
-$grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
-
 // Width of the content area
-$content-width:    800px;
+$aside-width:      250px;
+$content-width:    700px;
+$wrapper-width:    $content-width + $aside-width;
 
 $on-mobile:        600px;
-$on-laptop:        800px;
+$on-laptop:        $wrapper-width;
 
