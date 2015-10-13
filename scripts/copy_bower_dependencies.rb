@@ -11,7 +11,6 @@ require 'fileutils'
 
 sass_dir = '_sass/third-party'
 FileUtils.mkdir(sass_dir) if !File.exists?(sass_dir)
-FileUtils.cp('bower_components/gridism/gridism.css', "#{sass_dir}/_gridism.scss")
 FileUtils.cp('bower_components/normalize-css/normalize.css', "#{sass_dir}/_normalize.scss")
 FileUtils.cp('bower_components/pygments/css/igor.css',
 "#{sass_dir}/_syntax-highlighting.scss")
