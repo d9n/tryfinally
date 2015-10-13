@@ -22,6 +22,13 @@ body {
 }
 
 /**
+ * More consistent calculations for width + padding
+ */
+div {
+    box-sizing: border-box;
+}
+
+/**
  * Set `margin-bottom` to maintain vertical rhythm
  */
 h1, h2, h3, h4, h5, h6,
@@ -136,7 +143,7 @@ pre {
  */
 .wrapper {
 
-    @include max-width($wrapper-width - $spacing-unit * 2);
+    @include max-width($wrapper-width);
     margin-right: auto;
     margin-left: auto;
     padding-right: $spacing-unit;
@@ -144,7 +151,7 @@ pre {
     @extend %clearfix;
 
     @include media-query($on-laptop) {
-        @include max-width($wrapper-width - $spacing-unit);
+        @include max-width($wrapper-width);
         padding-right: $spacing-unit / 2;
         padding-left: $spacing-unit / 2;
     }

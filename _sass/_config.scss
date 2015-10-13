@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-// @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700);
 
 // Our variables
 
@@ -8,7 +8,7 @@ $code-font-family: 'Courier New', Courier, monospace;
 $title-font-family: $code-font-family;
 
 $base-font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-$base-font-size:   16px;
+$base-font-size:   20px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
@@ -17,12 +17,11 @@ $base-line-height: 1.5;
 $primary-color:         #3f51b5;
 $primary-color-light:   #c5cae9;
 $primary-color-dark:    #303f9f;
-$accent-color:          #795548;
-$accent-color-fallback: lighten($accent-color, 10%);
+$accent-color:          #cccccc;
+$accent-color-alt:      #dddddd;
 $primary-text-color:    rgba(0, 0, 0, .87);
 $secondary-text-color:  rgba(0, 0, 0, .54);
 $disabled-text-color:   rgba(0, 0, 0, .38);
-
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
@@ -43,23 +42,26 @@ $horiz-pad:        8px;
 // $intro-area-fg:    #ffffff;
 $title-bar-bg:     $primary-color;
 $title-bar-fg:     #cccccc;
+// $intro-area-bg:    $primary-color-dark;
 $intro-area-bg:    $primary-color-dark;
 $intro-area-fg:    #ffffff;
 
 $text-color:       #000000;
 
+// $body-color:       darken($accent-color, 30%);
 $body-color:       #ffffff;
 
 $content-color:    #ffffff;
 $heading-color:    $title-bar-bg;
 
-$aside-color:      darken(#F0EAD6, 10%);
-$aside-col-color:  $grey-color-dark;
+// darken(#F0EAD6, 10%);
+$aside-color:      $accent-color;
+$aside-col-color:  $accent-color-alt;
 $link-color:       #2e598a;
 
 // Width of the content area
+$content-width:    750px;
 $aside-width:      250px;
-$content-width:    700px;
 $wrapper-width:    $content-width + $aside-width;
 
 $on-mobile:        600px;

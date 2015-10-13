@@ -5,7 +5,7 @@
     background-color: $title-bar-bg;
     min-height: 56px;
 
-    border-bottom: solid 1px;
+    border-bottom: solid 1px #000000;
     padding: 0px 30px;
 
     // Positioning context for the mobile navigation icon
@@ -101,8 +101,7 @@
  */
 
 .goal, .tip, .warn {
-    border-style: solid;
-    border-width: 1px;
+    border: solid 1px;
     @include border-radius(10px);
     padding: $vert-pad $horiz-pad;
 
@@ -138,8 +137,14 @@
  */
 
 .post {
+    margin-top: $spacing-unit;
+    position: relative; // Acts as a hook for asides to position against
+    @include box-shadow(0px 0px 10px 0px rgba(0,0,0,0.75));
+    background-color: $content-color;
 
-    position: relative; // Useful so asides can be laid out relative to posts
+    @include media-query($on-laptop) {
+        @include max-width($content-width);
+    }
 
     // Used for post title
     h1 {
@@ -205,12 +210,8 @@
 // The posts appear in a floating window
 $floating-post-radius: 10px;
 
-.post-content-and-asides {
-    border-style: solid;
-
-}
-
 .post-intro {
+    @include flex(1);
     // margin-top: 20px;
     padding: 20px;
     color: $intro-area-fg;
@@ -226,11 +227,15 @@ $floating-post-radius: 10px;
     font-style: italic;
 }
 
+.post-content-and-asides {
+    // position: relative; // Useful so asides can be laid out relative to posts
+    display: flex;
+}
+
 .post-content {
-
     @include max-width($content-width);
+    @include flex(1);
 
-    background-color: #ffffff;
     padding: 20px 30px;
     // margin-bottom: $spacing-unit;
     // @include border-bottom-radius($floating-post-radius);
@@ -240,11 +245,11 @@ $floating-post-radius: 10px;
     $arrow-shift: $left-arrow-size / 2;
     aside {
         position: absolute;
-        font-size: 90%;
+        font-size: 80%;
         font-style: italic;
         color: lighten($text-color, 30%);
         // left arrow overlaps content a bit, eats into aside width
-        left: $content-width + $arrow-shift;
+        right: $horiz-pad / 2;
         width: $aside-width - $arrow-shift * 2 - $horiz-pad * 2;
         background: $aside-color;
         padding: $vert-pad $horiz-pad;
@@ -276,16 +281,13 @@ $floating-post-radius: 10px;
 }
 
 .post-asides {
-    border-style: solid;
-    top: 0px;
-    bottom: 0px;
+    width: $aside-width;
     background-color: $aside-col-color;
     // z-index: -1; // Always show behind asides themselves
 
     @include media-query($on-laptop) {
         display: none;
-        // width: initial;
-        // left: initial;
+        width: 0px;
     }
 }
 

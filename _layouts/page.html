@@ -20,8 +20,8 @@ layout: default
         </div>
     </div>
 
-    <div class="grid no-gutters">
-        <div class="post-content unit three-quarters">
+    <div class="post-content-and-asides">
+        <div class="post-content">
             {% if page.github_repo? %}
                 {% highlight bash %}
 $ {{ page.github_repo }}
@@ -32,7 +32,7 @@ $ {{ page.github_repo }}
         </div>
 
         <!-- Asides will be positioned relative to this column  -->
-        <div class="post-asides unit one-quarter">
+        <div class="post-asides">
             
         </div>
   </article>
