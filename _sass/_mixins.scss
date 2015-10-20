@@ -26,6 +26,10 @@
   }
 }
 
+@mixin debug-box() {
+  border: solid 1px #000000;
+}
+
 @mixin max-width($width) {
   max-width: -webkit-calc(#{$width});
   max-width:         calc(#{$width});

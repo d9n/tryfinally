@@ -3,10 +3,10 @@
  */
 .site-header {
     background-color: $title-bar-bg;
-    min-height: 56px;
+    min-height: $title-bar-height;
+    margin-bottom: $spacing-unit;
 
-    border-bottom: solid 1px #000000;
-    padding: 0px 30px;
+    padding: $vpad 30px;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -29,7 +29,7 @@
 .site-nav {
     float: right;
     line-height: $title-bar-height;
-    font-size: $navbar-font-size;    
+    font-size: $navbar-font-size;
 
     .nav-link {
         color: $title-bar-fg;
@@ -97,59 +97,31 @@
 }
 
 /**
- * Notes
- */
-
-.goal, .tip, .warn {
-    border: solid 1px;
-    @include border-radius(10px);
-    padding: $vert-pad $horiz-pad;
-
-    ul {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }    
-}
-
-.tip, .warn {
-    display: block;
-}
-
-.goal-icon, .tip-icon, .warn-icon {
-    margin-right: 10px;
-}
-
-.goal-header, .tip-header, .warn-header {
-    font-weight: bold
-}
-
-.tip {
-    background: gold;
-}
-
-.warn {
-    background: red;
-}
-
-
-/**
  * Posts
  */
 
+// The posts appear in a floating window
+$floating-post-radius: 0px;
+
 .post {
-    margin-top: $spacing-unit;
+
+
     position: relative; // Acts as a hook for asides to position against
-    @include box-shadow(0px 0px 10px 0px rgba(0,0,0,0.75));
+    @include max-width($content-width);
+
+    // @include border-top-radius($floating-post-radius);
+    // @include box-shadow(0px 0px 2px 0px rgba(0,0,0,0.75));
+    // border: solid 1px;
+    border: solid 1px $primary-color-light;
+    // border-left: solid 1px;
+    // border-right: solid 1px;
     background-color: $content-color;
 
-    @include media-query($on-laptop) {
-        @include max-width($content-width);
-    }
 
     // Used for post title
     h1 {
         @include responsive-font($base-font-size * 3.0);
-        font-weight: 100;
+        color: $heading-color;
     }
 
     // Used for section title
@@ -197,8 +169,8 @@
             }
         }
         &:hover > a {
-            display: inline;            
-        }        
+            display: inline;
+        }
     }
 }
 
@@ -207,38 +179,52 @@
     color: $text-color;
 }
 
-// The posts appear in a floating window
-$floating-post-radius: 10px;
-
 .post-intro {
-    @include flex(1);
-    // margin-top: 20px;
-    padding: 20px;
-    color: $intro-area-fg;
-    @include gradient(lighten($intro-area-bg, 10%) 0%, $intro-area-bg 100%);
+    // @include flex(1);
+    // border: solid 1px #000000;
+    padding: 10px 20px;
+    margin-bottom: $spacing-unit;
+    color: $heading-color;
+    // background-color: $intro-area-bg;
+    // @include gradient($body-color 0%, $intro-area-bg 2%, $intro-area-bg 90%, $content-color 100%);
+    @include gradient(bottom, $intro-area-bg 0%, darken($intro-area-bg, 2%) 100%);
     // @include border-top-radius($floating-post-radius);
-}
-
-.post-title {
-    margin-bottom: 10px;
+    // border-radius: 5px;
 }
 
 .post-series-title {
     font-style: italic;
+    margin-bottom: 0px;
+    color: #000000;
 }
 
-.post-content-and-asides {
-    // position: relative; // Useful so asides can be laid out relative to posts
-    display: flex;
+.post-title {
+    // margin-bottom: 0px;
+}
+
+.post-goal {
+    margin: 0px $gutter;
+    // border-bottom: solid 1px;
+    @include border-radius(5px);
+    padding: $vpad $hpad;
+    color: $text-color;
+
+    ul {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.post-goal-header {
+    font-weight: bold;
 }
 
 .post-content {
     @include max-width($content-width);
     @include flex(1);
 
-    padding: 20px 30px;
+    padding: 0px 30px;
     // margin-bottom: $spacing-unit;
-    // @include border-bottom-radius($floating-post-radius);
 
     // Thank you http://cssarrowplease.com/
     $left-arrow-size: 10px;
@@ -248,17 +234,19 @@ $floating-post-radius: 10px;
         font-size: 80%;
         font-style: italic;
         color: lighten($text-color, 30%);
-        // left arrow overlaps content a bit, eats into aside width
-        right: $horiz-pad / 2;
-        width: $aside-width - $arrow-shift * 2 - $horiz-pad * 2;
+        left: 100%;
+        margin-left: $arrow-shift;
+        // left arrow eats into aside width
+        width: $aside-width - $arrow-shift * 2 - $hpad * 2;
         background: $aside-color;
-        padding: $vert-pad $horiz-pad;
+        padding: $vpad $hpad;
         @include border-radius(5px);
 
         @include media-query($on-laptop) {
             position: static;
             width: initial;
             left: initial;
+            margin: initial $gutter;
         }
     }
     aside:before {
@@ -280,18 +268,6 @@ $floating-post-radius: 10px;
     }
 }
 
-.post-asides {
-    width: $aside-width;
-    background-color: $aside-col-color;
-    // z-index: -1; // Always show behind asides themselves
-
-    @include media-query($on-laptop) {
-        display: none;
-        width: 0px;
-    }
-}
-
-
 /**
  * Debug
  */
@@ -301,12 +277,12 @@ $floating-post-radius: 10px;
     border-style: solid;
     @include border-top-radius(5px);
     border-width: 1px;
-    padding-left: $horiz-pad;
+    padding-left: $hpad;
     white-space: nowrap;
     overflow: hidden;
     // Choose width, margin, and left values to center the console
     width: 80%;
-    margin: 0 0 0 -40%; 
+    margin: 0 0 0 -40%;
     left:50%;
     top: 98%; // Debug console only peeks onscreen until hover
 

@@ -1,40 +1,35 @@
 ---
 layout: default
 ---
-<div class="post">
+<article class="post">
 
-    <div class="post-intro">
+    <header class="post-intro">
         <div class="post-series-title">{{ page.series_title | default: '(page missing: series_title)' }}</div>
 
         <h1 class="post-title">{{ page.title | default: '(page missing: title)' '}}</h1>
 
-        <div class="goal">
-            <span class="goal-header">In this lesson, we'll...</span>
-            <!-- <ul class="fa-ul">  -->
+        <div class="post-goal">
+            <span class="post-goal-header">Contents</span>
             <ul>
             {% for goal in page.goals %}
-                <!-- <li><span class="fa-li fa fa-square-o"/></span>{{ goal }}</li> -->
                 <li>{{goal}}</li>
             {% endfor %}
             </ul>
         </div>
+
+    </header>
+
+    <div class="post-content">
+        {% if page.github_repo? %}
+            {% highlight bash %}
+$ {{ page.github_repo }}
+            {% endhighlight %}
+        {% endif %}
+
+        {{ page.intro | default: '(page missing: intro)' }}
+        <p>
+
+        {{ content }}
     </div>
 
-    <div class="post-content-and-asides">
-        <div class="post-content">
-            {% if page.github_repo? %}
-                {% highlight bash %}
-$ {{ page.github_repo }}
-                {% endhighlight %}
-            {% endif %}
-
-            {{ content }}
-        </div>
-
-        <!-- Asides will be positioned relative to this column  -->
-        <div class="post-asides">
-            
-        </div>
-  </article>
-
-</div>
+</article>
