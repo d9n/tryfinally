@@ -174,8 +174,14 @@
 
 .post-intro {
     padding: 10px 20px;
-    margin-bottom: $spacing-unit;
     @include gradient(top, darken($intro-area-bg, 2%) 0%, $intro-area-bg 100%);
+    margin-bottom: $spacing-unit;
+}
+
+.post-intro-summary {
+    font-size: 90%;
+    font-style: italic;
+    margin-bottom: $spacing-unit;
 }
 
 .post-series-title {

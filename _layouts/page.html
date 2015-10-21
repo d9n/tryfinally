@@ -10,26 +10,20 @@ layout: default
 
         <div class="post-goal">
             <span class="post-goal-header">Contents</span>
-            <ul>
-            {% for goal in page.goals %}
-                <li>{{goal}}</li>
-            {% endfor %}
-            </ul>
+            {{ content | toc }}
         </div>
-
     </header>
 
     <div class="post-content">
+        <!-- TODO: Figure out repo style -->
         {% if page.github_repo? %}
             {% highlight bash %}
 $ {{ page.github_repo }}
             {% endhighlight %}
         {% endif %}
 
-        {{ page.intro | default: '(page missing: intro)' }}
-        <p>
+        <div class="post-intro-summary">{{ page.intro | default: '(page missing: intro)' }}</div>
 
         {{ content }}
     </div>
-
 </article>
