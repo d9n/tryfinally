@@ -109,7 +109,7 @@
     @include max-width($content-width);
 
     // Still debating leaving this in:
-    // border: solid 1px $primary-color-light;
+    border: solid 1px $primary-color-light;
     background-color: $content-color;
 
     // Used for post title

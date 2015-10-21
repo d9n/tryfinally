@@ -47,8 +47,8 @@ $navbar-font-size: $title-font-size * 0.5;
 $title-bar-bg:     $primary-color;
 $title-bar-fg:     $primary-text-light;
 
-$body-color:       #ffffff;
-$content-color:    $body-color;
+$body-color:       darken($accent-color-light, 5%);
+$content-color:    #ffffff;
 $intro-area-bg:    $accent-color-light;
 $intro-area-fg:    $primary-text-dark;
 
@@ -57,7 +57,7 @@ $aside-color:      $primary-color-light;
 $link-color:       $accent-color-dark;
 
 // Width of the content area
-$content-width:    750px;
+$content-width:    800px;
 $aside-width:      250px;
 $wrapper-width:    $content-width;
 
