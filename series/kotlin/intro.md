@@ -1,14 +1,17 @@
 ---
 layout: page
-permalink: series/kotlin/0/
+permalink: series/kotlin/intro/
 title: Introduction
 goals:
   - propose a game idea for Android
   - introduce Kotlin and its benefits
   - present a brief overview of LibGdx
 intro:
-  This is an introductory paragraph.
-  This is a test.
+  In this series, I will walk you through creating a game for the Android platform, which we'll
+  build using Kotlin and LibGdx. In addition to providing a whirlwind tour of those technologies, I
+  will include all additional steps - from getting started to publishing the app.<p><p>
+  But that all comes later. This post is just an introductory overview, explaining Kotlin and
+  LibGdx in a bit more detail, and providing motivations for using them.
 ---
 
 ## Demo
