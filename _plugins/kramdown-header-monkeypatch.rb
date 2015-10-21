@@ -49,7 +49,7 @@ module Kramdown
             'class' => 'fa fa-link'
         })
         anchor.children.push(linkicon)
-        el.children.push(anchor)        
+        el.children.push(anchor)
         orig_convert_header(el, indent)
       end
     end
