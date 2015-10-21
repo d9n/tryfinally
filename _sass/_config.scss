@@ -2,8 +2,35 @@
 
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700);
 
-// Our variables
+// Material design inspired colors
+// See also: https://www.google.com/design/spec/style/color.html
+$primary-color:         #3f51b5;
+$primary-color-light:   #c5cae9;
+$primary-color-dark:    #303f9f;
+$accent-color:          #cccccc;
+$accent-color-light:    #f5f5f5;
+$accent-color-dark:     #2e598a;
 
+// Dark text on light colors
+$primary-text-dark:    rgba(0, 0, 0, .87);
+$secondary-text-dark:  rgba(0, 0, 0, .54);
+$disabled-text-dark:   rgba(0, 0, 0, .38);
+// Light text on dark colors
+$primary-text-light:   rgba(255, 255, 255, .87);
+$secondary-text-light:   rgba(255, 255, 255, .54);
+$disabled-text-light:   rgba(255, 255, 255, .38);
+
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+// Layout spacing
+$spacing-unit:     25px;
+$vpad:             5px;
+$hpad:             8px;
+$gutter:           10px;
+
+// Fonts
 $code-font-family: 'Courier New', Courier, monospace;
 $title-font-family: $code-font-family;
 
@@ -12,59 +39,25 @@ $base-font-size:   17px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-// Material design inspired colors
-// See also: https://www.google.com/design/spec/style/color.html
-$primary-color:         #3f51b5;
-$primary-color-light:   #c5cae9;
-$primary-color-dark:    #303f9f;
-$accent-color:          #cccccc;
-$accent-color-alt:      #f5f5f5;
-$primary-text-color:    rgba(0, 0, 0, .87);
-$secondary-text-color:  rgba(0, 0, 0, .54);
-$disabled-text-color:   rgba(0, 0, 0, .38);
-
-$grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
-
+// Title bar
 $title-font-size:  30px;
 $title-bar-height: 40px;
 $navbar-font-size: $title-font-size * 0.5;
 
-// Buffer that surrounds main content area and divides sections
-$spacing-unit:     25px;
-$vpad:             5px;
-$hpad:             8px;
-$gutter:           10px;
-
-
-// $title-bar-bg:     #305060;
-// $title-bar-fg:     #cccccc;
-// $intro-area-bg:    $title-bar-bg;
-// $intro-area-fg:    #ffffff;
 $title-bar-bg:     $primary-color;
-$title-bar-fg:     #eeeeee;
+$title-bar-fg:     $primary-text-light;
 
-// $intro-area-bg:    $primary-color-dark;
-// $intro-area-fg:    #ffffff;
-
-$text-color:       #000000;
-
-// $body-color:       darken($accent-color, 30%);
 $body-color:       #ffffff;
-$content-color:    #ffffff;
-$intro-area-bg:    $accent-color-alt;
-$intro-area-fg:    $text-color;
+$content-color:    $body-color;
+$intro-area-bg:    $accent-color-light;
+$intro-area-fg:    $primary-text-dark;
 
 $heading-color:    $title-bar-bg;
-
-// darken(#F0EAD6, 10%);
 $aside-color:      $primary-color-light;
-// $aside-col-color:  $accent-color-alt;
-$link-color:       #2e598a;
+$link-color:       $accent-color-dark;
 
 // Width of the content area
-$content-width:    800px;
+$content-width:    750px;
 $aside-width:      250px;
 $wrapper-width:    $content-width;
 

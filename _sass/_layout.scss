@@ -3,6 +3,7 @@
  */
 .site-header {
     background-color: $title-bar-bg;
+    color: $title-bar-fg;
     min-height: $title-bar-height;
     margin-bottom: $spacing-unit;
 
@@ -12,13 +13,15 @@
     position: relative;
 }
 
+.site-title-area {
+    line-height: $title-bar-height;
+    float: left;
+}
+
 .site-title {
+    letter-spacing: -1px;
     font-family: $title-font-family;
     font-size: $title-font-size;
-    line-height: $title-bar-height;
-    letter-spacing: -1px;
-    margin-bottom: 0;
-    float: left;
 
     &,
     &:visited {
@@ -100,28 +103,18 @@
  * Posts
  */
 
-// The posts appear in a floating window
-$floating-post-radius: 0px;
-
 .post {
-
 
     position: relative; // Acts as a hook for asides to position against
     @include max-width($content-width);
 
-    // @include border-top-radius($floating-post-radius);
-    // @include box-shadow(0px 0px 2px 0px rgba(0,0,0,0.75));
-    // border: solid 1px;
-    border: solid 1px $primary-color-light;
-    // border-left: solid 1px;
-    // border-right: solid 1px;
+    // Still debating leaving this in:
+    // border: solid 1px $primary-color-light;
     background-color: $content-color;
-
 
     // Used for post title
     h1 {
         @include responsive-font($base-font-size * 3.0);
-        color: $heading-color;
     }
 
     // Used for section title
@@ -129,6 +122,7 @@ $floating-post-radius: 0px;
         @include responsive-font($base-font-size * 2.2);
         color: $heading-color;
 
+        // Horizontal line under the section area
         &:after {
             content:'';
             display:block;
@@ -141,7 +135,6 @@ $floating-post-radius: 0px;
     // Used for section subtitle
     h3 {
         @include responsive-font($base-font-size * 1.5);
-        color: $heading-color;
     }
 
     // Currently unused
@@ -155,6 +148,7 @@ $floating-post-radius: 0px;
     }
 
     h1, h2, h3, h4, h5 {
+        color: $heading-color;
         font-weight: 100; // Normal=400, Bold=700
 
         // Style the link icon, so it appears only on mouseover
@@ -176,38 +170,22 @@ $floating-post-radius: 0px;
 
 .github_repo {
     font-family: $code-font-family;
-    color: $text-color;
 }
 
 .post-intro {
-    // @include flex(1);
-    // border: solid 1px #000000;
     padding: 10px 20px;
     margin-bottom: $spacing-unit;
-    color: $heading-color;
-    // background-color: $intro-area-bg;
-    // @include gradient($body-color 0%, $intro-area-bg 2%, $intro-area-bg 90%, $content-color 100%);
-    @include gradient(bottom, $intro-area-bg 0%, darken($intro-area-bg, 2%) 100%);
-    // @include border-top-radius($floating-post-radius);
-    // border-radius: 5px;
+    @include gradient(top, darken($intro-area-bg, 2%) 0%, $intro-area-bg 100%);
 }
 
 .post-series-title {
     font-style: italic;
     margin-bottom: 0px;
-    color: #000000;
-}
-
-.post-title {
-    // margin-bottom: 0px;
 }
 
 .post-goal {
     margin: 0px $gutter;
-    // border-bottom: solid 1px;
-    @include border-radius(5px);
     padding: $vpad $hpad;
-    color: $text-color;
 
     ul {
         margin-top: 5px;
@@ -224,7 +202,6 @@ $floating-post-radius: 0px;
     @include flex(1);
 
     padding: 0px 30px;
-    // margin-bottom: $spacing-unit;
 
     // Thank you http://cssarrowplease.com/
     $left-arrow-size: 10px;
@@ -233,7 +210,7 @@ $floating-post-radius: 0px;
         position: absolute;
         font-size: 80%;
         font-style: italic;
-        color: lighten($text-color, 30%);
+        color: lighten($primary-text-dark, 30%);
         left: 100%;
         margin-left: $arrow-shift;
         // left arrow eats into aside width
@@ -288,6 +265,7 @@ $floating-post-radius: 0px;
 
     &:hover {
         top: initial;
-        bottom: -1px; // Hides the bottom border
+        // Hide the bottom border, looks like it's peeking from offscreen
+        bottom: -1px;
     }
 }

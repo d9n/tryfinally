@@ -16,7 +16,7 @@ body {
     font-size: $base-font-size;
     line-height: $base-line-height;
     font-weight: 300;
-    color: $text-color;
+    color: $primary-text-dark;
     background-color: $body-color;
     -webkit-text-size-adjust: 100%;
 }
@@ -90,7 +90,7 @@ a {
     }
 
     &:hover {
-        color: $text-color;
+        color: $primary-text-dark;
         text-decoration: underline;
     }
 }
