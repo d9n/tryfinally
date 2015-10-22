@@ -49,12 +49,14 @@ img {
 /**
  * Figures
  */
+
 figure > img {
     display: block;
 }
 
 figcaption {
     font-size: $small-font-size;
+    font-style: italic;
 }
 
 /**
@@ -82,11 +84,11 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-    color: $link-color;
+    color: $accent-color-dark;
     text-decoration: none;
 
     &:visited {
-        color: darken($link-color, 15%);
+        color: $accent-color-light;
     }
 
     &:hover {
