@@ -49,12 +49,14 @@ $title-bar-fg:     $primary-text-light;
 
 $body-color:       darken($grey-color-light, 5%);
 $content-color:    #ffffff;
-$intro-area-bg:    $grey-color-light;
+$intro-area-bg:    lighten($grey-color-light, 5%);
 $intro-area-fg:    $primary-text-dark;
 
 $heading-color:    $title-bar-bg;
-$aside-color:      $accent-color-light;
-$link-color:       $accent-color-dark;
+$aside-color:      $primary-color-light;
+
+$link-color:         $primary-color-dark;
+$link-color-visited: darken($primary-color-light, 10%);
 
 // Width of the content area
 $content-width:    800px;

@@ -23,7 +23,7 @@ module Jekyll
         headers = input.scan(/<h2.+<\/h2>/)
         nameIds = []
         for header in headers
-            match = /<h2 id="\S+">(.+)<a href="(\S+)".*/.match(header)
+            match = /<h2 .*id="\S+".*>(.+)<a href="(\S+)".*/.match(header)
             if match
                 nameIds.push(match.captures)
             end

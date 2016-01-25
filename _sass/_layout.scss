@@ -108,7 +108,6 @@
     position: relative; // Acts as a hook for asides to position against
     @include max-width($content-width);
 
-    // Still debating leaving this in:
     border: solid 1px $primary-color-light;
     background-color: $content-color;
 
@@ -120,7 +119,6 @@
     // Used for section title
     h2 {
         @include responsive-font($base-font-size * 2.2);
-        color: $heading-color;
 
         // Horizontal line under the section area
         &:after {
@@ -148,7 +146,6 @@
     }
 
     h1, h2, h3, h4, h5 {
-        color: $heading-color;
         font-weight: 100; // Normal=400, Bold=700
 
         // Style the link icon, so it appears only on mouseover
@@ -164,6 +161,11 @@
         }
         &:hover > a {
             display: inline;
+        }
+
+        // Style headers differently if they have a link
+        &.link-header {
+            color: $link-color;
         }
     }
 }
@@ -205,7 +207,6 @@
 
 .post-content {
     @include max-width($content-width);
-    @include flex(1);
 
     padding: 0px 30px;
 
@@ -215,7 +216,6 @@
     aside {
         position: absolute;
         font-size: 80%;
-        font-style: italic;
         color: lighten($primary-text-dark, 30%);
         left: 100%;
         margin-left: $arrow-shift;
@@ -224,12 +224,23 @@
         background: $aside-color;
         padding: $vpad $hpad;
         @include border-radius(5px);
+        border: solid 1px;
 
         @include media-query($on-laptop) {
             position: static;
             width: initial;
             left: initial;
             margin: initial $gutter;
+            border: transparent;
+        }
+
+        // We need to adjust the link colors in asides because
+        // they're not readable otherwise
+        a {
+            color: $accent-color-dark;
+            &:visited {
+                color: $accent-color;
+            }
         }
     }
     aside:before {
@@ -241,13 +252,36 @@
         height: 0;
         width: 0;
         pointer-events: none;
-        border-right-color: $aside-color;
+        border-right-color: black;
         border-width: $left-arrow-size;
         margin-top: -$left-arrow-size;
+        z-index: 1;
 
         @include media-query($on-laptop) {
             display: none;
         }
+    }
+    aside:after {
+        position: absolute;
+        right: 100%;
+        top: 51%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        pointer-events: none;
+        border-right-color: $aside-color;
+        border-width: $left-arrow-size - 1;
+        margin-top: -($left-arrow-size);
+        z-index: 2;
+
+        @include media-query($on-laptop) {
+            display: none;
+        }
+    }
+
+    .highlight-span {
+        background-color: rgba($aside-color, 0.3);
     }
 }
 

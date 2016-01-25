@@ -32,44 +32,56 @@ clearlog = ->
     debugConsole.css('display', 'none')
     debugConsole.html('')
 
-refreshAsides = (withLogging = false) ->
-
-    origLog = log
-    if not withLogging
-        log = (msg) ->
-
     # Special thanks to the Game Programming Patterns book for the sample on how to
-    # set up asides.
+    # set up asides by pairing them with and positioning them against spans.
     # https://github.com/munificent/game-programming-patterns/blob/master/html/script.js#L24
     # Also, you should read: http://gameprogrammingpatterns.com/contents.html
+    loopAsides = (callback, withLogging = false) ->
 
-    $("aside").each((index) ->
+        origLog = log
+        if not withLogging
+            log = (msg) ->
+
+        $("aside").each((index) ->
+            name = $(@).attr('name')
+            if not name
+                log("Aside tag found without a name")
+                return
+
+            target = $("span[name='#{name}']")
+            if target.length == 0
+                log("Could not find span tag to match aside name '#{name}'")
+                return
+
+            callback($(@), target)
+        )
+
+        if not withLogging
+            log = origLog
+
+initAsideMouseEvents = (withLogging = false) ->
+    loopAsides((aside, span) ->
+        aside.mouseenter(() ->
+            span.addClass("highlight-span"))
+        aside.mouseleave(() ->
+            span.removeClass("highlight-span"))
+    , withLogging)
+
+refreshAsides = (withLogging = false) ->
+    loopAsides((aside, span) ->
         # Don't mess with aside offsets if we're in a mode where they're not being positioned
         # absolutely (e.g. small screen mode)
-        if $(@).css('position') != 'absolute'
+        if aside.css('position') != 'absolute'
             return
-
-        name = $(@).attr('name')
-        if not name
-            log("Aside tag found without a name")
-            return
-
-        target = $("span[name='#{name}']")
-        if target.length == 0
-            log("Could not find span tag to match aside name '#{name}'")
-            return
-
-        targetY = target.offset().top + target.outerHeight() / 2
-        $(@).offset({ top: targetY - $(@).outerHeight() / 2 })
-    )
-
-    if not withLogging
-        log = origLog
+        spanY = span.offset().top + span.outerHeight() / 2
+        aside.offset({ top: spanY - aside.outerHeight() / 2 })
+    , withLogging)
 
 $(document).ready ->
     window.clearlog = clearlog
     clearlog()
 
+    initAsideMouseEvents(withLogging: false)
     refreshAsides(withLogging: true)
     $(window).resize(refreshAsides)
 

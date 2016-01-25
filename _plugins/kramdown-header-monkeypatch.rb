@@ -48,6 +48,7 @@ module Kramdown
         linkicon = Element.new(:span, nil, {
             'class' => 'fa fa-link'
         })
+        el.attr['class'] = 'link-header'
         anchor.children.push(linkicon)
         el.children.push(anchor)
         orig_convert_header(el, indent)

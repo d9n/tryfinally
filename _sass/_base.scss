@@ -42,7 +42,7 @@ ul, ol, dl, figure, aside,
  * Images
  */
 img {
-    max-width: 100%;
+    @include max-width(100%);
     vertical-align: middle;
 }
 
@@ -84,11 +84,11 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-    color: $accent-color-dark;
+    color: $link-color;
     text-decoration: none;
 
     &:visited {
-        color: $accent-color-light;
+        color: $link-color-visited;
     }
 
     &:hover {
