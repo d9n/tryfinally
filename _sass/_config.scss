@@ -17,8 +17,8 @@ $secondary-text-dark:  rgba(0, 0, 0, .54);
 $disabled-text-dark:   rgba(0, 0, 0, .38);
 // Light text on dark colors
 $primary-text-light:   rgba(255, 255, 255, .87);
-$secondary-text-light:   rgba(255, 255, 255, .54);
-$disabled-text-light:   rgba(255, 255, 255, .38);
+$secondary-text-light: rgba(255, 255, 255, .54);
+$disabled-text-light:  rgba(255, 255, 255, .38);
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
@@ -60,7 +60,7 @@ $link-color-visited: darken($primary-color-light, 10%);
 
 // Width of the content area
 $content-width:    800px;
-$aside-width:      250px;
+$aside-width:      270px;
 $wrapper-width:    $content-width;
 
 $on-mobile:        600px;

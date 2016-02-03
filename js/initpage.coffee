@@ -32,39 +32,45 @@ clearlog = ->
     debugConsole.css('display', 'none')
     debugConsole.html('')
 
-    # Special thanks to the Game Programming Patterns book for the sample on how to
-    # set up asides by pairing them with and positioning them against spans.
-    # https://github.com/munificent/game-programming-patterns/blob/master/html/script.js#L24
-    # Also, you should read: http://gameprogrammingpatterns.com/contents.html
-    loopAsides = (callback, withLogging = false) ->
+# Special thanks to the Game Programming Patterns book for the sample on how to
+# set up asides by pairing them with and positioning them against spans.
+# https://github.com/munificent/game-programming-patterns/blob/master/html/script.js#L24
+# Also, you should read: http://gameprogrammingpatterns.com/contents.html
+loopAsides = (callback, withLogging = false) ->
+    origLog = log
+    if not withLogging
+        log = (msg) ->
 
-        origLog = log
-        if not withLogging
-            log = (msg) ->
+    $("aside").each((index) ->
+        name = $(@).attr('name')
+        if not name
+            log("Aside tag found without a name")
+            return
 
-        $("aside").each((index) ->
-            name = $(@).attr('name')
-            if not name
-                log("Aside tag found without a name")
-                return
+        target = $("span[name='#{name}']")
+        if target.length == 0
+            log("Could not find span tag to match aside name '#{name}'")
+            return
 
-            target = $("span[name='#{name}']")
-            if target.length == 0
-                log("Could not find span tag to match aside name '#{name}'")
-                return
+        callback($(@), target)
+    )
 
-            callback($(@), target)
-        )
-
-        if not withLogging
-            log = origLog
+    if not withLogging
+        log = origLog
 
 initAsideMouseEvents = (withLogging = false) ->
     loopAsides((aside, span) ->
-        aside.mouseenter(() ->
-            span.addClass("highlight-span"))
-        aside.mouseleave(() ->
-            span.removeClass("highlight-span"))
+        addClassFunc = () ->
+            span.addClass("highlight-span")
+            aside.addClass("highlight-aside")
+        removeClassFunc = () ->
+            span.removeClass("highlight-span")
+            aside.removeClass("highlight-aside")
+
+        aside.mouseenter(addClassFunc)
+        aside.mouseleave(removeClassFunc)
+        span.mouseenter(addClassFunc)
+        span.mouseleave(removeClassFunc)
     , withLogging)
 
 refreshAsides = (withLogging = false) ->

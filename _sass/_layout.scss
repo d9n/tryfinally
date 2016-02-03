@@ -242,6 +242,10 @@
                 color: $accent-color;
             }
         }
+
+        &.highlight-aside {
+            @include box-shadow(0px 0px 10px 0px rgba(125,125,125,0.5))
+        }
     }
     aside:before {
         position: absolute;
@@ -264,7 +268,7 @@
     aside:after {
         position: absolute;
         right: 100%;
-        top: 51%;
+        top: 50%;
         border: solid transparent;
         content: " ";
         height: 0;
@@ -272,7 +276,7 @@
         pointer-events: none;
         border-right-color: $aside-color;
         border-width: $left-arrow-size - 1;
-        margin-top: -($left-arrow-size);
+        margin-top: -($left-arrow-size - 1);
         z-index: 2;
 
         @include media-query($on-laptop) {
