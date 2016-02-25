@@ -18,11 +18,18 @@ defaults:
       series_title: "Making an Android Game with Kotlin and LibGdx"
       github_repo: "kotlin_keep"
       github_branch: "master"
+  -
+    scope:
+      path: "series/understanding_gradle"
+    values:
+      series_title: "Understanding Gradle"
 
 # Build settings
 markdown: kramdown
 sass:
   style: compressed
+gems:
+ - jekyll-coffeescript
 
 include:
   - ".nojekyll" # Tell github pages we build jekyll ourselves
