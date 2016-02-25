@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Mac OS X version 5.1.25">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1">
+  <title>Gradle projects (Understanding Gradle)</title>
+  <meta name="description" content=
+  "This article covers what a Gradle project is and how it is organized. After reading this article and the previous one, you should be able to understand many ...">
+  <link rel="stylesheet" href="/trypp/css/main.css">
+  <link rel="canonical" href=
+  "http://d9n.github.io/trypp/series/understanding_gradle/projects/">
+  <link rel="icon" type="image/png" href=
+  "/trypp/assets/icons/trypp.png">
+</head>
+<body>
+  <div class="page-container">
+    <header class="site-bar site-header">
+      <div class="site-title-area">
+        <a class="site-title" href="/trypp/">Try++</a> <span class=
+        "site-subtitle">// a coding blog</span>
+      </div>
+      <nav class="site-links">
+        <!-- navbar shrinks to menu icon if space is reduced -->
+         <a href="#" class="menu-icon"><span class=
+        "fa fa-bars fa-lg"></span></a>
+        <div class="trigger">
+          <a href="/trypp/series/" class="site-link"><span class=
+          "fa fa-files-o"></span> Series</a> <a href=
+          "/trypp/about/" class="site-link"><span class=
+          "fa fa-question-circle"></span> About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <article class="post">
+        <header class="post-intro">
+          <nav class="series-nav">
+            <a href="#" class="menu-icon"><span class=
+            "fa fa-caret-down fa-lg"></span></a>
+            <div class="trigger">
+              <a href="../intro" class="nav-link">Getting
+              Started</a><br>
+              <b>Gradle projects</b><br>
+            </div>
+          </nav>
+          <div class="post-series-title">
+            Understanding Gradle
+          </div>
+          <h1 class="post-title">Gradle projects</h1>
+          <div class="post-toc">
+            <span class="post-toc-header">Contents</span>
+            <ul>
+              <li>
+                <a href="#overview">Overview</a>
+              </li>
+              <li style="list-style: none; display: inline">
+                <ul>
+                  <li>
+                    <a href="#what-is-a-gradle-project">What is a
+                    Gradle project?</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#project-organization">Project
+                Organization</a>
+              </li>
+              <li style="list-style: none; display: inline">
+                <ul>
+                  <li>
+                    <a href="#root-project-and-settingsgradle">Root
+                    project and settings.gradle</a>
+                  </li>
+                  <li>
+                    <a href="#deeply-nested-projects">Deeply nested
+                    projects</a>
+                  </li>
+                  <li>
+                    <a href="#project-blocks">Project blocks</a>
+                  </li>
+                  <li>
+                    <a href="#external-paths">External paths</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#key-takeaways">Key Takeaways</a>
+              </li>
+            </ul>
+          </div>
+        </header>
+        <div class="post-content">
+          <div class="post-intro-summary">
+            This series is for users who want to learn the barest
+            minimum needed to get started with Gradle. This article
+            covers what a Gradle project is and how it is
+            organized. After reading this article and <a href=
+            "../intro">the previous one</a>, you should be able to
+            understand many Gradle scripts used in real projects.
+          </div>
+          <aside name="terminal">
+            Whenever you see the terminal <span class=
+            "fa fa-terminal"></span> icon, try the example at home!
+          </aside><span name="terminal"></span>
+          <figcaption class="title">
+            <span name="terminal"><span class=
+            "fa fa-terminal"></span></span>
+          </figcaption>
+          <div class="terminal">
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang=
+              "bash"><span class=
+              "c"># In a source folder somewhere on your machine, e.g.</span>
+<span class=
+"c"># mkdir -p ~/src/trypp/understanding_gradle/projects/ &amp;& cd $_</span>
+<span class=
+"gp">$ </span>git clone -b projects https://github.com/d9n/understanding_gradle.git .</code></pre>
+            </figure>
+          </div>
+          <h2 class="link-header" id="overview">Overview<a href=
+          "#overview" class="section-anchor"><span class=
+          "fa fa-link"></span></a></h2>
+          <h3 class="link-header" id="what-is-a-gradle-project">
+          What is a Gradle project?<a href=
+          "#what-is-a-gradle-project" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p><span name="projectname">A Gradle project is a named
+          collection of tasks</span>. You can think of it as a
+          folder, a <code class=
+          "highlighter-rouge">build.gradle</code> file, and all
+          other contents in that folder.</p>
+          <div class="filetree">
+            <ul class="fa-ul">
+              <li><span class=
+              "fa fa-li fa-folder-open-o"></span><i>root</i></li>
+              <li style="list-style: none; display: inline">
+                <ul class="fa-ul">
+                  <li><span class=
+                  "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                  <li><span class=
+                  "fa fa-li fa-folder-o"></span>src</li>
+                  <li><span class=
+                  "fa fa-li fa-folder-o"></span>resources</li>
+                  <li><span class=
+                  "fa fa-li fa-ellipsis-h"></span><br></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <aside name="projectname">
+            By default, a project's name comes from the folder
+            which contains the Gradle build script. Modifying it is
+            not a common action and therefore not covered in this
+            series, but it's easy to find the answer if you search
+            for it.
+          </aside>
+          <p>Commonly, you’ll define projects that represent a
+          library or an application. In fact, this may be all you
+          ever use Gradle for, and that’s fine.</p>
+          <p>But you can define a Gradle project to do pretty much
+          anything. A project isn’t limited to just building code.
+          For example, a project can spin up a web server and serve
+          interal documentation to your team. Or a project can
+          process art assets. Or, <em>whatever</em> really. Gradle
+          build scripts are programs, so Gradle projects, by
+          extension, are very flexible.</p>
+          <p>Overall, it’s easiest to think of a Gradle project as
+          a <code class="highlighter-rouge">build.gradle</code>
+          script plus data. In fact, for every <code class=
+          "highlighter-rouge">build.gradle</code> script, Gradle
+          creates a single <span name="projectapi"><code class=
+          "highlighter-rouge">Project</code></span> object that it
+          associates with it. The relationship is one-to-one.</p>
+          <p>You can access this object directly by referencing
+          <code class="highlighter-rouge">project</code> anywhere
+          in your script:</p>
+          <figcaption class="title">
+            build.gradle
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">task</span> <span class=
+            "n">printName</span> <span class=
+            "o">&lt;&lt;</span> <span class="o">{</span>
+  <span class="n">println</span> <span class=
+"s2">"My project name: '${project.name}'"</span>
+<span class="o">}</span>
+
+<span class="n">task</span> <span class=
+"n">listTasks</span> <span class="o">&lt;&lt;</span> <span class=
+"o">{</span>
+  <span class="n">println</span> <span class=
+"s2">"Project tasks are:"</span>
+  <span class="n">project</span><span class=
+"o">.</span><span class="na">tasks</span><span class=
+"o">.</span><span class="na">each</span> <span class=
+"o">{</span> <span class="n">task</span> <span class=
+"o">-&gt;</span>
+    <span class="n">println</span> <span class=
+"s2">"\t${task.name}"</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <aside name="projectapi">
+            Check out the <a href=
+            "https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html">
+            API of the <code>Project</code> class</a> to learn more
+            about what information it can provide.
+          </aside>
+          <figcaption class="title">
+            <span class="fa fa-terminal"></span>
+          </figcaption>
+          <div class="terminal">
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang=
+              "bash"><span class="gp">$ </span><span class=
+              "nb">cd </span>empty_project
+
+<span class="gp">$ </span>./gradlew -q printName
+My project name: <span class="s1">'empty_project'</span>
+
+<span class="gp">$ </span>./gradlew -q listTasks
+Project tasks are:
+    printName
+    listTasks</code></pre>
+            </figure>
+          </div>
+          <div class="note">
+            Note the use of <code>gradlew -q</code>, where
+            <code>q</code> is short for <code>quiet</code>. This
+            cuts out a lot of chatty help text.
+          </div>
+          <h2 class="link-header" id="project-organization">Project
+          Organization<a href="#project-organization" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h2>
+          <h3 class="link-header" id=
+          "root-project-and-settingsgradle">Root project and
+          settings.gradle<a href="#root-project-and-settingsgradle"
+          class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Gradle is designed so that multiple projects can work
+          together to accomplish some larger goal. After all, if
+          one project represents a library and another project
+          represents an application, there needs to be a way to get
+          the two of them to talk.</p>
+          <p>Gradle supports this by having you to declare a root
+          project and configuring it with a list of target projects
+          for it to manage. Often, these other projects are nested,
+          which makes for a nice, hierarchical organization.</p>
+          <p>For the root project only, in addition to defining a
+          <code class="highlighter-rouge">build.gradle</code>
+          script, you also provide a <code class=
+          "highlighter-rouge">settings.gradle</code> file. This
+          settings file defines all subprojects. If a target
+          project isn’t listed in there, the root project won’t
+          know about it.</p>
+          <figcaption class="title">
+            The layout of a root project and three nested projects,
+            named "a", "b", and "c" for simplicity.<br>
+            Note the inclusion of a <code>gradlew</code> binary in
+            the root folder, which is a standard convention.
+          </figcaption>
+          <div class="filetree">
+            <ul class="fa-ul">
+              <li><span class=
+              "fa fa-li fa-folder-open-o"></span>root_project</li>
+              <li style="list-style: none; display: inline">
+                <ul class="fa-ul">
+                  <li><span class=
+                  "fa fa-li fa-file-excel-o"></span><i>gradlew</i></li>
+                  <li><span class=
+                  "fa fa-li fa-file-code-o"></span><b>build.gradle</b></li>
+                  <li><span class=
+                  "fa fa-li fa-file-code-o"></span><b>settings.gradle</b></li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span>a</li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                    </ul>
+                  </li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span>b</li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                    </ul>
+                  </li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span>c</li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <figcaption class="title">
+            build.gradle<br>
+            a/build.gradle<br>
+            b/guild.gradle<br>
+            c/build.gradle
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">task</span> <span class=
+            "n">printName</span> <span class=
+            "o">&lt;&lt;</span> <span class="o">{</span>
+  <span class="n">println</span> <span class=
+"s2">"My project name: '${project.name}'"</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <figcaption class="title">
+            settings.gradle
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">include</span> <span class=
+            "s1">'a'</span><span class="o">,</span> <span class=
+            "s1">'b'</span><span class="o">,</span> <span class=
+            "s1">'c'</span></code></pre>
+          </figure>
+          <p>Simply including the subproject names in your
+          <code class="highlighter-rouge">settings.gradle</code> is
+          all you need to do in most cases. Gradle automatically
+          searches the current path for matching subdirectories and
+          creates a <code class="highlighter-rouge">Project</code>
+          for each.</p>
+          <div class="note">
+            Gradle only supports one root project at any time. Even
+            if you wrap a subproject that has its own
+            <code>settings.gradle</code> in it, it will be ignored.
+            Only the root <code>settings.gradle</code> file will be
+            considered in a Gradle run.
+          </div>
+          <p>Now, we have multiple projects all with the same task
+          (<code class="highlighter-rouge">printName</code>). By
+          default, when you make a request to run a Gradle task, it
+          will fire all tasks that match.</p>
+          <p>If you want to target a task in a particular project,
+          you will need to qualify its name. You do this by
+          explicitly including the project name before the
+          task,</p>
+          <p>e.g. <code class="highlighter-rouge">task</code> →
+          <code class=
+          "highlighter-rouge">projectname:task</code></p>
+          <figcaption class="title">
+            <span class="fa fa-terminal"></span>
+          </figcaption>
+          <div class="terminal">
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang=
+              "bash"><span class="gp">$ </span><span class=
+              "nb">cd </span>root_project
+
+<span class="gp">$ </span>./gradlew -q printName
+My project name: <span class="s1">'root_project'</span>
+My project name: <span class="s1">'a'</span>
+My project name: <span class="s1">'b'</span>
+My project name: <span class="s1">'c'</span>
+
+<span class="gp">$ </span>./gradlew -q c:printName
+My project name: <span class="s1">'c'</span></code></pre>
+            </figure>
+          </div>
+          <p>The <code class="highlighter-rouge">:</code> character
+          is essentially a path separator, playing a similar role
+          to the <code class="highlighter-rouge">/</code> character
+          in a directory path.</p>
+          <p>If you start a project name with a <code class=
+          "highlighter-rouge">:</code>, that means start from the
+          root project. If you don’t, Gradle treats the task name
+          like a relative path, using the current directory to
+          figure out the active project scope.</p>
+          <p>By using <code class="highlighter-rouge">:</code> and
+          starting from the root, you can reference any project’s
+          task from the directory of any other.</p>
+          <figcaption class="title">
+            <span class="fa fa-terminal"></span>
+          </figcaption>
+          <div class="terminal">
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang=
+              "bash"><span class="gp">$ </span><span class=
+              "nb">cd </span>root_project
+
+<span class="gp">$ </span>./gradlew -q printName
+My project name: <span class="s1">'root_project'</span>
+My project name: <span class="s1">'a'</span>
+My project name: <span class="s1">'b'</span>
+My project name: <span class="s1">'c'</span>
+
+<span class="gp">$ </span>./gradlew -q :printName
+My project name: <span class="s1">'root_project'</span>
+
+<span class="gp">$ </span><span class="nb">cd </span>b
+
+<span class="gp">$ </span>../gradlew -q printName
+My project name: <span class="s1">'b'</span>
+
+<span class="gp">$ </span>../gradlew -q :printName
+My project name: <span class="s1">'root_project'</span>
+
+<span class="gp">$ </span>../gradlew -q :c:printName
+My project name: <span class="s1">'c'</span></code></pre>
+            </figure>
+          </div>
+          <h3 class="link-header" id="deeply-nested-projects">
+          Deeply nested projects<a href="#deeply-nested-projects"
+          class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Projects can be nested more than one level deep. Just
+          be sure to qualify the project names correctly, such as
+          <code class=
+          "highlighter-rouge">:root:projectParent:projectChild</code>.</p>
+          <div class="filetree">
+            <ul class="fa-ul">
+              <li><span class=
+              "fa fa-li fa-folder-open-o"></span>nested_projects</li>
+              <li style="list-style: none; display: inline">
+                <ul class="fa-ul">
+                  <li><span class=
+                  "fa fa-li fa-file-excel-o"></span><i>gradlew</i></li>
+                  <li><span class=
+                  "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                  <li><span class=
+                  "fa fa-li fa-file-code-o"></span>settings.gradle</li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span><b>a</b></li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                      <li><span class=
+                      "fa fa-li fa-folder-open-o"></span><b>b</b></li>
+                      <li style=
+                      "list-style: none; display: inline">
+                        <ul class="fa-ul">
+                          <li><span class=
+                          "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                          <li><span class=
+                          "fa fa-li fa-folder-open-o"></span><b>c</b></li>
+                          <li style=
+                          "list-style: none; display: inline">
+                            <ul class="fa-ul">
+                              <li><span class=
+                              "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <figcaption class="title">
+            settings.gradle
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">include</span> <span class=
+            "s1">'a'</span><span class="o">,</span> <span class=
+            "s1">'a:b'</span><span class="o">,</span> <span class=
+            "s1">'a:b:c'</span></code></pre>
+          </figure>
+          <figcaption class="title">
+            <span class="fa fa-terminal"></span>
+          </figcaption>
+          <div class="terminal">
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang=
+              "bash"><span class="gp">$ </span><span class=
+              "nb">cd </span>nested_projects
+
+<span class="gp">$ </span>./gradlew -q printName
+My project name: <span class="s1">'nested_projects'</span>
+My project name: <span class="s1">'a'</span>
+My project name: <span class="s1">'b'</span>
+My project name: <span class="s1">'c'</span>
+
+<span class="gp">$ </span>./gradlew -q a:printName
+My project name: <span class="s1">'a'</span>
+
+<span class="gp">$ </span>./gradlew -q b:printName
+<span class="k">*</span> What went wrong:
+Project <span class="s1">'b'</span> not found <span class=
+"k">in </span>root project <span class=
+"s1">'nested_projects'</span>
+
+<span class="gp">$ </span>./gradlew -q a:b:printName
+My project name: <span class="s1">'b'</span></code></pre>
+            </figure>
+          </div>
+          <h3 class="link-header" id="project-blocks">Project
+          blocks<a href="#project-blocks" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>You may have noticed in the previous sections that I
+          duplicated a lot of script code. In particular, each
+          subproject had the exact same copy of the root project’s
+          <code class="highlighter-rouge">build.gradle</code>
+          script. Of course, we can do better than this and share
+          code across projects.</p>
+          <p>Gradle provides special blocks that are available to
+          the root project: <code class=
+          "highlighter-rouge">allprojects</code> and <code class=
+          "highlighter-rouge">subprojects</code>. Any logic within
+          the <code class="highlighter-rouge">allprojects</code>
+          blocks will be available both to the root project itself
+          as well as its subprojects. The <code class=
+          "highlighter-rouge">subprojects</code> block does the
+          same, except excluding the root project.</p>
+          <p>For completion, you should also know you can target a
+          project directly using the <code class=
+          "highlighter-rouge">project(':project-name')</code>
+          method.</p>
+          <p>By using these blocks in your root script, you don’t
+          even need to have <code class=
+          "highlighter-rouge">build.gradle</code> files in the
+          subproject folders at all. Perhaps you have a target
+          source code folder that you don’t own but still want to
+          decorate with Gradle tasks. You can do that all from a
+          root project.</p>
+          <p>Of course, if there are <code class=
+          "highlighter-rouge">build.gradle</code> files in your
+          subprojects, the additional logic you define in the rot
+          project will simply be merged into them.</p>
+          <div class="filetree">
+            <ul class="fa-ul">
+              <li><span class=
+              "fa fa-li fa-folder-open-o"></span>project_blocks</li>
+              <li style="list-style: none; display: inline">
+                <ul class="fa-ul">
+                  <li><span class=
+                  "fa fa-li fa-file-excel-o"></span><i>gradlew</i></li>
+                  <li><span class=
+                  "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                  <li><span class=
+                  "fa fa-li fa-file-code-o"></span>settings.gradle</li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span>a</li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-text-o"></span>example_file_a1.txt</li>
+                      <li><span class=
+                      "fa fa-li fa-file-text-o"></span>example_file_a1.txt</li>
+                    </ul>
+                  </li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span>b</li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-text-o"></span>example_file_b1.txt</li>
+                    </ul>
+                  </li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span>c</li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-text-o"></span>example_file_c1.txt</li>
+                      <li><span class=
+                      "fa fa-li fa-file-text-o"></span>example_file_c2.txt</li>
+                      <li><span class=
+                      "fa fa-li fa-file-text-o"></span>example_file_c3.txt</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <figcaption class="title">
+            build.gradle
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">allprojects</span> <span class=
+            "o">{</span>
+    <span class="n">task</span> <span class=
+"n">printName</span> <span class="o">&lt;&lt;</span> <span class=
+"o">{</span>
+        <span class="n">println</span> <span class=
+"s2">"My project name: '${project.name}'"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">subprojects</span> <span class="o">{</span>
+    <span class="n">task</span> <span class=
+"n">listFiles</span> <span class="o">&lt;&lt;</span> <span class=
+"o">{</span>
+        <span class="n">println</span> <span class=
+"s2">"Project '${project.name}', files:"</span>
+        <span class="n">fileTree</span><span class=
+"o">(</span><span class="s1">'.'</span><span class=
+"o">).</span><span class="na">visit</span> <span class=
+"o">{</span> <span class="n">file</span> <span class=
+"o">-&gt;</span>
+            <span class="n">println</span> <span class=
+"s2">"\t${file.relativePath}"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">project</span><span class="o">(</span><span class=
+"s1">':c'</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">task</span> <span class=
+"n">listTasks</span> <span class="o">&lt;&lt;</span> <span class=
+"o">{</span>
+        <span class="n">println</span> <span class=
+"s2">"Project '${project.name}', tasks:"</span>
+        <span class="n">project</span><span class=
+"o">.</span><span class="na">tasks</span><span class=
+"o">.</span><span class="na">each</span> <span class=
+"o">{</span> <span class="n">task</span> <span class=
+"o">-&gt;</span>
+            <span class="n">println</span> <span class=
+"s2">"\t${task.name}"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <p>The above gradle script defines <code class=
+          "highlighter-rouge">printName</code> in every project,
+          <code class="highlighter-rouge">listFiles</code> in
+          subprojects only, and <code class=
+          "highlighter-rouge">listTasks</code> only in project
+          <code class="highlighter-rouge">c</code>.</p>
+          <figcaption class="title">
+            <span class="fa fa-terminal"></span>
+          </figcaption>
+          <div class="terminal">
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang=
+              "bash"><span class="gp">$ </span><span class=
+              "nb">cd </span>project_blocks
+
+<span class="gp">$ </span>./gradlew -q printName
+My project name: <span class="s1">'project_blocks'</span>
+My project name: <span class="s1">'a'</span>
+My project name: <span class="s1">'b'</span>
+My project name: <span class="s1">'c'</span>
+
+<span class="gp">$ </span>./gradlew -q listFiles
+Project <span class="s1">'a'</span>, files:
+  example_file_a1.txt
+  example_file_a2.txt
+Project <span class="s1">'b'</span>, files:
+  example_file_b1.txt
+Project <span class="s1">'c'</span>, files:
+  example_file_c1.txt
+  example_file_c2.txt
+  example_file_c3.txt
+
+<span class="gp">$ </span>./gradlew -q listTasks
+Project <span class="s1">'c'</span>, tasks:
+  listFiles
+  listTasks
+  printName</code></pre>
+            </figure>
+          </div>
+          <p><code class="highlighter-rouge">allprojects</code> and
+          <code class="highlighter-rouge">subprojects</code> blocks
+          are a great place to set variables or define tasks that
+          are shared across projects. The <code class=
+          "highlighter-rouge">project</code> selector may be useful
+          occasionally, but it is probably better to just put that
+          logic in the subproject <code class=
+          "highlighter-rouge">build.gradle</code> script
+          directly.</p>
+          <p>In short, if you find yourself repeating logic across
+          subprojects, think about moving it to the root project
+          instead.</p>
+          <h3 class="link-header" id="external-paths">External
+          paths<a href="#external-paths" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>In practice, it’s pretty common to have a root project
+          that wants to reach outside of its own path to some
+          external directory. For example, a project may commonly
+          be laid out as follows, where the library directories are
+          not children of the application directory:</p>
+          <div class="filetree">
+            <ul class="fa-ul">
+              <li><span class=
+              "fa fa-li fa-folder-open-o"></span>external_paths</li>
+              <li style="list-style: none; display: inline">
+                <ul class="fa-ul">
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span><b>app_root</b></li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-file-code-o"></span>build.gradle</li>
+                      <li><span class=
+                      "fa fa-li fa-file-code-o"></span>settings.gradle</li>
+                      <li><span class=
+                      "fa fa-li fa-folder-open-o"></span>app</li>
+                      <li style=
+                      "list-style: none; display: inline">
+                        <ul class="fa-ul">
+                          <li><span class=
+                          "fa fa-li fa-folder-open-o"></span>src</li>
+                          <li style=
+                          "list-style: none; display: inline">
+                            <ul class="fa-ul">
+                              <li><span class=
+                              "fa fa-li fa-file-code-o"></span>SampleApp.java</li>
+                              <li><span class=
+                              "fa fa-li fa-ellipsis-h"></span><br></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><span class=
+                  "fa fa-li fa-folder-open-o"></span>libs</li>
+                  <li style="list-style: none; display: inline">
+                    <ul class="fa-ul">
+                      <li><span class=
+                      "fa fa-li fa-folder-open-o"></span><b>lib1</b></li>
+                      <li style=
+                      "list-style: none; display: inline">
+                        <ul class="fa-ul">
+                          <li><span class=
+                          "fa fa-li fa-folder-open-o"></span>src</li>
+                          <li style=
+                          "list-style: none; display: inline">
+                            <ul class="fa-ul">
+                              <li><span class=
+                              "fa fa-li fa-file-code-o"></span>Lib1.java</li>
+                              <li><span class=
+                              "fa fa-li fa-ellipsis-h"></span><br></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><span class=
+                      "fa fa-li fa-folder-open-o"></span><b>lib2</b></li>
+                      <li style=
+                      "list-style: none; display: inline">
+                        <ul class="fa-ul">
+                          <li><span class=
+                          "fa fa-li fa-folder-open-o"></span>src</li>
+                          <li style=
+                          "list-style: none; display: inline">
+                            <ul class="fa-ul">
+                              <li><span class=
+                              "fa fa-li fa-file-code-o"></span>Lib2.java</li>
+                              <li><span class=
+                              "fa fa-li fa-ellipsis-h"></span><br></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <p>To provide a custom path for a project, you can
+          override any default settings in the <code class=
+          "highlighter-rouge">settings.gradle</code> file.</p>
+          <figcaption class="title">
+            app_root/settings.gradle
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">include</span> <span class=
+            "s1">'app'</span><span class="o">,</span> <span class=
+            "s1">'lib1'</span><span class="o">,</span> <span class=
+            "s1">'lib2'</span>
+
+<span class="n">project</span><span class="o">(</span><span class=
+"s1">':lib1'</span><span class="o">).</span><span class=
+"na">projectDir</span> <span class="o">=</span> <span class=
+"n">file</span><span class="o">(</span><span class=
+"s1">'../libs/lib1'</span><span class="o">)</span>
+<span class="n">project</span><span class="o">(</span><span class=
+"s1">':lib2'</span><span class="o">).</span><span class=
+"na">projectDir</span> <span class="o">=</span> <span class=
+"n">file</span><span class="o">(</span><span class=
+"s1">'../libs/lib2'</span><span class="o">)</span></code></pre>
+          </figure>
+          <figcaption class="title">
+            app_root/build.gradle
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">subprojects</span> <span class=
+            "o">{</span>
+    <span class="n">task</span> <span class=
+"n">listJava</span> <span class="o">&lt;&lt;</span> <span class=
+"o">{</span>
+        <span class="n">println</span> <span class=
+"s2">"Project '${project.name}', source files:"</span>
+        <span class="n">fileTree</span><span class=
+"o">(</span><span class="s1">'.'</span><span class=
+"o">).</span><span class="na">include</span><span class=
+"o">(</span><span class="s1">'**/*.java'</span><span class=
+"o">).</span><span class="na">visit</span> <span class=
+"o">{</span> <span class="n">file</span> <span class=
+"o">-&gt;</span>
+            <span class="k">if</span> <span class=
+"o">(!</span><span class="n">file</span><span class=
+"o">.</span><span class="na">isDirectory</span><span class=
+"o">())</span> <span class="o">{</span>
+                <span class="n">println</span> <span class=
+"s2">"\t${file.relativePath}"</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <p>By modifying <code class=
+          "highlighter-rouge">settings.gradle</code> in this way,
+          you not only can support complex project layouts, but
+          this abstracts hardcoded path details out of your build
+          script logic. For example, you can now safely change the
+          location of <code class="highlighter-rouge">lib1</code>
+          and/or <code class="highlighter-rouge">lib2</code>
+          anytime. Simply update <code class=
+          "highlighter-rouge">settings.gradle</code> and everything
+          will still compile.</p>
+          <p>As far as the root project is concerned, it thinks the
+          organization is flat:</p>
+          <div class="filetree">
+            <ul class="fa-ul">
+              <li><span class=
+              "fa fa-li fa-folder-open-o"></span><i>root</i></li>
+              <li style="list-style: none; display: inline">
+                <ul class="fa-ul">
+                  <li><span class=
+                  "fa fa-li fa-folder-o"></span>app</li>
+                  <li><span class=
+                  "fa fa-li fa-folder-o"></span>lib1</li>
+                  <li><span class=
+                  "fa fa-li fa-folder-o"></span>lib2</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <figcaption class="title">
+            <span class="fa fa-terminal"></span>
+          </figcaption>
+          <div class="terminal">
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang=
+              "bash"><span class="gp">$ </span><span class=
+              "nb">cd </span>external_paths/app_root
+
+<span class="gp">$ </span>./gradlew -q listJava
+Project <span class="s1">'app'</span>, <span class=
+"nb">source </span>files:
+  src/SampleApp.java
+Project <span class="s1">'lib1'</span>, <span class=
+"nb">source </span>files:
+  src/Lib1.java
+Project <span class="s1">'lib2'</span>, <span class=
+"nb">source </span>files:
+  src/Lib2.java</code></pre>
+            </figure>
+          </div>
+          <h2 class="link-header" id="key-takeaways">Key
+          Takeaways<a href="#key-takeaways" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h2>
+          <ul>
+            <li>A Gradle project is a folder containing a
+            <code class="highlighter-rouge">gradle.build</code>
+            script plus its contents</li>
+            <li>Multiproject layout is accomplished with a root
+            project that manages target projects</li>
+            <li>A root project is defined by a <code class=
+            "highlighter-rouge">gradle.build</code> scripts plus a
+            <code class="highlighter-rouge">settings.gradle</code>
+            file</li>
+            <li>To explicitly target the Gradle tasks of a
+            particular subproject, qualify its name using
+            <code class="highlighter-rouge">:</code> separators,
+            e.g. <code class=
+            "highlighter-rouge">:path:to:project:&lt;task&gt;</code></li>
+            <li>Projects can be nested as deeply as you want</li>
+            <li>Gradle allows <code class=
+            "highlighter-rouge">allprojects</code> and <code class=
+            "highlighter-rouge">subprojects</code> blocks in the
+            root project to share code across scripts</li>
+            <li>You can specify a project’s path in <code class=
+            "highlighter-rouge">settings.gradle</code>, allowing
+            Gradle to manage projects in external directories</li>
+          </ul>
+          <div class="footer-nav">
+            <a class='pull-left' href="../intro"><span class=
+            "fa fa-long-arrow-left"></span> Getting Started</a><br>
+          </div>
+        </div>
+      </article>
+    </div>
+    <footer class="site-bar site-footer">
+      <div class="site-links">
+        <a href=
+        "https://github.com/d9n/understanding_gradle/issues/new?title=%0AMistake%20in%20blog%20post%3A%20Understanding%20Gradle%20%3E%20Gradle%20projects%0A&amp;body=%0A_Issue%20reported%20from%20http%3A%2F%2Fd9n.github.io%2Ftrypp%2Fseries%2Funderstanding_gradle%2Fprojects%2F_%0A%0APlease%20report%3A%0A*%20your%20issue%0A*%20your%20browser%20%2B%20browser%20version%0A%0A**Thanks%20for%20your%20help!**%0A"
+        class="site-link"><span class="fa fa-github"></span> Report
+        a mistake</a> <a href="mailto:d9n.coding@gmail.com" class=
+        "site-link"><span class="fa fa-envelope-o"></span> Contact
+        me</a>
+      </div>
+    </footer>
+  </div>
+  <script src="/trypp/js/third-party/jquery.min.js">
+  </script> 
+  <script src="/trypp/js/initpage.js">
+  </script> 
+  <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-75896788-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+</body>
+</html>

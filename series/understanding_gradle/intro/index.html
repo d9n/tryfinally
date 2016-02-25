@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Mac OS X version 5.1.25">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1">
+  <title>Getting Started (Understanding Gradle)</title>
+  <meta name="description" content=
+  "This first article introduces just enough foundation so that we can start exploring real build scripts in the following articles.">
+  <link rel="stylesheet" href="/trypp/css/main.css">
+  <link rel="canonical" href=
+  "http://d9n.github.io/trypp/series/understanding_gradle/intro/">
+  <link rel="icon" type="image/png" href=
+  "/trypp/assets/icons/trypp.png">
+</head>
+<body>
+  <div class="page-container">
+    <header class="site-bar site-header">
+      <div class="site-title-area">
+        <a class="site-title" href="/trypp/">Try++</a> <span class=
+        "site-subtitle">// a coding blog</span>
+      </div>
+      <nav class="site-links">
+        <!-- navbar shrinks to menu icon if space is reduced -->
+         <a href="#" class="menu-icon"><span class=
+        "fa fa-bars fa-lg"></span></a>
+        <div class="trigger">
+          <a href="/trypp/series/" class="site-link"><span class=
+          "fa fa-files-o"></span> Series</a> <a href=
+          "/trypp/about/" class="site-link"><span class=
+          "fa fa-question-circle"></span> About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <article class="post">
+        <header class="post-intro">
+          <nav class="series-nav">
+            <a href="#" class="menu-icon"><span class=
+            "fa fa-caret-down fa-lg"></span></a>
+            <div class="trigger">
+              <b>Getting Started</b><br>
+              <a href="../projects" class="nav-link">Gradle
+              projects</a><br>
+            </div>
+          </nav>
+          <div class="post-series-title">
+            Understanding Gradle
+          </div>
+          <h1 class="post-title">Getting Started</h1>
+          <div class="post-toc">
+            <span class="post-toc-header">Contents</span>
+            <ul>
+              <li>
+                <a href="#overview">Overview</a>
+              </li>
+              <li style="list-style: none; display: inline">
+                <ul>
+                  <li>
+                    <a href="#what-is-gradle">What is Gradle?</a>
+                  </li>
+                  <li>
+                    <a href="#gradle-scripts-are-programs">Gradle
+                    scripts are programs</a>
+                  </li>
+                  <li>
+                    <a href="#why-gradle">Why Gradle?</a>
+                  </li>
+                  <li>
+                    <a href="#official-documentation">Official
+                    documentation</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#the-basics">The Basics</a>
+              </li>
+              <li style="list-style: none; display: inline">
+                <ul>
+                  <li>
+                    <a href="#gradlew">Gradlew</a>
+                  </li>
+                  <li>
+                    <a href="#tasks">Tasks</a>
+                  </li>
+                  <li>
+                    <a href="#dependency-management">Dependency
+                    management</a>
+                  </li>
+                  <li>
+                    <a href="#strings">Strings</a>
+                  </li>
+                  <li>
+                    <a href="#variables">Variables</a>
+                  </li>
+                  <li>
+                    <a href="#buildscript-block">Buildscript
+                    block</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#key-takeaways">Key Takeaways</a>
+              </li>
+            </ul>
+          </div>
+        </header>
+        <div class="post-content">
+          <div class="post-intro-summary">
+            This series is for users who want to learn the barest
+            minimum needed to get started with Gradle. This first
+            article introduces just enough foundation so that we
+            can start exploring real build scripts in the following
+            articles.
+          </div>
+          <h2 class="link-header" id="overview">Overview<a href=
+          "#overview" class="section-anchor"><span class=
+          "fa fa-link"></span></a></h2>
+          <h3 class="link-header" id="what-is-gradle">What is
+          Gradle?<a href="#what-is-gradle" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Gradle is a build system. Most of the time you will
+          use it to build a target library or application.</p>
+          <p>Gradle, when run, looks for a <code class=
+          "highlighter-rouge">build.gradle</code> file in the
+          current directory. A working <code class=
+          "highlighter-rouge">build.gradle</code> is included here
+          for reference, but don’t worry about understanding it for
+          now. We’ll make more sense of it later.</p>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">apply</span> <span class=
+            "nl">plugin:</span> <span class="s1">'java'</span>
+
+<span class="n">repositories</span> <span class="o">{</span>
+  <span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+  <span class="n">compile</span> <span class=
+"s1">'com.google.guava:guava:19.0'</span>
+  <span class="n">testCompile</span> <span class=
+"s1">'junit:junit:4.12'</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <h3 class="link-header" id="gradle-scripts-are-programs">
+          Gradle scripts are programs<a href=
+          "#gradle-scripts-are-programs" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Though at first glance a simple <code class=
+          "highlighter-rouge">build.gradle</code> file may look
+          like a bunch of data values, you are actually reading
+          code, <span name="groovy">written in <a href=
+          "http://www.groovy-lang.org/">Groovy</a></span>. If you
+          wanted, you could add variable declarations, print
+          statements, and all sorts of other logic throughout the
+          script above. Groovy’s flexible syntax allows writing
+          code that has a declaritive, data-like look and feel to
+          it.</p>
+          <aside name="groovy">
+            No Groovy knowledge is required to complete this
+            series.
+          </aside>
+          <p>You can think of Gradle as a framework designed to do
+          all sorts of heavy lifting for your project. <span name=
+          "ide">It can handle managing dependencies, collecting
+          input files, compiling code, and much more</span>. In
+          short, this means you can ask someone to clone your
+          project and then type <code class=
+          "highlighter-rouge">gradle compileJava</code>, and Gradle
+          will do a whole bunch of magic to produce an output. For
+          example, Gradle might download libraries from an online
+          repository and copy intermediate files around before,
+          say, generating an executable.</p>
+          <aside name="ide">
+            Often, this sort of work is handled by an IDE. However,
+            if you allow Gradle to be the <a href=
+            "https://en.wikipedia.org/wiki/Single_source_of_truth">source
+            of truth</a>, you let each programmer use whichever IDE
+            they want - IntelliJ, Eclipse, emacs, vim, notepad -
+            and maybe, <i>just maybe</i>, avoid a developer holy
+            war.
+          </aside>
+          <h3 class="link-header" id="why-gradle">Why
+          Gradle?<a href="#why-gradle" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Gradle has been growing in popularity as a build
+          system for a couple of reasons.</p>
+          <p><strong>It is JVM based</strong>, which means the one
+          prerequisite is that you have to install Java before
+          using it. And that’s it. If you are working on a Java
+          project, you are already ready to go.</p>
+          <p><span name="dynamic"><strong>It is a fully featured
+          programming language.</strong></span> Gradle provides a
+          flexibility that can be refreshing for projects with
+          non-standard build steps. Compare this with its
+          predecessor <a href="http://ant.apache.org/">Ant</a>, a
+          build system driven by static xml files, where running
+          into a wall means writing and registering a custom plugin
+          with their system. With Gradle, such issues can be worked
+          around with a few lines added to a build script.</p>
+          <aside name="dynamic">
+            My thoughts on whether this is good or bad is
+            irrelevant to this series, so I'll be sidestepping it.
+            But rest assured, this is a point of contention for
+            developers, and I'm sure you can start a flame war over
+            it if you want to (somewhere else, please).
+          </aside>
+          <p><strong>It is cross platform</strong>. The importance
+          of this can’t be overstated. Gradle has a solid story on
+          Windows.</p>
+          <p><strong>It is extensible</strong> via a rich, powerful
+          plugin system. A plugin for managing Java projects is
+          included out of the box, <a href=
+          "https://docs.gradle.org/current/userguide/standard_plugins.html">
+          as are quite a few other standard plugins if you’re
+          curious</a>.</p>
+          <p>And finally, <span name="android"><strong>Android has
+          officially endorsed Gradle</strong> as the recommended
+          build system for building Android apps</span>. The
+          Android gradle plugin does a lot of work to hide much of
+          the complexity that can normally creep up when you start
+          buliding lots of different versions of your Android
+          app.</p>
+          <aside name="android">
+            See also: <a href=
+            "http://developer.android.com/sdk/installing/studio-build.html">
+            Android Build Overview</a>
+          </aside>
+          <h3 class="link-header" id="official-documentation">
+          Official documentation<a href="#official-documentation"
+          class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Gradle’s <a href=
+          "https://docs.gradle.org/current/userguide/userguide.html">
+          official documentation can be found here</a>, and you
+          should bookmark that link in case you need to deep dive
+          into any Gradle feature later. However, I feel that it
+          can come across an intimidating tome of information that
+          doesn’t even have you writing your first build script
+          until Chapter 44.</p>
+          <p>When I’m learning, I want to see simple, contained,
+          concrete, realistic examples. I want to tweak settings
+          and see what happens. That’s exactly what I’ll provide in
+          this guide, and I hope this series acts as a useful
+          supplement to the official materials.</p>
+          <h2 class="link-header" id="the-basics">The
+          Basics<a href="#the-basics" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h2>
+          <h3 class="link-header" id="gradlew">Gradlew<a href=
+          "#gradlew" class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Instead of running <code class=
+          "highlighter-rouge">gradle</code> directly, you will
+          almost always run <code class=
+          "highlighter-rouge">gradlew</code> instead.</p>
+          <p><code class="highlighter-rouge">gradlew</code> is
+          short for “gradle wrapper”, because it wraps an inner
+          copy of <code class="highlighter-rouge">gradle</code>,
+          offering indirect access to it. You can think of
+          <code class="highlighter-rouge">gradlew</code> as being a
+          snapshot of a particular <code class=
+          "highlighter-rouge">gradle</code> instance. Whereas
+          <code class="highlighter-rouge">gradle</code> would be
+          installed somewhere generically on your system (like
+          /usr/local/bin), <code class=
+          "highlighter-rouge">gradlew</code> should be dropped into
+          the project’s root directory (and checked into source
+          control).</p>
+          <p><span name="installgradle">If you have <code class=
+          "highlighter-rouge">gradle</code> installed on your
+          system</span>, you can instantiate a gradle wrapper in
+          the current directory by typing <code class=
+          "highlighter-rouge">gradle wrapper</code>:</p>
+          <figure class="highlight">
+            <pre><code class="language-bash" data-lang=
+            "bash"><span class="gp">$ </span>./gradlew -v
+./gradlew: No such file or directory
+
+<span class="gp">$ </span>gradle wrapper --gradle-version 2.0
+... stuff happens ...
+
+<span class="gp">$ </span>./gradlew -v
+------------------------------------------------------------
+Gradle 2.0
+------------------------------------------------------------</code></pre>
+          </figure>
+          <aside name="installgradle">
+            If you don't have gradle installed and want to install
+            it, <a href=
+            "https://docs.gradle.org/current/userguide/installation.html">
+            visit the official docs</a> for more information.
+          </aside>
+          <p>By running <code class=
+          "highlighter-rouge">gradlew</code>, you can be sure
+          you’re running the <code class=
+          "highlighter-rouge">gradle</code> version that the
+          original author tested against. This is important as
+          newer major versions of gradle may break backwards
+          compatibility (or have different default behavior that
+          may also affect the build). It also means a user can
+          build your project even if they never installed
+          <code class="highlighter-rouge">gradle</code>
+          themselves.</p>
+          <p>I will start refering to <code class=
+          "highlighter-rouge">gradlew</code> for the rest of this
+          series, but remember that conceptually <code class=
+          "highlighter-rouge">gradlew</code> is just <code class=
+          "highlighter-rouge">gradle</code> and accepts the same
+          inputs.</p>
+          <h3 class="link-header" id="tasks">Tasks<a href="#tasks"
+          class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p><code class="highlighter-rouge">gradlew</code>, when
+          run, reads the current folder’s build script (if any) and
+          prints out a list of tasks to the console.</p>
+          <p>A task is a named, isolated unit of work which is one
+          part of the overall build. Additionally, a task can
+          depend on other tasks (meaning those tasks should run
+          first). In this way, simple tasks chain together to
+          perform complex logic.</p>
+          <p>A concrete example will help illustrate this. Here are
+          a subset of the tasks that might be listed when you run
+          <code class="highlighter-rouge">gradlew tasks</code> on a
+          configured Java project:</p>
+          <p><img src=
+          "/trypp/assets/series/understanding_gradle/intro/java_tasks.png"
+          alt=
+          "An example flowchart of some Java tasks generated by Gradle and how they depend on one another."></p>
+          <p>Each box above represents a task (description +
+          <b><i>task name</i></b>). Tasks without any other tasks
+          depending on them are emphasized with a bold outline for
+          clarity, but otherwise there is nothing technically
+          special about them.</p>
+          <p>Running <code class="highlighter-rouge">gradlew
+          &lt;task_name&gt;</code> will run that task, as well as
+          any prerequisite tasks. In practice, you probably won’t
+          run intermediate tasks directly. But you can if the need
+          arises.</p>
+          <p>So in the above example, <code class=
+          "highlighter-rouge">gradlew clean</code> is a standalone
+          task that simply deletes the contents of a build
+          directory. <code class="highlighter-rouge">gradlew
+          run</code>, on the other hand, will compile code, process
+          resources, package everything together, and then run the
+          application. <code class="highlighter-rouge">gradlew
+          javadoc</code> and <code class=
+          "highlighter-rouge">gradlew run</code> rely on a bunch of
+          the same tasks, so calling one and then the other will
+          share a lot of the work from the previous call.</p>
+          <p>Tasks are defined by declaring them with the
+          <code class="highlighter-rouge">task</code> keyword and
+          <span name="leftshift">setting them to a block with the
+          left-shift operator</span>:</p>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">apply</span> <span class=
+            "nl">plugin:</span> <span class="s1">'java'</span>
+
+<span class="n">task</span> <span class="n">run</span> <span class=
+"o">&lt;&lt;</span> <span class="o">{</span>
+  <span class="n">ant</span><span class="o">.</span><span class=
+"na">java</span><span class="o">(</span><span class=
+"nl">jar:</span> <span class=
+"s1">'/path/to/app.jar'</span><span class="o">,</span> <span class=
+"nl">fork:</span><span class="kc">true</span><span class=
+"o">)</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <aside name="leftshift">
+            This works because Gradle overloads the left shift
+            operator for defining tasks. Without it, the full code
+            would be:
+            <pre>
+task run {
+  doLast {
+    ant.java(...)
+  }
+}</pre>
+          </aside>
+          <h3 class="link-header" id="dependency-management">
+          Dependency management<a href="#dependency-management"
+          class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>So, you want to compile your Java project. However, it
+          depends on some library that, in turn, depends on
+          another.</p>
+          <p>One of the main jobs of a build system is to
+          automatically manage these sorts of dependency
+          relationships for you, and of course Gradle is no
+          exception.</p>
+          <p>You can think of dependency management consisting of
+          three parts:</p>
+          <ol>
+            <li>dependencies</li>
+            <li>configurations</li>
+            <li>repositories</li>
+          </ol>
+          <h4 class="link-header" id="dependencies">
+          Dependencies<a href="#dependencies" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h4>
+          <p>A dependency is pretty straightforward: it’s whatever
+          your project relies on to compile or run. This is often a
+          jar. To get this jar, you may download it from a server,
+          find it on disk, or compile another gradle project on
+          demand to produce it.</p>
+          <p>When you specify a dependency, you must associate it
+          with an existing configuration.</p>
+          <h4 class="link-header" id="configurations">
+          Configurations<a href="#configurations" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h4>
+          <p>A configuration is a group of related dependencies.
+          For example, a fancy graphing calculator application
+          you’re writing may depend on a math library and a
+          graphics library, while your unit tests may additionally
+          depend on a testing library and a profiling library. In
+          this case, you would specify a main configuration
+          (math+graphics) and a test configuration
+          (testing+profiling).</p>
+          <p>Note that the test configuration builds upon the main
+          configuration. If you want to compile your unit tests,
+          you must also compile the project itself. As you might
+          expect, then, configurations can inherit from other
+          configurations.</p>
+          <p>Configurations are often created behind the scenes for
+          you and you may never need to declare your own. For
+          example, the Java plugin provides <code class=
+          "highlighter-rouge">compile</code>, <code class=
+          "highlighter-rouge">runtime</code>, <code class=
+          "highlighter-rouge">testCompile</code>, and <code class=
+          "highlighter-rouge">testRuntime</code> configurations,
+          with the following inheritance rules:</p>
+          <p><img src=
+          "/trypp/assets/series/understanding_gradle/intro/java_configurations.png"
+          alt=
+          "An example flowchart showing the relationship of Java's compile, runtime, testCompile, and testRuntime configurations."></p>
+          <ul>
+            <li><code class="highlighter-rouge">compile</code> -
+            dependencies needed when you compile your
+            application</li>
+            <li><code class="highlighter-rouge">testCompile</code>
+            - dependencies needed when you compile your
+            application’s unit tests</li>
+            <li><code class="highlighter-rouge">runtime</code> -
+            dependencies your code doesn’t compile against but will
+            need when running. For example: a jar of
+            theme-dependant icons, classes accessed through
+            reflection, or a bundled executable that should be run
+            by your application</li>
+            <li><code class="highlighter-rouge">testRuntime</code>
+            - same as “runtime” but only used by unit tests</li>
+          </ul>
+          <h4 class="link-header" id="repositories">
+          Repositories<a href="#repositories" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h4>
+          <p>A repository is a large collection of dependencies.
+          Think of it like a dragon’s hoard of treasure and gold.
+          When you need to find a specific version of a specific
+          dependency, you can root around inside a repository to
+          look for one. Whereas a project would only reference a
+          single version of a library at a time, a repository may
+          store all versions of the library that ever existed.</p>
+          <p>It’s usually good enough to specify <code class=
+          "highlighter-rouge">mavenCentral</code> as your sole
+          repository (which directs to <a href=
+          "https://repo1.maven.org/maven2">https://repo1.maven.org/maven2</a>).
+          <code class="highlighter-rouge">jcenter</code> is another
+          common choice. You can even specify both repositories,
+          and they will be searched in the order you listed
+          them.</p>
+          <p>It can even make sense for you to own a small, local
+          repository with a handful of dependencies that you
+          maintain yourself. For example, you might iterate on some
+          library under development, hosting it locally until
+          you’re satisfied it’s ready for release.</p>
+          <h4 class="link-header" id="tying-it-all-together">Tying
+          it all together<a href="#tying-it-all-together" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h4>
+          <p>Let’s revisit the example from the beginning as it
+          should make more sense now.</p>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">apply</span> <span class=
+            "nl">plugin:</span> <span class="s1">'java'</span>
+
+<span class="n">repositories</span> <span class="o">{</span>
+  <span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+  <span class="n">compile</span> <span class=
+"s1">'com.google.guava:guava:19.0'</span>
+  <span class="n">testCompile</span> <span class=
+"s1">'junit:junit:4.12'</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <p>Here, we are adding a single dependency, Guava v19.0,
+          to the <code class="highlighter-rouge">compile</code>
+          configuration, and another dependency, JUnit v4.12, to
+          the <code class="highlighter-rouge">testCompile</code>
+          configuration. The first time you ask Gradle to compile
+          the project, it will download any missing dependnecies
+          from Maven Central.</p>
+          <h3 class="link-header" id="strings">Strings<a href=
+          "#strings" class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Groovy, and by extension Gradle, makes a subtle
+          distinction between ‘single quotes’ and “double quotes”.
+          Double quoted strings are evaluated when they are read,
+          and can contain code expressions that will be resolved at
+          runtime. Single quoted strings, in contrast, are static.
+          What you see is what you get.</p>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">println</span> <span class=
+            "s2">"5 + 5 = ${5 + 5}"</span> <span class=
+            "c1">// 5 + 5 = 10</span>
+<span class="n">println</span> <span class=
+"s1">'5 + 5 = ${5 + 5}'</span> <span class=
+"c1">// 5 + 5 = ${5 + 5}</span></code></pre>
+          </figure>
+          <p>You can think of double-quoted strings as a very
+          convenient, concise way to represent Java’s <a href=
+          "https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#format(java.lang.String,%20java.lang.Object...)">
+          String.format(text, args…)</a> method call.</p>
+          <figure class="highlight">
+            <pre><code class="language-java" data-lang=
+            "java"><span class="n">System</span><span class=
+            "o">.</span><span class="na">out</span><span class=
+            "o">.</span><span class="na">println</span><span class=
+            "o">(</span><span class="n">String</span><span class=
+            "o">.</span><span class="na">format</span><span class=
+            "o">(</span><span class=
+            "s">"5 + 5 = %s"</span><span class=
+            "o">,</span> <span class="mi">5</span> <span class=
+            "o">+</span> <span class="mi">5</span><span class=
+            "o">));</span></code></pre>
+          </figure>
+          <p>When writing Gradle scripts, it’s a good idea to use
+          single quotes if your text is static and double quotes if
+          your text is dynamic. <span name="singlequote">At the
+          very least, it’s important to know there’s a
+          difference.</span></p>
+          <aside name="singlequote">
+            I learned this the hard way when I copied some text
+            which was double-quoted. However, by trying to stay
+            consistent with the rest of the script I was pasting
+            into, I changed the double quotes to single quotes.
+            Things broke.
+          </aside>
+          <h3 class="link-header" id="variables">Variables<a href=
+          "#variables" class="section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>In Gradle scripts, you will commonly run across two
+          types of variables: the standard kind (local variables)
+          and a dynamic kind (extra properties).</p>
+          <h4 class="link-header" id="local-variables">Local
+          variables<a href="#local-variables" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h4>
+          <p>Local variables are declared normally just like any
+          local variable you’d define in Java, such as <code class=
+          "highlighter-rouge">String name</code> or <code class=
+          "highlighter-rouge">File srcPath</code>. <span name=
+          "def">You can also (and often should) use the
+          <code class="highlighter-rouge">def</code> keyword which
+          will let the compiler figure out the type for you</span>,
+          and I do this in the example below.</p>
+          <aside name="def">
+            Some developers feel uneasy about this, as if losing
+            type information somehow defeats the purpose of using a
+            statically typed language. For example, <code>String
+            name</code> is certainly more informative than
+            <code>def name</code>, right? But if you fall in this
+            camp, consider this example:
+            <pre>
+String result =
+  getUser().
+  getName().
+  toLowerCase()
+</pre>Verbosely, this can be rewritten as:
+            <pre>
+def user = getUser()
+def name = user.getName()
+String result =
+  name.toLowerCase()
+</pre>So, even if you didn't realize it, you have already been
+relying on the compiler to handle intermediate values.
+          </aside>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="kt">def</span> <span class=
+            "n">root</span> <span class="o">=</span> <span class=
+            "n">System</span><span class="o">.</span><span class=
+            "na">getenv</span><span class="o">(</span><span class=
+            "s1">'PROJECT_ROOT'</span><span class="o">)</span>
+<span class="c1">// Equivalent to:</span>
+<span class=
+"c1">// String root = System.getenv('PROJECT_ROOT')</span>
+
+<span class="k">if</span> <span class="o">(</span><span class=
+"n">root</span> <span class="o">==</span> <span class=
+"kc">null</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">throw</span> <span class=
+"k">new</span> <span class="nf">RuntimeException</span><span class=
+"o">(</span><span class=
+"s2">"You must define PROJECT_ROOT!"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="kt">def</span> <span class="n">src</span> <span class=
+"o">=</span> <span class="n">file</span><span class=
+"o">(</span><span class=
+"s2">"$root/assets/nightly/"</span><span class="o">)</span>
+<span class="kt">def</span> <span class="n">dst</span> <span class=
+"o">=</span> <span class="n">file</span><span class=
+"o">(</span><span class=
+"s2">"$root/dev/game/assets/"</span><span class="o">)</span>
+<span class="k">if</span> <span class="o">(</span><span class=
+"n">dst</span><span class="o">.</span><span class=
+"na">exists</span><span class="o">()</span> <span class=
+"o">&amp;&</span> <span class="n">dst</span><span class=
+"o">.</span><span class="na">list</span><span class=
+"o">().</span><span class="na">length</span> <span class=
+"o">&gt;</span> <span class="mi">0</span><span class=
+"o">)</span> <span class="o">{</span>
+  <span class="n">println</span> <span class=
+"s2">"Target dir $dst is not empty..."</span>
+  <span class="n">println</span> <span class=
+"s2">"Consider running cleanDest task"</span>
+<span class="o">}</span>
+
+<span class="n">task</span> <span class=
+"n">cleanDest</span> <span class="o">&lt;&lt;</span> <span class=
+"o">{</span>
+  <span class="n">delete</span> <span class="s2">"$dst/"</span>
+<span class="o">}</span>
+
+<span class="n">task</span> <span class=
+"nf">copyFiles</span><span class="o">(</span><span class=
+"nl">type:</span> <span class="n">Copy</span><span class=
+"o">)</span> <span class="o">{</span>
+  <span class="n">from</span> <span class="s2">"$src"</span>
+  <span class="n">into</span> <span class="s2">"$dst"</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <h4 class="link-header" id="extra-properties">Extra
+          properties<a href="#extra-properties" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h4>
+          <p>Local variables are useful for storing intermediate
+          values as part of a function. Often, though, you just
+          want to set a value in one place that you want to read
+          back somewhere else.</p>
+          <p>Gradle provides a way to do this through extra
+          properties - using the <code class=
+          "highlighter-rouge">ext</code> keyword, you can
+          dynamically define variables that are then associated
+          with the object at the current scope it is being defined
+          in. Anywhere else in the same scope, you can later read
+          that variable out again (without needing to use the
+          <code class="highlighter-rouge">ext</code> keyword at
+          that point).</p>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">ext</span> <span class=
+            "o">{</span>
+    <span class="n">notifyEmails</span> <span class=
+"o">=</span> <span class="o">[</span><span class=
+"s1">'adam@example.com'</span><span class="o">,</span> <span class=
+"s1">'betty@example.com'</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="n">task</span> <span class=
+"n">sendEmails</span> <span class="o">&lt;&lt;</span> <span class=
+"o">{</span>
+    <span class="n">notifyEmails</span><span class=
+"o">.</span><span class="na">each</span> <span class=
+"o">{</span> <span class="n">email</span> <span class=
+"o">-&gt;</span>
+        <span class="n">println</span> <span class=
+"s2">"Sending email to: $email..."</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+          </figure>
+          <p>The above sample works but is admittedly limited.
+          However, extra properties can play a useful role
+          especially when you write build scripts that spans across
+          multiple projects.</p>
+          <p>You should be aware that I’m glossing over this
+          feature since we’re just focusing on the basics for now.
+          Explaining the details of Gradle scopes would require a
+          decent tangent, and you may never need to really
+          understand them to get by. At this point, it’s just good
+          to be aware of extra properties because you’ll often see
+          the <code class="highlighter-rouge">ext</code> keyword
+          used in practice.</p>
+          <h3 class="link-header" id="buildscript-block">
+          Buildscript block<a href="#buildscript-block" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h3>
+          <p>Normally a Gradle script is read from top to bottom,
+          but an exception to that is the <code class=
+          "highlighter-rouge">buildscript</code> block, which is
+          always executed before everything else. You can think of
+          it as a script within your script - Gradle will run over
+          your code in two passes, first running the <code class=
+          "highlighter-rouge">buildscript</code> block, and next
+          running everything else.</p>
+          <p>Why is this important? Well, it turns out it’s very
+          useful for fetching custom plugins.</p>
+          <p>For example, although the Java plugin is bundled with
+          Gradle, the Android plugin is not. You could always make
+          it a requirement for the user to download just the right
+          version of the Android plugin before building their code,
+          but this is something Gradle is already really great at
+          doing! There should be some way to lean on Gradle to do
+          this for us…</p>
+          <p>And indeed, that’s what the <code class=
+          "highlighter-rouge">buildscript</code> block is for.</p>
+          <figcaption class="title">
+            The following snippet is extracted from <a href=
+            "http://developer.android.com/tools/building/plugin-for-gradle.html#projectBuildFile">
+            developer.android.com</a>.
+          </figcaption>
+          <figure class="highlight">
+            <pre><code class="language-groovy" data-lang=
+            "groovy"><span class="n">buildscript</span> <span class=
+            "o">{</span>
+  <span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">jcenter</span><span class="o">()</span>
+  <span class="o">}</span>
+  <span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">classpath</span> <span class=
+"s1">'com.android.tools.build:gradle:1.0.1'</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">apply</span> <span class=
+"nl">plugin:</span> <span class=
+"s1">'com.android.application'</span></code></pre>
+          </figure>
+          <p>Notice that the <code class=
+          "highlighter-rouge">buildscript</code> block
+          automatically introduces a <code class=
+          "highlighter-rouge">classpath</code> configuration. Read
+          the note below if you’re curious to know more, but
+          otherwise just use this configuration to specify
+          dependencies needed by any plugins you want to use.</p>
+          <div class="note">
+            A <a href=
+            "https://en.wikipedia.org/wiki/Classpath_(Java)">classpath</a>
+            is a concept in Java and Groovy, a path where compiled
+            code can be found and used as a dependency when
+            building other code. Remember that your build script is
+            code and is actually being compiled each time
+            <code>gradlew</code> is called! The buildblock's
+            classpath is actually providing dependencies for the
+            rest of your build script.
+          </div>
+          <h2 class="link-header" id="key-takeaways">Key
+          Takeaways<a href="#key-takeaways" class=
+          "section-anchor"><span class=
+          "fa fa-link"></span></a></h2>
+          <p>At this point, you should be able to make a good first
+          stab at reading basic Gradle scripts out in the wild.
+          We’ve still got more to cover, but you now have a decent
+          foundation. To reiterate what we’ve covered so far:</p>
+          <ul>
+            <li>Gradle is used for building libraries and
+            applications</li>
+            <li>Gradle uses the Groovy language</li>
+            <li>You’ll often invoke Gradle indirectly using
+            <code class="highlighter-rouge">gradlew</code>, the
+            “Gradle Wrapper”</li>
+            <li>Gradle breaks a build up into tasks, and you can
+            invoke tasks directly</li>
+            <li>A configuration is a collection of
+            dependencies</li>
+            <li>The Java plugin includes useful configurations and
+            build tasks that use them</li>
+            <li>There are two types of variables: local variables
+            (declared with <code class=
+            "highlighter-rouge">def</code>) and extra properties
+            (declared with <code class=
+            "highlighter-rouge">ext</code>)</li>
+            <li><code class="highlighter-rouge">buildscript</code>
+            blocks run before everything else and provide
+            dependencies for the rest of your build script</li>
+          </ul>
+          <div class="footer-nav">
+            <a class='pull-right' href="../projects">Gradle
+            projects <span class=
+            "fa fa-long-arrow-right"></span></a><br>
+          </div>
+        </div>
+      </article>
+    </div>
+    <footer class="site-bar site-footer">
+      <div class="site-links">
+        <a href=
+        "https://github.com/d9n/understanding_gradle/issues/new?title=%0AMistake%20in%20blog%20post%3A%20Understanding%20Gradle%20%3E%20Getting%20Started%0A&amp;body=%0A_Issue%20reported%20from%20http%3A%2F%2Fd9n.github.io%2Ftrypp%2Fseries%2Funderstanding_gradle%2Fintro%2F_%0A%0APlease%20report%3A%0A*%20your%20issue%0A*%20your%20browser%20%2B%20browser%20version%0A%0A**Thanks%20for%20your%20help!**%0A"
+        class="site-link"><span class="fa fa-github"></span> Report
+        a mistake</a> <a href="mailto:d9n.coding@gmail.com" class=
+        "site-link"><span class="fa fa-envelope-o"></span> Contact
+        me</a>
+      </div>
+    </footer>
+  </div>
+  <script src="/trypp/js/third-party/jquery.min.js">
+  </script> 
+  <script src="/trypp/js/initpage.js">
+  </script> 
+  <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-75896788-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+</body>
+</html>
