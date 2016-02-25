@@ -7,6 +7,7 @@ This document contains steps for setting up, building, and publishing this blog.
 Global dependencies have been kept to a minimal few.
 
 * [Install Jekyll](http://jekyllrb.com/docs/installation/)
+* [Install Jekyll-Coffeescript](http://jekyllrb.com/docs/assets/#coffeescript)
 * [Install npm](https://docs.npmjs.com/getting-started/installing-node) # Needed to install Bower
 * [Install Bower](http://bower.io/#install-bower)
 
