@@ -47,7 +47,8 @@ $navbar-font-size: $title-font-size * 0.5;
 $title-bar-bg:     $primary-color;
 $title-bar-fg:     $primary-text-light;
 
-$body-color:       darken($grey-color-light, 5%);
+//$body-color:       darken($grey-color-light, 5%);
+$body-color:       #000000;
 $content-color:    #ffffff;
 $intro-area-bg:    lighten($grey-color-light, 5%);
 $intro-area-fg:    $primary-text-dark;

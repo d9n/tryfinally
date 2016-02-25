@@ -103,12 +103,15 @@
  * Posts
  */
 
-.post {
+$top-radius: 10px;
 
+.post {
     position: relative; // Acts as a hook for asides to position against
     @include max-width($content-width);
 
     border: solid 1px $primary-color-light;
+    @include border-radius($top-radius);
+
     background-color: $content-color;
 
     // Used for post title
@@ -177,6 +180,8 @@
 .post-intro {
     padding: 10px 20px;
     @include gradient(top, darken($intro-area-bg, 2%) 0%, $intro-area-bg 100%);
+    @include border-radius($top-radius);
+
     margin-bottom: $spacing-unit;
 }
 
@@ -214,6 +219,7 @@
     $left-arrow-size: 10px;
     $arrow-shift: $left-arrow-size / 2;
     aside {
+        opacity: 0.2;
         position: absolute;
         font-size: 80%;
         color: lighten($primary-text-dark, 30%);
@@ -227,6 +233,7 @@
         border: solid 1px;
 
         @include media-query($on-laptop) {
+            opacity: 1.0;
             position: static;
             width: initial;
             left: initial;
@@ -243,7 +250,15 @@
             }
         }
 
+        pre {
+            border: 0px;
+            padding: 4px 0px;
+            background: rgba(255, 255, 255, 0)
+        }
+
         &.highlight-aside {
+            opacity: 1.0;
+            z-index: 1; // Asides may overlap. On mouseover, always bring to the top
             @include box-shadow(0px 0px 10px 0px rgba(125,125,125,0.5))
         }
     }
