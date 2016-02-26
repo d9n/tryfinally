@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
-
   {% include head.html %}
-
     {% include header.html %}
 
     <div class="wrapper">
       {{ content }}
     </div>
 
+  	<script src={{ "/js/third-party/jquery.min.js" | prepend: site.baseurl }}></script>
+  	<script src={{ "/js/initpage.js" | prepend: site.baseurl}}></script>
 
-	<script src={{ "/js/third-party/jquery.min.js" | prepend: site.baseurl }}></script>
-	<script src={{ "/js/initpage.js" | prepend: site.baseurl}}></script>
+    {% if jekyll.environment == "development" %}
+      <div id="debug-console" onclick="clearlog()"></div>
+    {% else %}
+      {% comment %}
+        Google Analytics tag, useful for tracking article popularity
+      {% endcomment %}
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  {% if jekyll.environment == "development" %}
-    <div id="debug-console" onclick="clearlog()"></div>
-  {% endif %}
-
+        ga('create', 'UA-74360606-1', 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
   </body>
-
 </html>
