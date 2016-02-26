@@ -7,8 +7,9 @@
     "firstrun": "bower install && npm run updatedeps && npm install",
     "updatedeps": "ruby scripts/copy_bower_dependencies.rb",
     "serve": "node_modules/watchy/bin/watchy -w _config.yml -- jekyll serve",
+    "tidy": "find _site -name '*.html' -type f -exec tidy --drop-empty-elements no -m -utf8 -i '{}' \\;",
     "build": "jekyll build",
-    "tidy": "find _site -name '*.html' -type f -exec tidy --drop-empty-elements no -m -utf8 -i '{}' \\;"
+    "build-release": "export JEKYLL_ENV=production && npm run build && npm run tidy"
   },
   "author": "David Herman",
   "license": "MIT",

@@ -23,14 +23,15 @@ All remaining dependencies are local and maintained by Bower.
 $ npm run firstrun
 
 # Verify config
-$ less _config.yml
+$ less _config.yml # You should probably update "url"
 
 # Initialize _site and sync with github repo
-# !!! Github repo name should be replaced with your fork !!!
+# !!! $user should be set to your username !!!
 $ mkdir _site && cd _site
 $ git init
-$ git remote add origin https://github.com/$user/$user.github.io.git
-$ git pull origin master
+$ git checkout -b gh-pages
+$ git remote add origin https://github.com/$user/tryfinally
+$ git pull origin gh-pages
 ```
 
 ## Publish changes
@@ -46,16 +47,20 @@ $ jekyll build
 $ npm run serve # "jekyll serve" is also OK
 ```
 
-<!-- Make this obsolete by using Jekyll hook on build? -->
-### Pretty print your html
+### Build the site
 ```bash
-# requires up-to-date tidy, to handle html5!
-$ npm run tidy
-```
+# development
+# (not usually necessary as 'npm run serve' does this automatically)
+$ npm run build
+
+# production
+# includes analytics, tidies html, hides debug controls
+$ npm run build-release
 
 ### Push to github
 ```bash
+# run 'npm run build-release' first!
 $ cd _site
 $ git add . && git commit -m "(commit message)"
-$ git push -u origin master
+$ git push -u origin gh-pages
 ```
