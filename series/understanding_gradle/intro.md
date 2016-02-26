@@ -144,9 +144,9 @@ A configuration is a group of related dependencies. For example, your fancy grap
 
 Note that the test configuration builds on the main configuration. If you want to compile your unit tests, you must also compile the project itself. As you might expect, then, configurations can inherit from other configurations.
 
-Configurations are often created behind the scenes for you and you may never need to declare your own. For example, the Java plugin provides "compile", "runtime", "testCompile", and "testRuntime" configurations, with the following inheritance rules:
+Configurations are often created behind the scenes for you and you may never need to declare your own. For example, the Java plugin provides `compile`, `runtime`, `testCompile`, and `testRuntime` configurations, with the following inheritance rules:
 
-<img src="{% asset_path java_configurations.png %}" alt="An example flowchart showing the relationship of Java's compile, runtime, testCompile, and runtime configurations." width="40%" height="40%" />
+<img src="{% asset_path java_configurations.png %}" alt="An example flowchart showing the relationship of Java's compile, runtime, testCompile, and runtime configurations."  />
 
 * `compile` - dependencies needed when you compile your application
 * `testCompile` - dependencies needed when you compile your application's unit tests
