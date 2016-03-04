@@ -1,11 +1,11 @@
 ---
-layout: default
+layout: basic
 title: About
 permalink: /about/
 ---
-A home for **carefully crafted coding tutorials**. Articles designed to teach, not to overwhelm.
+`Try{Finally}` is my home for writing coding tutorials. Articles designed to teach, not to overwhelm.
 
-For each entry, you can rely on me to provide:
+For each entry, I provide
 
 * A clear, focused goal
 * Concrete examples

@@ -103,14 +103,14 @@
  * Posts
  */
 
-$top-radius: 10px;
+$post-border-radius: 10px;
 
 .post {
     position: relative; // Acts as a hook for asides to position against
     @include max-width($content-width);
 
     border: solid 1px $primary-color-light;
-    @include border-radius($top-radius);
+    @include border-radius($post-border-radius);
 
     background-color: $content-color;
 
@@ -180,7 +180,7 @@ $top-radius: 10px;
 .post-intro {
     padding: 10px 20px;
     @include gradient(top, darken($intro-area-bg, 2%) 0%, $intro-area-bg 100%);
-    @include border-radius($top-radius);
+    @include border-radius($post-border-radius);
 
     margin-bottom: $spacing-unit;
 }

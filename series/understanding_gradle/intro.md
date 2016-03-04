@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: series
 permalink: series/understanding_gradle/intro/
 title: Introduction
 intro:
