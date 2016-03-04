@@ -76,11 +76,10 @@ initAsideMouseEvents = (withLogging = false) ->
 refreshAsides = (withLogging = false) ->
     loopAsides((aside, span) ->
         # Don't mess with aside offsets if we're in a mode where they're not being positioned
-        # absolutely (e.g. small screen mode)
+        # absolutely (e.g. view is narrow)
         if aside.css('position') != 'absolute'
             return
-        spanY = span.offset().top + span.outerHeight() / 2
-        aside.offset({ top: spanY - aside.outerHeight() / 2 })
+        aside.offset({ top: span.offset().top })
     , withLogging)
 
 $(document).ready ->

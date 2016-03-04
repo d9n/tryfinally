@@ -116,8 +116,7 @@ task run {
   doLast {
     ant.java(...)
   }
-}
-</pre>
+}</pre>
 </aside>
 
 ### Dependency management

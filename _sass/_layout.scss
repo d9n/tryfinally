@@ -109,7 +109,7 @@ $post-border-radius: 10px;
     position: relative; // Acts as a hook for asides to position against
     @include max-width($content-width);
 
-    border: solid 1px $primary-color-light;
+    // border: solid 1px $primary-color-light;
     @include border-radius($post-border-radius);
 
     background-color: $content-color;
@@ -136,6 +136,7 @@ $post-border-radius: 10px;
     // Used for section subtitle
     h3 {
         @include responsive-font($base-font-size * 1.5);
+        margin-top: $spacing-unit;
     }
 
     // Currently unused
@@ -215,29 +216,38 @@ $post-border-radius: 10px;
 
     padding: 0px 30px;
 
-    // Thank you http://cssarrowplease.com/
-    $left-arrow-size: 10px;
-    $arrow-shift: $left-arrow-size / 2;
+    $one-line-height: 1.5em;
+
     aside {
-        opacity: 0.2;
+        $aside-gutter: 5px;
         position: absolute;
         font-size: 80%;
         color: lighten($primary-text-dark, 30%);
         left: 100%;
-        margin-left: $arrow-shift;
-        // left arrow eats into aside width
-        width: $aside-width - $arrow-shift * 2 - $hpad * 2;
+        margin-left: $aside-gutter;
+        width: $aside-width - $aside-gutter * 2 - $hpad * 2;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-height: $one-line-height;
+
         background: $aside-color;
         padding: $vpad $hpad;
         @include border-radius(5px);
         border: solid 1px;
 
         @include media-query($on-laptop) {
-            opacity: 1.0;
+            // When the page is squished so there's no gutter
+            // space, show asides inline
             position: static;
             width: initial;
+            white-space: initial;
+            height: initial;
+            max-height: initial;
+
             left: initial;
-            margin: initial $gutter;
+            margin: initial $aside-gutter;
             border: transparent;
         }
 
@@ -257,45 +267,13 @@ $post-border-radius: 10px;
         }
 
         &.highlight-aside {
-            opacity: 1.0;
+            white-space: initial;
+            height: initial;
+            max-height: initial;
+            // transition: max-height 2s;
+
             z-index: 1; // Asides may overlap. On mouseover, always bring to the top
             @include box-shadow(0px 0px 10px 0px rgba(125,125,125,0.5))
-        }
-    }
-    aside:before {
-        position: absolute;
-        right: 100%;
-        top: 50%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        pointer-events: none;
-        border-right-color: black;
-        border-width: $left-arrow-size;
-        margin-top: -$left-arrow-size;
-        z-index: 1;
-
-        @include media-query($on-laptop) {
-            display: none;
-        }
-    }
-    aside:after {
-        position: absolute;
-        right: 100%;
-        top: 50%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        pointer-events: none;
-        border-right-color: $aside-color;
-        border-width: $left-arrow-size - 1;
-        margin-top: -($left-arrow-size - 1);
-        z-index: 2;
-
-        @include media-query($on-laptop) {
-            display: none;
         }
     }
 
