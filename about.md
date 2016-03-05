@@ -3,12 +3,12 @@ layout: basic
 title: About
 permalink: /about/
 ---
-`Try{Finally}` is my coding blog for discussing programming technologies and code examples, with a focus on keeping things easy to understand. Too many coding articles, in my opinion, are data dumps that are informative but hard to follow.
+`Try{Finally}` is my coding blog for discussing programming technologies and posting code examples. I will be focusing on keeping things easy to understand. Too many coding articles, in my opinion, are data dumps that are informative but hard to follow.
 
 For each post, I will provide, for you, my dear reader...
 
 * A clear, focused goal
-* <span name="gitclone">Git clone links - follow along at home! (when appplicable)</span>
+* <span name="gitclone">Git clone links - follow along at home!</span>
 * Concrete examples
 * Focused code snippets
 * Approachable explanations
@@ -24,10 +24,13 @@ For each post, I will provide, for you, my dear reader...
 
 I use [Jekyll](http://jekyllrb.com) to build this site, and I host it using [GitHub Pages](https://pages.github.com/).
 
-[All content in this blog](https://github.com/d9n/tryfinally) is open source and hosted on Github as well.
+[All content in this blog](https://github.com/d9n/tryfinally/tree/master) is open source and hosted on Github as well.
 
 I chose the name `Try{Finally}` because of its [obvious programming relevance](https://en.wikipedia.org/wiki/Exception_handling_syntax), but also because I came to realize that so many things I used to assume were hard to learn just took patience and repeated practice to figure out. <span name="tryfinally">So keeping on _trying_ until you _finally_ get it.</span>
 
-<aside name="tryfinally">Yeah, sorry. That's the reason. Really. They pay me for my code, not my creativity.</aside>
+<aside name="tryfinally">Yeah, sorry. That's the reason.</aside>
 
-d9n is a [numeronym](https://en.wikipedia.org/wiki/Numeronym) for my full name, which I used to use as a login name and got sick of how long it was. I've been a programmer in the industry since 2001, a fair share of that spent in the game industry, and I'm currently working at Google on [Android Studio](http://developer.android.com/sdk/index.html).
+d9n is a [numeronym](https://en.wikipedia.org/wiki/Numeronym) for my full name. I've been a programmer in the industry since 2001, a fair share of that spent in the game industry, and I'm currently working at Google on [Android Studio](http://developer.android.com/sdk/index.html).
+
+If you have any questions or comments and want to reach me directly, email me at
+<d9n.coding@gmail.com>.
