@@ -28,9 +28,8 @@ I use [Jekyll](http://jekyllrb.com) to build this site, and I host it using [Git
 
 I chose the name `Try{Finally}` because of its [obvious programming relevance](https://en.wikipedia.org/wiki/Exception_handling_syntax), but also because I came to realize that so many things I used to assume were hard to learn just took patience and repeated practice to figure out. <span name="tryfinally">So keeping on _trying_ until you _finally_ get it.</span>
 
-<aside name="tryfinally">Yeah, sorry. That's the reason.</aside>
+<aside name="tryfinally">Yeah... That's the reason. Really. Whatever, let's just move on, shall we?</aside>
 
-d9n is a [numeronym](https://en.wikipedia.org/wiki/Numeronym) for my full name. I've been a programmer in the industry since 2001, a fair share of that spent in the game industry, and I'm currently working at Google on [Android Studio](http://developer.android.com/sdk/index.html).
+I've been a programmer since 2001, with ten years of that spent in the game industry. I'm currently working at Google on [Android Studio](http://developer.android.com/sdk/index.html).
 
-If you have any questions or comments and want to reach me directly, email me at
-<d9n.coding@gmail.com>.
+d9n is a [numeronym](https://en.wikipedia.org/wiki/Numeronym) for my full name. If you have any questions or comments and want to reach me directly, email me at <d9n.coding@gmail.com>.
