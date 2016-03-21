@@ -225,7 +225,7 @@ def name = user.getName()
 String result =
   name.toLowerCase()
 </pre>
-So, even if you didn't know it, you have already been relying on the compiler to handle intermediate values.
+So, even if you didn't realize it, you have already been relying on the compiler to handle intermediate values.
 </aside>
 
 {% highlight groovy %}
