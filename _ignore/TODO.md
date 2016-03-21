@@ -1,6 +1,4 @@
-* Space between header caption
-* TOC two levels deep?
-* Add "A Coding Blog" aside below Try{Finally} header?
+* Space between "top of the image" figcaptions
 * Finalize about page, style, message, special thanks to...
   * Jekyll team
   * Game Programming Patterns
