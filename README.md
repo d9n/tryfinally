@@ -36,15 +36,9 @@ $ git pull origin gh-pages
 
 ## Publish changes
 
-### Build the site
-```bash
-$ jekyll build
-```
-
 ### Preview the site
 ```bash
-# use npm instead of "jekyll serve" to also watch _config.yml changes
-$ npm run serve # "jekyll serve" is also OK
+$ npm run serve # Unlike "jekyll serve", this also watches _config.yml changes
 ```
 
 ### Build the site
@@ -56,6 +50,7 @@ $ npm run build
 # production
 # includes analytics, tidies html, hides debug controls
 $ npm run build-release
+```
 
 ### Push to github
 ```bash
