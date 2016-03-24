@@ -145,7 +145,7 @@ Note that the test configuration builds on the main configuration. If you want t
 
 Configurations are often created behind the scenes for you and you may never need to declare your own. For example, the Java plugin provides `compile`, `runtime`, `testCompile`, and `testRuntime` configurations, with the following inheritance rules:
 
-<img src="{% asset_path java_configurations.png %}" alt="An example flowchart showing the relationship of Java's compile, runtime, testCompile, and runtime configurations."  />
+<img src="{% asset_path java_configurations.png %}" alt="An example flowchart showing the relationship of Java's compile, runtime, testCompile, and testRuntime configurations."  />
 
 * `compile` - dependencies needed when you compile your application
 * `testCompile` - dependencies needed when you compile your application's unit tests
