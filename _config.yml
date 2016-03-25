@@ -8,6 +8,7 @@ description: >
 baseurl: "/tryfinally"
 url: "http://d9n.github.io"
 github_username: d9n
+permalink: pretty
 
 # Defaults
 defaults:

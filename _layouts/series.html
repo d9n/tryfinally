@@ -1,28 +1,76 @@
 ---
 layout: skeleton
 ---
-<article class="post">
-    <header class="post-intro">
-        <div class="post-series-title">{{ page.series_title | default: '(page missing: series_title)' }}</div>
 
-        <h1 class="post-title">{{ page.title | default: '(page missing: title)' '}}</h1>
+{% for series in site.data.allseries %}
+    {% if _series == null and page.dir contains series.dir %}
+        {% assign _series = series %}
+        {% for article in series.articles %}
+            {% if page.name contains article.dir %}
+                {% assign _article = article %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
 
-        <div class="post-goal">
-            <span class="post-goal-header">Contents</span>
-            {{ content | toc }}
-        </div>
-    </header>
+{% if _series == null or _article == null %}
+    Page url {{ page.dir }} missing match for:
+    {% if _series == null %}series{% endif %}
+    {% if _artcile == null %}article{% endif %}
+    <br><code>allseries.yml:</code>
+    <ul>
+    {% for s in site.data.allseries %}
+        <li>{{ s.dir }}</li>
+        <ul>
+        {% for a in s.articles %}
+            <li>{{ a.dir }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+{% else %}
+    <article class="post">
+        <header class="post-intro">
+            {% if _series.articles.size > 1 %}
+                <nav class="series-nav">
+                    <a href="#" class="menu-icon">
+                        {% icon fa-bars fa-lg %}
+                    </a>
 
-    <div class="post-content">
-        <!-- TODO: Figure out repo style -->
-        {% if page.github_repo? %}
-            {% highlight bash %}
+                    <div class="trigger">
+                        {% for a in _series.articles %}
+                            {% if a == _article %}
+                                <b>{{ a.title }}</b><br/>
+                            {% else %}
+                               <a href="../{{ a.dir }}" class="nav-link">{{ a.title }}</a><br/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </nav>
+            {% endif %}
+
+            <div class="post-series-title">{{ _series.title | default: '(data missing: series title)' }}</div>
+
+
+            <h1 class="post-title">{{ _article.title | default: '(data missing: article title)' }}</h1>
+
+            <div class="post-goal">
+                <span class="post-goal-header">Contents</span>
+                {{ content | toc }}
+            </div>
+        </header>
+
+        <div class="post-content">
+            <!-- TODO: Figure out repo style -->
+            {% if page.github_repo? %}
+{% highlight bash %}
 $ {{ page.github_repo }}
-            {% endhighlight %}
-        {% endif %}
+{% endhighlight %}
+            {% endif %}
 
-        <div class="post-intro-summary">{{ page.intro | default: '(page missing: intro)' }}</div>
+            <div class="post-intro-summary">{{ _article.intro | default: '(data missing: article intro)' }}</div>
 
-        {{ content }}
-    </div>
-</article>
+            {{ content }}
+        </div>
+    </article>
+{% endif %}

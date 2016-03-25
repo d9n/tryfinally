@@ -1,0 +1,6 @@
+- dir: understanding_gradle
+  title: Understanding Gradle
+  articles:
+    - dir: intro
+      title: Introduction
+      intro: This series is for users who want to learn the barest minimum needed to get started with Gradle. This first article introduces just enough foundation so that we can start exploring real build scripts in the following articles.
