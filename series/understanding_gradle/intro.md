@@ -39,7 +39,7 @@ Gradle has been growing in popularity as a build system for a couple of reasons.
 
 **It is JVM based**, which means the one prerequisite is that you have to install Java before using it. And that's it. If you are working on a Java project, you are already ready to go.
 
-<span name="dynamic">**It is an fully featured programming language.**</span> Gradle provides a flexibility that can be refreshing for projects with non-standard build steps. Compare this with its predecessor [Ant](http://ant.apache.org/), a build system driven by static xml files, where running into a wall means writing and registering a custom plugin with their system. With Gradle, such issues can be worked around with a few lines added to a build script.
+<span name="dynamic">**It is a fully featured programming language.**</span> Gradle provides a flexibility that can be refreshing for projects with non-standard build steps. Compare this with its predecessor [Ant](http://ant.apache.org/), a build system driven by static xml files, where running into a wall means writing and registering a custom plugin with their system. With Gradle, such issues can be worked around with a few lines added to a build script.
 
 <aside name="dynamic">My thoughts on whether this is good or bad is irrelevant to this series, so I'll be sidestepping it. But rest assured, this is a point of contention for developers, and I'm sure you can start a flame war over it if you want to (somewhere else, please).</aside>
 
@@ -53,12 +53,7 @@ And finally, <span name="android">**Android has officially endorsed Gradle** as 
 
 ### Official documentation
 
-Gradle's [official documentation can be found here](https://docs.gradle.org/current/userguide/userguide.html), and you should bookmark that link in case you need to deep dive into any Gradle feature later. However, I feel that it isn't the best possible resource for new users. In my opinion, <span name="teaching">they could have ordered their chapters better and made their examples a little less abstract</span>.
-
-<aside name="teaching">Better order: For what's supposed to be a build system tutorial, you don't actually start digging into your first real build script until Chapter 44, I'm just sayin'.
-<br/><br/>
-Too abstract: See <a href="https://docs.gradle.org/current/userguide/multi_project_builds.html">the multiproject build chapter</a>, which teaches you how to organize water, krill, and blue whales.
-</aside>
+Gradle's [official documentation can be found here](https://docs.gradle.org/current/userguide/userguide.html), and you should bookmark that link in case you need to deep dive into any Gradle feature later. However, I feel that it can come across an intimidating tome of information that doesn't even have you writing your first build script until Chpater 44.
 
 When I'm learning, I want to see simple, contained, concrete, realistic examples. I want to tweak settings and see what happens. That's exactly what I'll provide in this guide, and I hope this series acts as a useful supplement to the official materials.
 
@@ -70,11 +65,23 @@ Instead of running `gradle` directly, you will almost always run `gradlew` inste
 
 `gradlew` is short for "gradle wrapper", because it wraps an inner copy of `gradle`, offering indirect access to it. You can think of `gradlew` as being a snapshot of a particular `gradle` instance. Whereas `gradle` would be installed somewhere generically on your system (like /usr/local/bin), `gradlew` should be dropped into the project's root directory (and checked into source control).
 
-If you have `gradle` installed on your system, you can instantiate a gradle wrapper in the current directory by typing
+<span name="installgradle">If you have `gradle` installed on your system</span>, you can instantiate a gradle wrapper in the current directory by typing `gradle wrapper`:
 
 {% highlight bash %}
+$ ./gradlew -v
+./gradlew: No such file or directory
+
 $ gradle wrapper
+... stuff happens ...
+
+$ ./gradlew -v
+------------------------------------------------------------
+Gradle 2.10
+------------------------------------------------------------
+...
 {% endhighlight %}
+
+<aside name="installgradle">If you don't have gradle installed and want to install it, <a href="https://docs.gradle.org/current/userguide/installation.html">visit the official docs</a> for more information.</aside>
 
 By running `gradlew`, you can be sure you're running the `gradle` version that the original author tested against. This is important as newer major versions of gradle may break backwards compatibility (or have different default behavior that may also affect the build). It also means a user can build your project even if they never installed `gradle` themselves.
 
@@ -135,9 +142,9 @@ When you specify a dependency, you must associate it with an existing configurat
 
 #### Configurations
 
-A configuration is a group of related dependencies. For example, your fancy graphing calculator application may depend on a math library and a graphics library, while your unit tests may additionally depend on a testing library and a profiling library. In this case, you would specify a main configuration (math+graphics) and a test configuration (testing+profiling).
+A configuration is a group of related dependencies. For example, a fancy graphing calculator application you're writing may depend on a math library and a graphics library, while your unit tests may additionally depend on a testing library and a profiling library. In this case, you would specify a main configuration (math+graphics) and a test configuration (testing+profiling).
 
-Note that the test configuration builds on the main configuration. If you want to compile your unit tests, you must also compile the project itself. As you might expect, then, configurations can inherit from other configurations.
+Note that the test configuration builds upon the main configuration. If you want to compile your unit tests, you must also compile the project itself. As you might expect, then, configurations can inherit from other configurations.
 
 Configurations are often created behind the scenes for you and you may never need to declare your own. For example, the Java plugin provides `compile`, `runtime`, `testCompile`, and `testRuntime` configurations, with the following inheritance rules:
 
@@ -175,7 +182,7 @@ dependencies {
 
 Here, we are adding a single dependency, Guava v19.0, to the `compile` configuration, and another dependency, JUnit v4.12, to the `testCompile` configuration. The first time you ask Gradle to compile the project, it will download any missing dependnecies from Maven Central.
 
-### Single-quote and double-quote strings
+### Strings
 
 Groovy, and by extension Gradle, makes a subtle distinction between 'single quotes' and "double quotes". Double quoted strings are evaluated when they are read, and can contain code expressions that will be resolved at runtime. Single quoted strings, in contrast, are static. What you see is what you get.
 
@@ -187,7 +194,7 @@ println '5 + 5 = ${5 + 5}' // 5 + 5 = ${5 + 5}
 You can think of double-quoted strings as a very convenient, concise way to represent Java's [String.format(text, args...)](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#format(java.lang.String,%20java.lang.Object...)) method call.
 
 {% highlight java %}
-System.out.println(String.format("5 + 5 = %d", 5 + 5));
+System.out.println(String.format("5 + 5 = %s", 5 + 5));
 {% endhighlight %}
 
 When writing Gradle scripts, it's a good idea to use single quotes if your text is static and double quotes if your text is dynamic. <span name="singlequote">At the very least, it's important to know there's a difference.</span>
@@ -297,9 +304,9 @@ project(':graphing-calculator') {
 }
 {% endhighlight %}
 
-One other trick is that you can declare an `ext` block at the top level and treat variables defined in there as, essentially, global variables for the script.
+In short, I declare the variables in an `ext` block at the top and then can read them out later if I'm in the appropriate scope.
 
-<!-- TODO: ext example -->
+One trick is that you can declare an `ext` block at the top level of your script and treat variables defined in there as, essentially, global variables for the rest of the script.
 
 Extra properties will become particularly useful when we start exploring build logic that spans across multiple scripts, but it's good to be aware of them regardless because you'll often see the `ext` keyword used in practice.
 
@@ -342,5 +349,3 @@ At this point, you should be able to make a good first stab at reading basic Gra
 * The Java plugin includes useful configurations and build tasks that use them
 * There are two types of variables: local variables (declared with `def`) and extra properties (declared with `ext`)
 * `buildscript` blocks run before everything else and provide dependencies for the rest of your build script
-
-
