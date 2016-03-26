@@ -76,7 +76,7 @@ $ {{ page.github_repo }}
 {% endhighlight %}
             {% endif %}
 
-            <div class="post-intro-summary">{{ _article.intro | default: '(data missing: article intro)' }}</div>
+            <div class="post-intro-summary">{{ _series.summary | default: '(data missing: series summary)' }} {{ _article.intro | default: '(data missing: article intro)' }}</div>
 
             {{ content }}
         </div>
