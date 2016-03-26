@@ -8,6 +8,4 @@ I use [Jekyll](http://jekyllrb.com) to build this site, and I host it using [Git
 
 I'd like to call out the excellent online book [Game Programming Patterns](http://gameprogrammingpatterns.com/) for being an inspiration.
 
-If you have any questions or comments and want to reach me directly, <span name="d9n">email me at <d9n.coding@gmail.com></span>.
-
-<aside name="d9n">d9n, for the curious, is a <a href="https://en.wikipedia.org/wiki/Numeronym">numeronym</a> for my full name.</aside>
+If you have any questions or comments and want to reach me directly, email me at <d9n.coding@gmail.com>.
