@@ -313,7 +313,6 @@ For example, although the Java plugin is bundled with Gradle, the Android plugin
 
 And indeed, that's what the `buildscript` block is for.
 
-<figcaption>The following is extracted from <a href="http://developer.android.com/tools/building/plugin-for-gradle.html#projectModules">Android Developers</a></figcaption>
 {% highlight groovy %}
 buildscript {
   repositories {
@@ -326,6 +325,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 {% endhighlight %}
+<figcaption>The above snippet is extracted from <a href="http://developer.android.com/tools/building/plugin-for-gradle.html#projectBuildFile">developer.android.com</a>.</figcaption>
 
 Notice that the `buildscript` block automatically introduces a `classpath` configuration. <span name="classpath">Read the aside if you're curious to know more</span>, but otherwise just use this configuration to specify dependencies needed by any plugins you want to use.
 
