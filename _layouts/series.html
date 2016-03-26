@@ -6,8 +6,16 @@ layout: skeleton
     {% if _series == null and page.dir contains series.dir %}
         {% assign _series = series %}
         {% for article in series.articles %}
+            {% if _article_next == null and _article != null %}
+                {% assign _article_next = article %}
+            {% endif %}
+
             {% if page.name contains article.dir %}
                 {% assign _article = article %}
+            {% endif %}
+
+            {% if _article == null %}
+                {% assign _article_prev = article %}
             {% endif %}
         {% endfor %}
     {% endif %}
@@ -72,5 +80,14 @@ $ {{ page.github_repo }}
 
             {{ content }}
         </div>
+
+        <span>
+        {% if _article_prev != null %}
+           <a class='pull-left' href="../{{ _article_prev.dir }}">{% icon fa-long-arrow-left %} {{ _article_prev.title }}</a>
+        {% endif %}
+        {% if _article_next != null %}
+           <a class='pull-right' href="../{{ _article_next.dir }}">{{ _article_next.title }} {% icon fa-long-arrow-right %}</a>
+        {% endif %}
+        </span>
     </article>
 {% endif %}

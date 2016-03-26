@@ -177,6 +177,7 @@ $post-border-radius: 10px;
 
 .post {
     position: relative; // Acts as a hook for asides to position against
+
     @include max-width($content-width);
 
     // border: solid 1px $primary-color-light;

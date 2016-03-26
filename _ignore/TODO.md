@@ -1,4 +1,4 @@
-* Finish gradle series
+*allseries.yml
   * series should also have a pulldown
 * Include github URL
 
