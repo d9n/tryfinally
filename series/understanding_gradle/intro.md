@@ -201,7 +201,7 @@ When writing Gradle scripts, it's a good idea to use single quotes if your text 
 
 <aside name="singlequote">I learned this the hard way when I copied some text which was double-quoted. However, by trying to stay consistent with the rest of the script I was pasting into, I changed the double quotes to single quotes. Things broke.</aside>
 
-### Local variables and extra properties
+### Variables
 
 In Gradle scripts, you will commonly run across two types of variables: the standard kind (local variables) and a dynamic kind (extra properties).
 
