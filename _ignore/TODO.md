@@ -14,4 +14,5 @@
 * Blinking cursor on last brace in Try{Finally}|
 * Figure out a way to do comments. Github??
 
-* Use reddits for comments?
+* Use github issue tracker + label for comments?
+  * Add special tracker for people who get to the nocontent page?
