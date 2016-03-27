@@ -9,7 +9,7 @@
     "serve": "node_modules/watchy/bin/watchy -w _config.yml -- jekyll serve",
     "tidy": "find _site -name '*.html' -type f -exec tidy --drop-empty-elements no -m -utf8 -i '{}' \\;",
     "build": "jekyll build",
-    "build-release": "export JEKYLL_ENV=production && npm run build && npm run tidy"
+    "build-release": "export JEKYLL_ENV=production && npm run build && npm run tidy && cp _ignore/SITE_README.md _site/README.md"
   },
   "author": "David Herman",
   "license": "MIT",
