@@ -1,5 +1,6 @@
 ---
 layout: basic
+title: Try{Finally} - A coding blog
 ---
 
 `Try{Finally}` is my coding blog for chatting about programming and posting code examples I hope you'll find interesting. For each article, I will provide...
