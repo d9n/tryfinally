@@ -1,25 +1,13 @@
-{% comment %}
-    You are expected to define _articles and _article_index
-
-    _articles is a list of pages in a series
-    _article_index is the index of the current page
-{% endcomment %}
-
 <span>
-    {% assign _previ = _article_index | minus: 1 %}
-    {% assign _nexti = _article_index | plus: 1 %}
-    {% assign _prev = _articles[_previ] %}
-    {% assign _next = _articles[_nexti] %}
-
-    {% if _prev != null and _previ >= 0 %}
-        <a class='pull-left' href="../{{ _prev.url | split: '/' | last }}">
-            {% icon fa-long-arrow-left %} {{ _prev.title }}
+    {% if page.prev != null %}
+        <a class='pull-left' href="../{{ page.prev.url | split: '/' | last }}">
+            {% icon fa-long-arrow-left %} {{ page.prev.title }}
         </a>
     {% endif %}
 
-    {% if _next != null %}
-        <a class='pull-right' href="../{{ _next.url | split: '/' | last }}">
-            {{ _next.title }} {% icon fa-long-arrow-right %}
+    {% if page.next != null %}
+        <a class='pull-right' href="../{{ page.next.url | split: '/' | last }}">
+            {{ page.next.title }} {% icon fa-long-arrow-right %}
         </a>
     {% endif %}
 </span>

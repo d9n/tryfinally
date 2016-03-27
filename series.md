@@ -7,14 +7,8 @@ title: Series
 <b>{{ s.title }}</b><br>
 <i>{{ s.summary }}</i>
 <ul>
-{% for a in s.articles %}
-    {% for p in site.pages %}
-        {% assign _pdir = p.url | split: '/' | last %}
-        {% if _pdir == a %}
-            <li><a href="{{ s.url }}/{{ a }}" title="{{ p.summary }}">{{ p.title }}</a></li>
-            {% break %}
-        {% endif %}
-    {% endfor %}
+{% for p in s.pages %}
+    <li><a href="{{ p.url | prepend: site.baseurl }}" title="{{ p.summary }}">{{ p.title }}</a></li>
 {% endfor %}
 </ul>
 {% endfor %}

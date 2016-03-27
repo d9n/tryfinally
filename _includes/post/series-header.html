@@ -1,26 +1,19 @@
-{% comment %}
-    You are expected to define _series and _articles
-
-    _series: The series this article belongs to
-    _articles: The list of all (ordered) pages in this series
-{% endcomment %}
-
-{% if _articles.size > 1 %}
+{% if page.series.pages.size > 1 %}
     <nav class="series-nav">
         <a href="#" class="menu-icon">
             {% icon fa-bars fa-lg %}
         </a>
 
         <div class="trigger">
-            {% for a in _articles %}
-                {% if a.url == page.url %}
-                    <b>{{ a.title }}</b><br/>
+            {% for p in page.series.pages %}
+                {% if p == page %}
+                    <b>{{ p.title }}</b><br/>
                 {% else %}
-                   <a href="../{{ a.url | split: '/' | last }}" class="nav-link">{{ a.title }}</a><br/>
+                   <a href="../{{ p.url | split: '/' | last }}" class="nav-link">{{ p.title }}</a><br/>
                 {% endif %}
             {% endfor %}
         </div>
     </nav>
 {% endif %}
 
-<div class="post-series-title">{{ _series.title | default: '(data missing: series title)' }}</div>
+<div class="post-series-title">{{ page.series.title | default: '(data missing: series title)' }}</div>
