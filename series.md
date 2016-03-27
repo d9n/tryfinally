@@ -1,13 +1,20 @@
 ---
 layout: basic
+title: Series
 ---
 
-{% for series in site.data.allseries %}
-<b>{{ series.title }}</b><br>
-<i>{{ series.summary }}</i>
+{% for s in site.data.series %}
+<b>{{ s.title }}</b><br>
+<i>{{ s.summary }}</i>
 <ul>
-{% for article in series.articles %}
-    <li><a href="{{ series.dir }}/{{ article.dir }}" title="{{ article.intro }}">{{ article.title }}</a></li>
+{% for a in s.articles %}
+    {% for p in site.pages %}
+        {% assign _pdir = p.url | split: '/' | last %}
+        {% if _pdir == a %}
+            <li><a href="{{ s.url }}/{{ a }}" title="{{ p.summary }}">{{ p.title }}</a></li>
+            {% break %}
+        {% endif %}
+    {% endfor %}
 {% endfor %}
 </ul>
 {% endfor %}

@@ -1,0 +1,5 @@
+- url: understanding_gradle
+  title: Understanding Gradle
+  summary: This series is for users who want to learn the barest minimum needed to get started with Gradle.
+  articles:
+    - intro

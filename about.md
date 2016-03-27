@@ -1,5 +1,6 @@
 ---
 layout: basic
+title: About
 ---
 
 I've been a career programmer since 2001, with ten years of that spent in the game industry. I'm currently working at Google on [Android Studio](http://developer.android.com/sdk/index.html).

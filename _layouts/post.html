@@ -1,0 +1,78 @@
+---
+layout: skeleton
+---
+
+{% comment %}
+  The post layout changes slightly depending on whether it is a Single article or a Series article. This is determined by looking at the page's URL!
+{% endcomment %}
+
+{% comment %}
+    /a/b/c -> ["", "a", "b", "c"]
+    drop first element, it's useless
+{% endcomment %}
+{% assign _urlarray = page.url | split: '/' | shift %}
+
+{% if _urlarray[0] == "series" %}
+    {% assign _series_url = _urlarray[1] %}
+
+    {% for s in site.data.series %}
+        {% if s.url == _series_url %}
+            {% assign _series = s %}
+            {% assign _articles = "" | split: "" %}
+            {% for a in s.articles %}
+                {% for p in site.pages %}
+                    {% assign _pdir = p.url | split: '/' | last %}
+                    {% if _pdir == a %}
+                        {% assign _articles = _articles | push: p %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+
+    {% assign _article_url = _urlarray | last %}
+    {% for a in _series.articles %}
+        {% if a == _article_url %}
+            {% assign _article_index = forloop.index0 %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<article class="post">
+    <header class="post-intro">
+
+        {% if _series != null %}{% include post/series-header.html %}{% endif %}
+
+        <h1 class="post-title">
+            {{ page.title | default: '(data missing: page title)' }}
+        </h1>
+
+        <div class="post-goal">
+            <span class="post-goal-header">Contents</span>
+            {{ content | toc }}
+        </div>
+    </header>
+
+    <div class="post-content">
+        <!-- TODO: Figure out repo style -->
+        {% if page.github_repo? %}
+{% highlight bash %}
+$ {{ page.github_repo }}
+{% endhighlight %}
+        {% endif %}
+
+        <div class="post-intro-summary">
+            {% if _series != null %}
+                {% include post/series-summary.html %}
+            {% else %}
+                {% include post/single-summary.html %}
+            {% endif %}
+        </div>
+
+        {{ content }}
+    </div>
+
+    {% if _series != null %}{% include post/series-footer.html %}{% endif %}
+</article>
