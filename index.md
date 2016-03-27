@@ -19,5 +19,4 @@ So keeping on _trying_ until you _finally_ get it.
 
 Anyway, welcome. If you're looking for a place to get started, explore the <a href="series">{% icon fa-files-o %} Series</a> page for a good overview of available content.
 
-<!-- TODO: Update this with suggestions on what to do first once I start adding more content -->
-
+{% warn Update specific series after I start to add more content? %}

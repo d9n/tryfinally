@@ -163,7 +163,7 @@ A repository is a large collection of dependencies. Think of it like a dragon's 
 
 It's usually good enough to specify `mavenCentral` as your sole repository (which directs to [https://repo1.maven.org/maven2](https://repo1.maven.org/maven2)). `jcenter` is another common choice. You can even specify both repositories, and they will be searched in the order you listed them.
 
-It can even make sense for you to own a small, local repository with a handful of dependencies that you maintain yourself. We will play around with this setup in a followup article exploring multi-project configurations.<!-- TODO: Link to Multiproject configurations -->
+It can even make sense for you to own a small, local repository with a handful of dependencies that you maintain yourself. We will play around with this setup in a followup article exploring multi-project configurations.{% warn When Gradle multi-project article is ready link to it %}
 
 #### Tying it all together
 
