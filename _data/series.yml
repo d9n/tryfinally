@@ -3,3 +3,4 @@
   summary: This series is for users who want to learn the barest minimum needed to get started with Gradle.
   page_ids:
     - intro
+    - projects
