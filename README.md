@@ -56,6 +56,6 @@ $ npm run build-release
 ```bash
 # run 'npm run build-release' first!
 $ cd _site
-$ git add . && git commit -m "(commit message)"
-$ git push -u origin gh-pages
+$ git add . && git commit --amend
+$ git push --force -u origin gh-pages
 ```
