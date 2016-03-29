@@ -250,8 +250,8 @@ $post-border-radius: 10px;
 }
 
 .post-intro {
-    $post-intro-pad-horiz: 10px;
-    padding: $post-intro-pad-horiz 20px;
+    $post-intro-pad-horiz: 20px;
+    padding: 10px $post-intro-pad-horiz;
     @include gradient(top, darken($intro-area-bg, 2%) 0%, $intro-area-bg 100%);
     @include border-radius($post-border-radius);
 
