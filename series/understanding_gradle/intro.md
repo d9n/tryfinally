@@ -115,7 +115,7 @@ task run << {
 }
 {% endhighlight %}
 
-<aside name="leftshift">This works because Gradle overloads the left shift operator for tasks. Without it, the full code would be:
+<aside name="leftshift">This works because Gradle overloads the left shift operator for defining tasks. Without it, the full code would be:
 <pre>
 task run {
   doLast {
@@ -265,52 +265,21 @@ Local variables are useful for storing intermediate values as part of a function
 
 Gradle provides a way to do this through extra properties - using the `ext` keyword, you can dynamically define variables that are then associated with the object at the current scope it is being defined in. Anywhere else in the same scope, you can later read that variable out again (without needing to use the `ext` keyword at that point).
 
-You can think of extra properties as class fields that are defined at runtime. Note that extra properties are meant purely as a convenience for you, the user, to use if needed. A plugin, for example, should never provide its own extra properties.
-
-<span name="project-syntax">An example can help demonstrate this concept</span>.
-
-<aside name="project-syntax">We introduce some syntax here for defining projects, but don't worry about it. We'll cover this more in a followup article.</aside>
-
 {% highlight groovy %}
-allprojects {
-  ext {
-    guavaCoordinate = 'com.google.guava:guava:19.0'
-    junitCoordinate = 'junit:junit:4.12'
-  }
+ext {
+    notifyEmails = ['adam@example.com', 'betty@example.com']
 }
 
-project(':graph-renderer') {
-  apply plugin: 'java'
-
-  dependencies {
-    compile "$guavaCoordinate"
-  }
-}
-
-project(':math-lib') {
-  apply plugin: 'java'
-
-  dependencies {
-    compile "$guavaCoordinate"
-  }
-}
-
-project(':graphing-calculator') {
-  apply plugin: 'java'
-
-  dependencies {
-    compile project(':math-lib')
-    compile project(':graph-renderer')
-    compile "$guavaCoordinate"
-  }
+task sendEmails << {
+    notifyEmails.each { email ->
+        println "Sending email to: $email..."
+    }
 }
 {% endhighlight %}
 
-In short, I declare the variables in an `ext` block at the top and then can read them out later if I'm in the appropriate scope.
+The above sample works but is admittedly limited. However, extra properties will become particularly useful in the next article, when we start exploring build logic that spans across multiple scripts.
 
-One trick is that you can declare an `ext` block at the top level of your script and treat variables defined in there as, essentially, global variables for the rest of the script.
-
-Extra properties will become particularly useful when we start exploring build logic that spans across multiple scripts, but it's good to be aware of them regardless because you'll often see the `ext` keyword used in practice.
+You should be aware that I'm glossing over this feature since we're just focusing on the basics for now. At this point, it's just good to be aware of extra properties because you'll often see the `ext` keyword used in practice.
 
 ### Buildscript block
 
