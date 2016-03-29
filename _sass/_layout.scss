@@ -250,13 +250,16 @@ $post-border-radius: 10px;
 }
 
 .post-intro {
-    padding: 10px 20px;
+    $post-intro-pad-horiz: 10px;
+    padding: $post-intro-pad-horiz 20px;
     @include gradient(top, darken($intro-area-bg, 2%) 0%, $intro-area-bg 100%);
     @include border-radius($post-border-radius);
 
     margin-bottom: $spacing-unit;
 
     .series-nav {
+        position: absolute;
+        right: $post-intro-pad-horiz;
         float: right;
         font-size: $navbar-font-size;
 
@@ -269,11 +272,23 @@ $post-border-radius: 10px;
             clear: both;
             display: none;
             text-align: right;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-bottom: 5px;
+            margin: 5px;
         }
 
         &:hover .trigger {
             display: block;
-            padding-bottom: 5px;
+        }
+
+        &:hover .menu-icon {
+            display: none;
+        }
+
+        &:hover {
+            @include border-radius(5px);
+            background-color: darken($intro-area-bg, 5%);
         }
     }
 }
@@ -373,6 +388,16 @@ $post-border-radius: 10px;
         background-color: rgba($aside-color, 0.3);
     }
 }
+
+/**
+ * Code highlighting
+ */
+
+// Put above a {% highlight %} block
+figcaption.title {
+    margin-bottom: 0px;
+}
+
 
 /**
  * Misc
