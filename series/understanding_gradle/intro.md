@@ -6,7 +6,7 @@ summary: This first article introduces just enough foundation so that we can sta
 
 ## Overview
 
-### What is it?
+### What is Gradle?
 
 Gradle is a build system. Most of the time you will use it to build a target library or application.
 
@@ -322,6 +322,7 @@ For example, although the Java plugin is bundled with Gradle, the Android plugin
 
 And indeed, that's what the `buildscript` block is for.
 
+<figcaption class="title">The following snippet is extracted from <a href="http://developer.android.com/tools/building/plugin-for-gradle.html#projectBuildFile">developer.android.com</a>.</figcaption>
 {% highlight groovy %}
 buildscript {
   repositories {
@@ -334,13 +335,12 @@ buildscript {
 
 apply plugin: 'com.android.application'
 {% endhighlight %}
-<figcaption>The above snippet is extracted from <a href="http://developer.android.com/tools/building/plugin-for-gradle.html#projectBuildFile">developer.android.com</a>.</figcaption>
 
 Notice that the `buildscript` block automatically introduces a `classpath` configuration. <span name="classpath">Read the aside if you're curious to know more</span>, but otherwise just use this configuration to specify dependencies needed by any plugins you want to use.
 
 <aside name="classpath">A <a href="https://en.wikipedia.org/wiki/Classpath_(Java)">classpath</a> is a concept in Java and Groovy, a path where compiled code can be found and used as a dependency when building other code. Remember that your build script is code and is actually being compiled each time <code>gradlew</code> is called! The buildblock's classpath is actually providing dependencies for the rest of your build script.</aside>
 
-## Key takeaways
+## Key Takeaways
 
 At this point, you should be able to make a good first stab at reading basic Gradle scripts out in the wild. We'll cover some more subtle, advanced points in the next article, but to repeat what we've covered so far:
 
