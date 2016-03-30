@@ -45,7 +45,7 @@ Gradle has been growing in popularity as a build system for a couple of reasons.
 
 <aside name="dynamic">My thoughts on whether this is good or bad is irrelevant to this series, so I'll be sidestepping it. But rest assured, this is a point of contention for developers, and I'm sure you can start a flame war over it if you want to (somewhere else, please).</aside>
 
-**It is cross platform**. The importance of this can't be overstated. Often build systems that people point to as "better" don't have a great story on Windows.
+**It is cross platform**. The importance of this can't be overstated. Gradle has a solid story on Windows.
 
 **It is extensible** via a rich, powerful plugin system. A plugin for managing Java projects is included out of the box, [as are quite a few other standard plugins if you're curious](https://docs.gradle.org/current/userguide/standard_plugins.html).
 
@@ -55,7 +55,7 @@ And finally, <span name="android">**Android has officially endorsed Gradle** as 
 
 ### Official documentation
 
-Gradle's [official documentation can be found here](https://docs.gradle.org/current/userguide/userguide.html), and you should bookmark that link in case you need to deep dive into any Gradle feature later. However, I feel that it can come across an intimidating tome of information that doesn't even have you writing your first build script until Chpater 44.
+Gradle's [official documentation can be found here](https://docs.gradle.org/current/userguide/userguide.html), and you should bookmark that link in case you need to deep dive into any Gradle feature later. However, I feel that it can come across an intimidating tome of information that doesn't even have you writing your first build script until Chapter 44.
 
 When I'm learning, I want to see simple, contained, concrete, realistic examples. I want to tweak settings and see what happens. That's exactly what I'll provide in this guide, and I hope this series acts as a useful supplement to the official materials.
 
@@ -73,14 +73,13 @@ Instead of running `gradle` directly, you will almost always run `gradlew` inste
 $ ./gradlew -v
 ./gradlew: No such file or directory
 
-$ gradle wrapper
+$ gradle wrapper --gradle-version 2.0
 ... stuff happens ...
 
 $ ./gradlew -v
 ------------------------------------------------------------
-Gradle 2.10
+Gradle 2.0
 ------------------------------------------------------------
-...
 {% endhighlight %}
 
 <aside name="installgradle">If you don't have gradle installed and want to install it, <a href="https://docs.gradle.org/current/userguide/installation.html">visit the official docs</a> for more information.</aside>
@@ -279,7 +278,7 @@ task sendEmails << {
 
 The above sample works but is admittedly limited. However, extra properties will become particularly useful in the next article, when we start exploring build logic that spans across multiple scripts.
 
-You should be aware that I'm glossing over this feature since we're just focusing on the basics for now. At this point, it's just good to be aware of extra properties because you'll often see the `ext` keyword used in practice.
+You should be aware that I'm glossing over this feature since we're just focusing on the basics for now. Explaining the details of Gradle scopes would require a decent tangent, and you may never need to really understand them to get by. At this point, it's just good to be aware of extra properties because you'll often see the `ext` keyword used in practice.
 
 ### Buildscript block
 
@@ -307,13 +306,14 @@ apply plugin: 'com.android.application'
 
 Notice that the `buildscript` block automatically introduces a `classpath` configuration. <span name="classpath">Read the aside if you're curious to know more</span>, but otherwise just use this configuration to specify dependencies needed by any plugins you want to use.
 
-<aside name="classpath">A <a href="https://en.wikipedia.org/wiki/Classpath_(Java)">classpath</a> is a concept in Java and Groovy, a path where compiled code can be found and used as a dependency when building other code. Remember that your build script is code and is actually being compiled each time <code>gradlew</code> is called! The buildblock's classpath is actually providing dependencies for the rest of your build script.</aside>
+<aside name="classpath">A <a href="https://en.wikipedia.org/wiki/Classpath_(Java)">classpath</a> is a concept in Java and Groovy, a path where compiled code can be found and used as a dependency when building other code. Remember that your build script is code and is actually being compiled each time <code>gradlew</code> is called! The buildblock's classpath is actually providing dependencies for the rest of your build script. You can even include dependencies for classes that you want to use <i>inside</i> your build script.</aside>
 
 ## Key Takeaways
 
-At this point, you should be able to make a good first stab at reading basic Gradle scripts out in the wild. We'll cover some more subtle, advanced points in the next article, but to repeat what we've covered so far:
+At this point, you should be able to make a good first stab at reading basic Gradle scripts out in the wild. We've still got more to cover, but you now have a decent foundation. To reiterate what we've covered so far:
 
 * Gradle is used for building libraries and applications
+* Gradle uses the Groovy language
 * You'll often invoke Gradle indirectly using `gradlew`, the "Gradle Wrapper"
 * Gradle breaks a build up into tasks, and you can invoke tasks directly
 * A configuration is a collection of dependencies
