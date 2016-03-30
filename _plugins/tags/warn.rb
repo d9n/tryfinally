@@ -18,7 +18,7 @@ module Jekyll
       end
 
       page = context.environments.first["page"]
-      puts "#{page['dir']}#{page['name']}: #{@params}".yellow
+      Log.warn(page, @params)
     end
   end
 end
