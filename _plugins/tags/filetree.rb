@@ -1,6 +1,7 @@
 # Syntax:
 # {% filetree %}
 # folder/
+#   binary*
 #   code.java
 #   text.txt
 #   subfolder/
@@ -13,6 +14,7 @@
 # <ul class="fa-ul">
 #   <li>{% icon fa-li fa-folder-open-o %}folder</li>
 #   <ul class="fa-ul">
+#       <li>{% icon fa-li fa-file-excel-o %}binary</li>
 #       <li>{% icon fa-li fa-file-code-o %}code.java</li>
 #       <li>{% icon fa-li fa-file-text-o %}text.txt</li>
 #       <li>{% icon fa-li fa-folder-open-o %}subfolder</li>
@@ -31,6 +33,7 @@ module Jekyll
     ICON_CODE = "fa-file-code-o"
     ICON_IMAGE = "fa-file-image-o"
     ICON_TEXT = "fa-file-text-o"
+    ICON_BINARY = "fa-file-excel-o"
     ICON_GENERIC = "fa-file-o"
     @@icon_names = {
       '.gradle' => ICON_CODE,
@@ -56,54 +59,46 @@ module Jekyll
       end
 
       # Calculate and sanity check indents
-      lineIndents = Hash.new
-      hasChildren = Hash.new
+      lineIndents = []
+      hasChildren = []
       for line in input
-        lineIndents[line] = line.length - line.lstrip.length
-        hasChildren[line] = false
+        lineIndents.push(line.length - line.lstrip.length)
+        hasChildren.push(false)
       end
 
-
       indentLen = 1
-      for line in input
-        currIndent = lineIndents[line]
+      for currIndent in lineIndents
         if currIndent > 0
           indentLen = currIndent
           break
         end
       end
-
-      for line in input
-        lineIndents[line] /= indentLen
-      end
+      lineIndents.map! { |i| i / indentLen } # e.g. indent of 4: 4, 8, 12 -> 1, 2, 3
 
       prevIndent = -1
-      lastLine = nil
-      for line in input
-        nextIndent = lineIndents[line]
-        if (prevIndent - nextIndent).abs > 1
+      lineIndents.each_with_index { |currIndent, index|
+        if (currIndent - prevIndent) > 1
           Log.err(page, "Bad filetree indents, got #{prevIndent} then #{nextIndent}. Aborting!")
           return ""
         end
 
-        if (nextIndent > prevIndent and lastLine)
-          hasChildren[lastLine] = true
+        if (currIndent > prevIndent and index > 0)
+          hasChildren[index - 1] = true
         end
 
-        lastLine = line
-
-        prevIndent = nextIndent
-      end
+        prevIndent = currIndent
+      }
 
       # Convert input to output
       currIndent = -1
       output = StringIO.new
-      for line in input
-        nextIndent = lineIndents[line]
-        if nextIndent > currIndent
+      input.each_with_index { |line, index|
+        nextIndent = lineIndents[index]
+        while nextIndent > currIndent
           output << '<ul class="fa-ul">'
           currIndent += 1
-        elsif nextIndent < currIndent
+        end
+        while nextIndent < currIndent
           output << '</ul>'
           currIndent -= 1
         end
@@ -111,8 +106,8 @@ module Jekyll
         lineStrip = line.strip
         ext = File.extname(lineStrip)
         if lineStrip.end_with?('/')
-          icon = hasChildren[line] ? 'fa-folder-open-o' : 'fa-folder-o'
-          output << "<li>{% icon fa-li #{icon} %}#{line.chomp('/')}</li>"
+          icon = hasChildren[index] ? 'fa-folder-open-o' : 'fa-folder-o'
+          output << "<li>{% icon fa-li #{icon} %}#{lineStrip.chomp('/')}</li>"
         elsif lineStrip == "..."
           output << "<li>{% icon fa-ellipsis-h %}</li>"
         elsif !ext.empty?
@@ -122,10 +117,12 @@ module Jekyll
             icon = ICON_GENERIC
           end
           output << "<li>{% icon fa-li #{icon} %}#{lineStrip}</li>"
+        elsif lineStrip.end_with?('*')
+          output << "<li>{% icon fa-li #{ICON_BINARY} %}<i>#{lineStrip.chomp('*')}</i></li>"
         else
           Log.warn(page, "Skipping unknown input: #{lineStrip}")
         end
-      end
+      }
 
       while currIndent > -1
         output << '</ul>'
