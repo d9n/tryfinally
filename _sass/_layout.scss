@@ -308,9 +308,14 @@ $post-border-radius: 10px;
     margin: 0px $gutter;
     padding: $vpad $hpad;
 
-    ul {
+    > ul {
         margin-top: 5px;
         margin-bottom: 5px;
+
+        > ul {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
     }
 }
 
