@@ -62,6 +62,7 @@ module Jekyll
       series_data.each_entry do |series_curr|
         series = Hash.new
         pages = []
+        series['id'] = series_curr['id']
         series['title'] = series_curr['title']
         series['summary'] = series_curr['summary']
         series['pages'] = pages
@@ -78,6 +79,7 @@ module Jekyll
           end
 
           target_page.data['series'] = series
+          target_page.data['id'] = page_id
           if not prev_page.nil?
             prev_page.data['next'] = target_page
             target_page.data['prev'] = prev_page

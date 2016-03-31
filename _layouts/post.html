@@ -9,7 +9,7 @@ layout: skeleton
 <article class="post">
     <header class="post-intro">
 
-        {% if page.series != null %}{% include post/series-header.html %}{% endif %}
+        {% if page.series %}{% include post/series-header.html %}{% endif %}
 
         <h1 class="post-title">
             {{ page.title | default: '(data missing: page title)' }}
@@ -22,13 +22,6 @@ layout: skeleton
     </header>
 
     <div class="post-content">
-        {% warn Figure out repo style %}
-        {% if page.github_repo? %}
-{% highlight bash %}
-$ {{ page.github_repo }}
-{% endhighlight %}
-        {% endif %}
-
         <div class="post-intro-summary">
             {% if page.series != null %}
                 {% include post/series-summary.html %}
@@ -36,6 +29,14 @@ $ {{ page.github_repo }}
                 {% include post/single-summary.html %}
             {% endif %}
         </div>
+
+        {% if page.show_git_clone? %}
+<figcaption class="title">{% icon fa-terminal %} When you see this icon, try this at home!</figcaption>
+{% highlight bash %}
+# In $SRC/tryfinally/{{ page.series.id }}/{{ page.id }}/
+$ git clone -b {{ page.id }} https://github.com/d9n/{{ page.series.id }}.git .
+{% endhighlight %}
+        {% endif %}
 
         {{ content }}
     </div>
