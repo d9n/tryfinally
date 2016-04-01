@@ -403,6 +403,21 @@ figcaption.title {
     margin-bottom: 0px;
 }
 
+/**
+ * Filetree
+ */
+
+.filetree {
+    @include border-radius(3px);
+    border: 1px solid black;
+    > ul {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    padding: 10px;
+    margin-bottom: $spacing-unit;
+    overflow-x: scroll;
+}
 
 /**
  * Misc

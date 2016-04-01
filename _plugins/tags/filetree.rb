@@ -73,12 +73,18 @@ module Jekyll
           break
         end
       end
+      lineIndents.each_with_index { |currIndent, index|
+        if (currIndent % indentLen != 0)
+          Log.err(page, "Bad filetree indents, found #{currIndent} which is not a multiple of #{indentLen} (#{input[index].strip}). Aborting!")
+          return ""
+        end
+      }
       lineIndents.map! { |i| i / indentLen } # e.g. indent of 4: 4, 8, 12 -> 1, 2, 3
 
       prevIndent = -1
       lineIndents.each_with_index { |currIndent, index|
         if (currIndent - prevIndent) > 1
-          Log.err(page, "Bad filetree indents, got #{prevIndent} then #{nextIndent}. Aborting!")
+          Log.err(page, "Bad filetree indents, got #{prevIndent} then #{nextIndent} (#{input[index].strip}). Aborting!")
           return ""
         end
 
@@ -92,6 +98,7 @@ module Jekyll
       # Convert input to output
       currIndent = -1
       output = StringIO.new
+      output << '<div class="filetree">'
       input.each_with_index { |line, index|
         nextIndent = lineIndents[index]
         while nextIndent > currIndent
@@ -109,7 +116,8 @@ module Jekyll
           icon = hasChildren[index] ? 'fa-folder-open-o' : 'fa-folder-o'
           output << "<li>{% icon fa-li #{icon} %}#{lineStrip.chomp('/')}</li>"
         elsif lineStrip == "..."
-          output << "<li>{% icon fa-ellipsis-h %}</li>"
+          # Extra <br/> is necessary to prevent HTML from thinking this is a blank item
+          output << "<li>{% icon fa-li fa-ellipsis-h %}<br/></li>"
         elsif !ext.empty?
           icon = @@icon_names[ext]
           if icon.nil?
@@ -128,6 +136,8 @@ module Jekyll
         output << '</ul>'
         currIndent -= 1
       end
+      output << '</div>'
+
 
       template = Liquid::Template.parse(output.string)
       template.render()
