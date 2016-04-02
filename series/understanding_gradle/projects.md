@@ -273,7 +273,7 @@ Project 'c', tasks:
   printName
 {% endterminal %}
 
-`allprojects` and `subprojects` blocks are a great place to set variables or apply plugins that are shared across projects. The `project` selector may be useful occasionally, but it is probably better to just put that logic in the subproject `build.gradle` script directly.
+`allprojects` and `subprojects` blocks are a great place to set variables or define tasks that are shared across projects. The `project` selector may be useful occasionally, but it is probably better to just put that logic in the subproject `build.gradle` script directly.
 
 In short, if you find yourself repeating logic across subprojects, think about moving it to the root project instead.
 

@@ -276,7 +276,7 @@ task sendEmails << {
 }
 {% endhighlight %}
 
-The above sample works but is admittedly limited. However, extra properties will become particularly useful in the next article, when we start exploring build logic that spans across multiple scripts.
+The above sample works but is admittedly limited. However, extra properties can play a useful role especially when you write build scripts that spans across multiple projects.
 
 You should be aware that I'm glossing over this feature since we're just focusing on the basics for now. Explaining the details of Gradle scopes would require a decent tangent, and you may never need to really understand them to get by. At this point, it's just good to be aware of extra properties because you'll often see the `ext` keyword used in practice.
 
