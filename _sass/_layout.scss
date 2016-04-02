@@ -27,6 +27,13 @@
     &:visited {
         color: $title-bar-fg;
     }
+
+    > span.site-subtitle {
+        font-size: 60%;
+        @include media-query($on-mobile) {
+            display: none;
+        }
+    }
 }
 
 .site-nav {
