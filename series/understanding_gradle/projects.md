@@ -2,7 +2,7 @@
 layout: post
 title: Gradle projects
 show_git_clone?: true
-summary: This article covers what a Gradle project is and how it is organized. After reading this article and the previous one, you should be able to configure basic Gradle scripts for real projects.
+summary: This article covers what a Gradle project is and how it is organized. After reading this article and the previous one, you should be able to understand many Gradle scripts for real projects.
 ---
 
 ## Overview
@@ -146,7 +146,8 @@ $ ../gradlew -q :c:printName
 My project name: 'c'
 {% endterminal %}
 
-On final note: Gradle only supports one root project at any time. Even if you wrap a subproject that has its own <code>settings.gradle</code> in it, it will be ignored. Only the root <code>settings.gradle</code> file will be used in a Gradle run.
+<div class="note">Gradle only supports one root project at any time. Even if you wrap a subproject that has its own <code>settings.gradle</code> in it, it will be ignored. Only the root <code>settings.gradle</code> file will be considered in a Gradle run.
+</div>
 
 ### Deeply nested projects
 
@@ -196,7 +197,7 @@ You may have noticed in the previous sections that I duplicated a lot of script 
 
 Gradle provides special blocks that are available to the root project: `allprojects` and `subprojects`. Any logic within the `allprojects` blocks will be available both to the root project itself as well as its subprojects. The `subprojects` block does the same, except excluding the root project.
 
-In fact, by specifying these blocks in your root script, you don't even need to have `build.gradle` files in the subproject folders at all. Of course, if there are `build.gradle` files in these subprojects, the additional logic will simply be combined with them.
+In fact, by specifying these blocks in your root script, you don't even need to have `build.gradle` files in the subproject folders at all. Of course, if there are `build.gradle` files in these subprojects, the additional logic will simply be combined into them.
 
 For completion, you should also know you can also target a project directly using the `project(':project-name')` method.
 
@@ -324,7 +325,7 @@ subprojects {
 }
 {% endhighlight %}
 
-By modifying `settings.gradle` in this way, you not only can support complex project layouts, but this abstracts that detail from any build script logic. For example, you can now safely change the location of `lib1` and/or `lib2`. Simply update `settings.gradle` and everything should still compile.
+By modifying `settings.gradle` in this way, you not only can support complex project layouts, but this abstracts hardcoded path details out of your build script logic. For example, you can now safely change the location of `lib1` and/or `lib2` anytime. Simply update `settings.gradle` and everything will still compile.
 
 As far as the root project is concerned, it thinks the organization is flat:
 
@@ -350,9 +351,9 @@ Project 'lib2', source files:
 ## Key Takeaways
 
 * A Gradle project is a folder containing a `gradle.build` script plus its contents
-* Multiproject layout have a root project that manages nested child projects
+* Multiproject layout is accomplished with a root project that manages target projects
 * A root project is defined by a `gradle.build` scripts plus a `settings.gradle` file
 * To explicitly target the Gradle tasks of a particular subproject, qualify its name using `:` separators, e.g. `:path:to:project:<task>`
 * Projects can be nested as deeply as you want
-* Gradle allows `allprojects` and `subprojects` blocks in the root project to share logic and values across scripts
-* You can override every project's path in `settings.gradle`, allowing Gradle to manage projects in external directories
+* Gradle allows `allprojects` and `subprojects` blocks in the root project to share code across scripts
+* You can specify a project's path in `settings.gradle`, allowing Gradle to manage projects in external directories
