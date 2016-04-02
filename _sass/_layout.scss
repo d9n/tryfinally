@@ -420,6 +420,21 @@ figcaption.title {
 }
 
 /**
+ * Notes
+ */
+
+div.note {
+    font-size: 90%;
+    padding: $vpad $hpad;
+    // margin: $spacing-unit 5px;
+    margin-bottom: $spacing-unit;
+
+    @include border-radius(2px);
+    @include gradient-top($note-color);
+    @include box-shadow(0px 0px 1px 0px rgba(125,125,125,0.5));
+}
+
+/**
  * Misc
  */
 .pull-left    { float: left; }

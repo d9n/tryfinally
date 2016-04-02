@@ -18,6 +18,10 @@
   background: linear-gradient($gradient);
 }
 
+@mixin gradient-top($color, $perc: 10%) {
+  @include gradient(top, $color, darken($color, $perc))
+}
+
 @mixin responsive-font($font-size) {
   font-size: $font-size;
 
