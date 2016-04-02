@@ -74,8 +74,8 @@ For the root project only, in addition to defining a `build.gradle` script, you 
 {% filetree %}
 root_project/
     gradlew*
-    build.gradle
-    settings.gradle
+    <b>build.gradle</b>
+    <b>settings.gradle</b>
     a/
         build.gradle
     b/
@@ -160,11 +160,11 @@ nested_projects/
     gradlew*
     build.gradle
     settings.gradle
-    a/
+    <b>a</b>/
         build.gradle
-        b/
+        <b>b</b>/
             build.gradle
-            c/
+            <b>c</b>/
                 build.gradle
 {% endfiletree %}
 
@@ -287,7 +287,7 @@ In practice, it's pretty common to have a root project that wants to reach outsi
 
 {% filetree %}
 external_paths/
-    app_root/
+    <b>app_root</b>/
         build.gradle
         settings.gradle
         app/
@@ -295,11 +295,11 @@ external_paths/
                 SampleApp.java
                 ...
     libs/
-        lib1/
+        <b>lib1</b>/
             src/
                 Lib1.java
                 ...
-        lib2/
+        <b>lib2</b>/
             src/
                 Lib2.java
                 ...

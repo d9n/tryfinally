@@ -111,7 +111,7 @@ module Jekyll
         end
 
         lineStrip = line.strip
-        ext = File.extname(lineStrip)
+        ext = File.extname(lineStrip.strip_tags)
         if lineStrip.end_with?('/')
           icon = hasChildren[index] ? 'fa-folder-open-o' : 'fa-folder-o'
           output << "<li>{% icon fa-li #{icon} %}#{lineStrip.chomp('/')}</li>"
