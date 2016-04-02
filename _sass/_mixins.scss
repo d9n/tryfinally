@@ -11,6 +11,18 @@
     }
 }
 
+@mixin printer-query() {
+    @media print {
+        @content;
+    }
+}
+
+@mixin hide-on-printer() {
+  @include printer-query() {
+    display: none;
+  }
+}
+
 @mixin gradient($gradient...) {
   background: -webkit-linear-gradient($gradient);
   background: -o-linear-gradient($gradient);

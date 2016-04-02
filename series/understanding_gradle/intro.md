@@ -304,9 +304,9 @@ buildscript {
 apply plugin: 'com.android.application'
 {% endhighlight %}
 
-Notice that the `buildscript` block automatically introduces a `classpath` configuration. <span name="classpath">Read the aside if you're curious to know more</span>, but otherwise just use this configuration to specify dependencies needed by any plugins you want to use.
+Notice that the `buildscript` block automatically introduces a `classpath` configuration. Read the note below if you're curious to know more, but otherwise just use this configuration to specify dependencies needed by any plugins you want to use.
 
-<aside name="classpath">A <a href="https://en.wikipedia.org/wiki/Classpath_(Java)">classpath</a> is a concept in Java and Groovy, a path where compiled code can be found and used as a dependency when building other code. Remember that your build script is code and is actually being compiled each time <code>gradlew</code> is called! The buildblock's classpath is actually providing dependencies for the rest of your build script. You can even include dependencies for classes that you want to use <i>inside</i> your build script.</aside>
+<div class="note">A <a href="https://en.wikipedia.org/wiki/Classpath_(Java)">classpath</a> is a concept in Java and Groovy, a path where compiled code can be found and used as a dependency when building other code. Remember that your build script is code and is actually being compiled each time <code>gradlew</code> is called! The buildblock's classpath is actually providing dependencies for the rest of your build script.</div>
 
 ## Key Takeaways
 
