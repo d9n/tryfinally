@@ -45,8 +45,7 @@ task listTasks << {
 
 <aside name="projectapi"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html">Check out the API</a> to learn more about what information is provided by the <code>Project</code> class.</aside>
 
-{% tryme %}
-{% highlight bash %}
+{% terminal %}
 $ cd empty_project
 
 $ ./gradlew -q printName
@@ -56,7 +55,7 @@ $ ./gradlew -q listTasks
 Project tasks are:
     printName
     listTasks
-{% endhighlight %}
+{% endterminal %}
 
 <div class="note">Note the use of <code>gradlew -q</code>, where <code>q</code> is short for <code>quiet</code>. This cuts out a lot of chatty help text.</div>
 
@@ -104,8 +103,7 @@ If you want to target a task in a particular project, you will need to qualify i
 
 e.g. `task` → `projectname:task`
 
-{% tryme %}
-{% highlight bash %}
+{% terminal %}
 $ cd root_project
 
 $ ./gradlew -q printName
@@ -116,7 +114,7 @@ My project name: 'c'
 
 $ ./gradlew -q c:printName
 My project name: 'c'
-{% endhighlight %}
+{% endterminal %}
 
 The `:` character is essentially a path separator, playing a similar role to the `/` character in a directory path.
 
@@ -124,8 +122,7 @@ If you start a project name with a `:`, that means start from the root project. 
 
 By using `:` and starting from the root, you can reference any project's task from the directory of any other.
 
-{% tryme %}
-{% highlight bash %}
+{% terminal %}
 $ cd root_project
 
 $ ./gradlew -q printName
@@ -147,7 +144,7 @@ My project name: 'root_project'
 
 $ ../gradlew -q :c:printName
 My project name: 'c'
-{% endhighlight %}
+{% endterminal %}
 
 On final note: Gradle only supports one root project at any time. Even if you wrap a subproject that has its own <code>settings.gradle</code> in it, it will be ignored. Only the root <code>settings.gradle</code> file will be used in a Gradle run.
 
@@ -173,8 +170,7 @@ nested_projects/
 include 'a', 'a:b', 'a:b:c'
 {% endhighlight %}
 
-{% tryme %}
-{% highlight bash %}
+{% terminal %}
 $ cd nested_projects
 
 $ ./gradlew -q printName
@@ -192,7 +188,7 @@ Project 'b' not found in root project 'nested_projects'
 
 $ ./gradlew -q a:b:printName
 My project name: 'b'
-{% endhighlight %}
+{% endterminal %}
 
 ### Project blocks
 
@@ -249,8 +245,7 @@ project(':c') {
 
 The above gradle script defines `printName` in every project, `listFiles` in subprojects only, and `listTasks` only in project `c`.
 
-{% tryme %}
-{% highlight bash %}
+{% terminal %}
 $ cd project_blocks
 
 $ ./gradlew -q printName
@@ -275,7 +270,7 @@ Project 'c', tasks:
   listFiles
   listTasks
   printName
-{% endhighlight %}
+{% endterminal %}
 
 `allprojects` and `subprojects` blocks are a great place to set variables or apply plugins that are shared across projects. The `project` selector may be useful occasionally, but it is probably better to just put that logic in the subproject `build.gradle` script directly.
 
@@ -340,8 +335,7 @@ As far as the root project is concerned, it thinks the organization is flat:
     lib2/
 {% endfiletree %}
 
-{% tryme %}
-{% highlight bash %}
+{% terminal %}
 $ cd external_paths/app_root
 
 $ ./gradlew -q listJava
@@ -351,7 +345,7 @@ Project 'lib1', source files:
   src/Lib1.java
 Project 'lib2', source files:
   src/Lib2.java
-{% endhighlight %}
+{% endterminal %}
 
 ## Key Takeaways
 

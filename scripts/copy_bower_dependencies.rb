@@ -15,6 +15,19 @@ FileUtils.cp('bower_components/normalize-css/normalize.css', "#{sass_dir}/_norma
 FileUtils.cp('bower_components/pygments/css/igor.css',
 "#{sass_dir}/_syntax-highlighting.scss")
 
+terminal_style = File.open('bower_components/pygments/css/paraiso-dark.css', 'r').read
+terminal_style = ".terminal * {
+
+> pre {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+#{terminal_style}
+}"
+File.open("#{sass_dir}/_terminal-syntax-highlighting.scss", 'w') { |file| file.write(terminal_style)}
+
+
 fa_dir = "#{sass_dir}/font-awesome" # working directory, will remove later
 FileUtils.mkdir(fa_dir) if !File.exists?(fa_dir)
 FileUtils.cp_r('bower_components/font-awesome/fonts', '.')
