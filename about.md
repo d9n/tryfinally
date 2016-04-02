@@ -9,8 +9,8 @@ I use [Jekyll](http://jekyllrb.com) to build this site, and I host it using [Git
 
 I'd also like to call out some inspirations:
 
-- [Game Programming Patterns](http://gameprogrammingpatterns.com/) for being a humorous, well written resource; also, where I fell in love with asides.
-- [Red Blob Games](http://www.redblobgames.com/) for its approachable technical articles; it effectivley uses of colorful, animated, interactive components to break down and teach complex ideas.
+- [Game Programming Patterns](http://gameprogrammingpatterns.com/), where I fell in love with asides.
+- [Red Blob Games](http://www.redblobgames.com/), which uses interactive components to help break down and teach complex concepts.
 
 ### About me
 
