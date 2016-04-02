@@ -31,9 +31,10 @@ layout: skeleton
         </div>
 
         {% if page.show_git_clone? %}
-<figcaption class="title">{% icon fa-terminal %} When you see this icon, try this at home!</figcaption>
+        {% tryme When you see this icon, you can try this at home! %}
 {% highlight bash %}
-# In $SRC/tryfinally/{{ page.series.id }}/{{ page.id }}/
+# In a source folder somewhere on your machine,
+# e.g. ~/src/tryfinally/{{ page.series.id }}/{{ page.id }}/
 $ git clone -b {{ page.id }} https://github.com/d9n/{{ page.series.id }}.git .
 {% endhighlight %}
         {% endif %}
