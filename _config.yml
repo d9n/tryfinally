@@ -1,24 +1,13 @@
 # Site settings
 title: Try{Finally}
 email: d9n.coding@gmail.com
-description: >
-  <b>Carefully crafted coding tutorials</b>
-  <p>
-  Learn, discuss, and enjoy!
+description: A coding blog about game development with programming tutorials.
 baseurl: "/tryfinally"
 url: "http://d9n.github.io"
-github_username: d9n
 permalink: pretty
 
 # Defaults
 defaults:
-  -
-    scope:
-      path: "series/kotlin"
-    values:
-      series_title: "Making an Android Game with Kotlin and LibGdx"
-      github_repo: "kotlin_keep"
-      github_branch: "master"
   -
     scope:
       path: "series/understanding_gradle"

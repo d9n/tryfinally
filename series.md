@@ -8,7 +8,7 @@ title: Series
 <i>{{ s.summary }}</i>
 <ul>
 {% for p in s.pages %}
-    <li><a href="{{ p.url | prepend: site.baseurl }}" title="{{ p.summary }}">{{ p.title }}</a></li>
+    <li><a href="{{ p.url | prepend: site.baseurl }}" title="{{ p.summary | strip_html }}">{{ p.title }}</a></li>
 {% endfor %}
 </ul>
 {% endfor %}

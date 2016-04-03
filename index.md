@@ -1,9 +1,10 @@
 ---
 layout: basic
 title: Try{Finally} - A coding blog
+summary: <code>Try{Finally}</code> is my coding blog for chatting about game development and sharing programming tutorials.
 ---
 
-`Try{Finally}` is my coding blog for chatting about programming and posting code examples I hope you'll find interesting. For each article, I will provide...
+{{ page.summary }} For each article, I will provide...
 
 * A clear, focused goal
 * Git clone links - follow along at home!

@@ -4,7 +4,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% unless page.title %}{% warn Missing page title %}{% endunless %}
   <title>{% if page.title %}{{ page.title }}{% if page.series %} ({{ page.series.title }}){% endif %}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  {% if page.summary %}
+    {% assign metadesc = page.summary %}
+  {% elsif page.excerpt %}
+    {% assign metadesc = page.excerpt %}
+  {% endif %}
+  <meta name="description" content="{% if metadesc %}{{ metadesc | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">

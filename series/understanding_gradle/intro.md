@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introduction
+title: Getting Started
 summary: This first article introduces just enough foundation so that we can start exploring real build scripts in the following articles.
 ---
 

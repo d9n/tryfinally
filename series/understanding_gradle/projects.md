@@ -2,7 +2,7 @@
 layout: post
 title: Gradle projects
 show_git_clone?: true
-summary: This article covers what a Gradle project is and how it is organized. After reading this article and the previous one, you should be able to understand many Gradle scripts for real projects.
+summary: This article covers what a Gradle project is and how it is organized. After reading this article and <a href="../intro">the previous one</a>, you should be able to understand many Gradle scripts for real projects.
 ---
 
 ## Overview

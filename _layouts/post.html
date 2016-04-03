@@ -40,6 +40,6 @@ $ git clone -b {{ page.id }} https://github.com/d9n/{{ page.series.id }}.git .
 
         {{ content }}
     </div>
-
-    {% if page.series != null %}{% include post/series-footer.html %}{% endif %}
 </article>
+
+{% if page.series != null %}{% include post/series-footer.html %}{% endif %}
