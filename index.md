@@ -1,7 +1,7 @@
 ---
 layout: basic
-title: Try{Finally} - A coding blog
-summary: <code>Try{Finally}</code> is my coding blog for chatting about game development and sharing programming tutorials.
+title: Try++ // a coding blog
+summary: <code>Try++</code> is my coding blog for chatting about game development and sharing programming tutorials.
 ---
 
 {{ page.summary }} For each article, I will provide...
@@ -15,9 +15,20 @@ summary: <code>Try{Finally}</code> is my coding blog for chatting about game dev
 
 <aside name="aside">Like this one!</aside>
 
-I chose the name `Try{Finally}` because of its [obvious programming relevance](https://en.wikipedia.org/wiki/Exception_handling_syntax), but also because I've encountered a good many concepts that were hard to grasp at first but became trivial to understand with a bit of persistence.
+I chose the name `Try++` because I've encountered a good many concepts that seemed daunting to grasp at first but became trivial to understand with a bit of persistence. Perhaps if you expand this philosophy out a bit more, you'd get:
 
-So keeping on _trying_ until you _finally_ get it.
+
+{% highlight c %}
+int try = 1;
+while (!attemptToLearn()) {
+    ++try;
+    sleep(100);
+}
+{% endhighlight %}
+
+<span name="tripe">Also, the abbreviation _trypp_ can be pronounced "tripe" and that's the sort of thing I find disproportionately amusing.</span>
+
+<aside name="tripe">This tidbit may actually communicate the essence who I am as effectively as I'd ever hope to capture in even the most comprehensive autobiography.</aside>
 
 Anyway, welcome. If you're looking for a place to get started, explore the <a href="series">{% icon fa-files-o %} Series</a> page for a good overview of available content.
 

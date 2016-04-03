@@ -5,7 +5,7 @@ title: About
 
 ### Site details
 
-I use [Jekyll](http://jekyllrb.com) to build this site, and I host it using [GitHub Pages](https://pages.github.com/). [All content in this blog](https://github.com/d9n/tryfinally/tree/master) is open source and hosted on Github as well. I do my text editing with [Sublime Text](https://www.sublimetext.com/).
+I use [Jekyll](http://jekyllrb.com) to build this site, and I host it using [GitHub Pages](https://pages.github.com/). [All content in this blog]({{ site.url }}{{ site.baseurl }}/tree/master) is open source and hosted on Github as well. I do my text editing with [Sublime Text](https://www.sublimetext.com/).
 
 I'd also like to call out some inspirations:
 

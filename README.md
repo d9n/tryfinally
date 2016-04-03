@@ -30,7 +30,7 @@ $ less _config.yml # You should probably update "url"
 $ mkdir _site && cd _site
 $ git init
 $ git checkout -b gh-pages
-$ git remote add origin https://github.com/$user/tryfinally
+$ git remote add origin https://github.com/$user/trypp
 $ git pull origin gh-pages
 ```
 

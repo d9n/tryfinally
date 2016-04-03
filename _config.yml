@@ -1,18 +1,10 @@
 # Site settings
-title: Try{Finally}
+title: Try++
 email: d9n.coding@gmail.com
 description: A coding blog about game development with programming tutorials.
-baseurl: "/tryfinally"
+baseurl: "/trypp"
 url: "http://d9n.github.io"
 permalink: pretty
-
-# Defaults
-defaults:
-  -
-    scope:
-      path: "series/understanding_gradle"
-    values:
-      series_title: "Understanding Gradle"
 
 # Build settings
 markdown: kramdown

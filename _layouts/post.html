@@ -33,7 +33,7 @@ layout: skeleton
         {% if page.show_git_clone? %}
 {% terminal When you see this icon, try this at home %}
 # In a source folder somewhere on your machine,
-# e.g. ~/src/tryfinally/{{ page.series.id }}/{{ page.id }}/
+# e.g. ~/src{{ site.baseurl }}/{{ page.series.id }}/{{ page.id }}/
 $ git clone -b {{ page.id }} https://github.com/d9n/{{ page.series.id }}.git .
 {% endterminal %}
         {% endif %}
