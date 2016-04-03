@@ -21,7 +21,7 @@ I chose the name `Try++` because I've encountered a good many concepts that seem
 {% highlight c %}
 int try = 1;
 while (!attemptToLearn()) {
-    ++try;
+    try++;
     sleep(100);
 }
 {% endhighlight %}
