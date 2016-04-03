@@ -27,12 +27,15 @@
     &:visited {
         color: $title-bar-fg;
     }
+}
 
-    > span.site-subtitle {
-        font-size: 60%;
-        @include media-query($on-mobile) {
-            display: none;
-        }
+.site-subtitle {
+    font-family: $title-font-family;
+    font-size: $title-font-size * .6;
+
+    // Makes the title too long on thin screens
+    @include media-query($on-mobile) {
+        display: none;
     }
 }
 
