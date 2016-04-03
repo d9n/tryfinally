@@ -198,12 +198,16 @@ $post-border-radius: 10px;
 
     .series-nav {
         position: absolute;
-        right: $post-intro-pad-horiz;
+        right: $post-intro-pad-horiz / 2;
         float: right;
         font-size: $navbar-font-size;
 
         .menu-icon {
             float: right;
+            // Manually add rough padding to the ... icon
+            width: 36px;
+            text-align: center;
+
             color: $primary-text-dark;
         }
 
@@ -219,10 +223,6 @@ $post-border-radius: 10px;
 
         &:hover .trigger {
             display: block;
-        }
-
-        &:hover .menu-icon {
-            display: none;
         }
 
         &:hover {
