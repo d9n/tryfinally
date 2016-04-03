@@ -39,7 +39,8 @@ $ git clone -b {{ page.id }} https://github.com/d9n/{{ page.series.id }}.git .
         {% endif %}
 
         {{ content }}
+
+        {% if page.series != null %}{% include post/series-footer.html %}{% endif %}
     </div>
 </article>
 
-{% if page.series != null %}{% include post/series-footer.html %}{% endif %}

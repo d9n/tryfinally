@@ -278,6 +278,8 @@ $post-border-radius: 10px;
     @include max-width($content-width);
 
     padding: 0px 30px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 
     $one-line-height: 1.5em;
 

@@ -1,15 +1,16 @@
 {% if page.prev != null or page.next != null %}
-    <footer class="footer-nav">
+    <div class="footer-nav">
         {% if page.prev != null %}
             <a class='pull-left' href="../{{ page.prev.url | split: '/' | last }}">
                 {% icon fa-long-arrow-left %} {{ page.prev.title }}
             </a>
         {% endif %}
-
         {% if page.next != null %}
             <a class='pull-right' href="../{{ page.next.url | split: '/' | last }}">
                 {{ page.next.title }} {% icon fa-long-arrow-right %}
             </a>
         {% endif %}
-    </footer>
+        {% comment %}br needed to give the div some real content so it doesn't collapse{% endcomment %}
+        <br/>
+    </div>
 {% endif %}
