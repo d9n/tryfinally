@@ -16,4 +16,4 @@ I'd also like to call out some inspirations:
 
 I've been programming professionally since 2001, with ten years of that spent in the game industry. I'm currently working at Google on [Android Studio](http://developer.android.com/sdk/index.html).
 
-If you have any questions or comments and want to reach me directly, email me at <d9n.coding@gmail.com>.
+If you have any questions or comments and want to reach me directly, email me at <{{ site.email }}>.

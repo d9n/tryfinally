@@ -2,9 +2,12 @@
 <html>
   {% include head.html %}
   <body>
-    {% include header.html %}
-    <div class="wrapper">
-      {{ content }}
+    <div class="page-container">
+      {% include header.html %}
+      <div class="wrapper">
+        {{ content }}
+      </div>
+      {% include footer.html %}
     </div>
 
   	<script src={{ "/js/third-party/jquery.min.js" | prepend: site.baseurl }}></script>

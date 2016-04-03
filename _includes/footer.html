@@ -1,0 +1,20 @@
+<footer class="site-bar site-footer">
+  <div class="site-links">
+    {% if page.series %}
+{% capture title %}
+Mistake in blog post: {{ page.series.title }} > {{ page.title }}
+{% endcapture %}
+{% capture body %}
+_Issue reported from {{ page.url | prepend: site.baseurl | prepend: site.url }}_
+
+Please report:
+* your issue
+* your browser + browser version
+
+**Thanks for your help!**
+{% endcapture %}
+      <a href="https://github.com/d9n/{{ page.series.id }}/issues/new?title={{ title | url_encode }}&body={{ body | url_encode }}" class="site-link">{% icon fa-github %} Report a mistake</a>
+    {% endif %}
+    <a href="mailto:{{ site.email }}" class="site-link">{% icon fa-envelope-o %} Contact me</a>
+  </div>
+ </footer>

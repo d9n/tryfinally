@@ -1,13 +1,22 @@
+.page-container {
+    min-height: 100%;
+    height: auto;
+    position: relative;
+    padding-bottom: $title-bar-height;
+}
+
 /**
  * Site header
  */
-.site-header {
+.site-bar {
     background-color: $title-bar-bg;
     color: $title-bar-fg;
     min-height: $title-bar-height;
-    margin-bottom: $spacing-unit;
-
     padding: $vpad 30px;
+}
+
+.site-header {
+    margin-bottom: $spacing-unit;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -39,12 +48,12 @@
     }
 }
 
-.site-nav {
+.site-links {
     float: right;
     line-height: $title-bar-height;
     font-size: $navbar-font-size;
 
-    .nav-link {
+    .site-link {
         color: $title-bar-fg;
         margin-left: 5px;
         &:visited {
@@ -107,6 +116,20 @@
             padding: 5px 10px;
         }
     }
+
+    @include hide-on-printer()
+}
+
+/**
+ * Site footer
+ */
+.site-footer {
+    position: absolute;
+    padding: 0px 10px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: right;
 
     @include hide-on-printer()
 }

@@ -11,10 +11,16 @@ dl, dd, ol, ul, figure {
 /**
  * Basic styling
  */
+
+html {
+    height: 100%;
+}
+
 body {
     font-family: $base-font-family;
     font-size: $base-font-size;
     line-height: $base-line-height;
+    height: 100%;
     font-weight: 300;
     color: $primary-text-dark;
     background-color: $body-color;
