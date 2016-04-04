@@ -43,7 +43,7 @@ task listTasks << {
 }
 {% endhighlight %}
 
-<aside name="projectapi"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html">Check out the API</a> to learn more about what information is provided by the <code>Project</code> class.</aside>
+<aside name="projectapi">Check out the <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html">API of the <code>Project</code> class</a> to learn more about what information it can provide.</aside>
 
 {% terminal %}
 $ cd empty_project
@@ -97,6 +97,9 @@ include 'a', 'b', 'c'
 
 Simply including the subproject names in your `settings.gradle` is all you need to do in most cases. Gradle automatically searches the current path for matching subdirectories and creates a `Project` for each.
 
+<div class="note">Gradle only supports one root project at any time. Even if you wrap a subproject that has its own <code>settings.gradle</code> in it, it will be ignored. Only the root <code>settings.gradle</code> file will be considered in a Gradle run.
+</div>
+
 Now, we have multiple projects all with the same task (`printName`). By default, when you make a request to run a Gradle task, it will fire all tasks that match.
 
 If you want to target a task in a particular project, you will need to qualify its name. You do this by explicitly including the project name before the task,
@@ -146,9 +149,6 @@ $ ../gradlew -q :c:printName
 My project name: 'c'
 {% endterminal %}
 
-<div class="note">Gradle only supports one root project at any time. Even if you wrap a subproject that has its own <code>settings.gradle</code> in it, it will be ignored. Only the root <code>settings.gradle</code> file will be considered in a Gradle run.
-</div>
-
 ### Deeply nested projects
 
 Projects can be nested more than one level deep. Just be sure to qualify the project names correctly, such as `:root:projectParent:projectChild`.
@@ -197,9 +197,11 @@ You may have noticed in the previous sections that I duplicated a lot of script 
 
 Gradle provides special blocks that are available to the root project: `allprojects` and `subprojects`. Any logic within the `allprojects` blocks will be available both to the root project itself as well as its subprojects. The `subprojects` block does the same, except excluding the root project.
 
-In fact, by specifying these blocks in your root script, you don't even need to have `build.gradle` files in the subproject folders at all. Of course, if there are `build.gradle` files in these subprojects, the additional logic will simply be combined into them.
-
 For completion, you should also know you can target a project directly using the `project(':project-name')` method.
+
+By using these blocks in your root script, you don't even need to have `build.gradle` files in the subproject folders at all. Perhaps you have a target source code folder that you don't own but still want to decorate with Gradle tasks. You can do that all from a root project.
+
+Of course, if there are `build.gradle` files in your subprojects, the additional logic you define in the rot project will simply be merged into them.
 
 {% filetree %}
 project_blocks/
