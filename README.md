@@ -25,9 +25,9 @@ $ npm run firstrun
 # Verify config
 $ less _config.yml # You should probably update "url"
 
-# Initialize _site and sync with github repo
+# Initialize _site-release and sync with github repo
 # !!! $user should be set to your username !!!
-$ mkdir _site && cd _site
+$ mkdir _site-release && cd !$
 $ git init
 $ git checkout -b gh-pages
 $ git remote add origin https://github.com/$user/trypp
@@ -43,11 +43,11 @@ $ npm run serve # Unlike "jekyll serve", this also watches _config.yml changes
 
 ### Build the site
 ```bash
-# development
+# development, writes into _site
 # (not usually necessary as 'npm run serve' does this automatically)
 $ npm run build
 
-# production
+# production, writes into _site-release
 # includes analytics, tidies html, hides debug controls
 $ npm run build-release
 ```
@@ -55,7 +55,7 @@ $ npm run build-release
 ### Push to github
 ```bash
 # run 'npm run build-release' first!
-$ cd _site
+$ cd _site-release
 $ git add . && git commit --amend
 $ git push --force -u origin gh-pages
 ```
