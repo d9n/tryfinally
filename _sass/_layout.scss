@@ -399,10 +399,10 @@ figcaption.title {
  */
 
 div.note {
-    font-size: 90%;
+    font-size: 95%;
     padding: $vpad $hpad;
-    // margin: $spacing-unit 5px;
-    margin-bottom: $spacing-unit;
+    // Notes in the middle of a paragraph shouldn't disrupt spacing too much
+    margin-bottom: $spacing-unit / 2;
 
     @include border-radius(2px);
     @include gradient-top($note-color);
