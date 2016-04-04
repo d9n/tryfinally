@@ -199,7 +199,7 @@ Gradle provides special blocks that are available to the root project: `allproje
 
 In fact, by specifying these blocks in your root script, you don't even need to have `build.gradle` files in the subproject folders at all. Of course, if there are `build.gradle` files in these subprojects, the additional logic will simply be combined into them.
 
-For completion, you should also know you can also target a project directly using the `project(':project-name')` method.
+For completion, you should also know you can target a project directly using the `project(':project-name')` method.
 
 {% filetree %}
 project_blocks/
