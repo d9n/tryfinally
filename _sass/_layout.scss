@@ -208,6 +208,12 @@ $post-border-radius: 10px;
 }
 
 .post-intro {
+    @mixin post-intro-menu-style() {
+        @include border-radius(5px);
+        background-color: darken($intro-area-bg, 5%);
+    }
+
+
     $post-intro-pad-horiz: 20px;
     padding: 10px $post-intro-pad-horiz;
     @include gradient(top, darken($intro-area-bg, 2%) 0%, $intro-area-bg 100%);
@@ -224,10 +230,12 @@ $post-border-radius: 10px;
         .menu-icon {
             float: right;
             // Manually add rough padding to the ... icon
-            width: 36px;
+            width: 24px;
             text-align: center;
 
             color: $primary-text-dark;
+
+            @include post-intro-menu-style()
         }
 
         .trigger {
@@ -240,13 +248,12 @@ $post-border-radius: 10px;
             margin: 5px;
         }
 
-        &:hover .trigger {
-            display: block;
-        }
-
         &:hover {
-            @include border-radius(5px);
-            background-color: darken($intro-area-bg, 5%);
+            > .trigger {
+                display: block;
+            }
+
+            @include post-intro-menu-style()
         }
 
         @include hide-on-printer()
