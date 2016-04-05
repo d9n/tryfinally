@@ -31,11 +31,15 @@ layout: skeleton
         </div>
 
         {% if page.show_git_clone? %}
-{% terminal When you see this icon, try this at home %}
-# In a source folder somewhere on your machine,
-# e.g. ~/src{{ site.baseurl }}/{{ page.series.id }}/{{ page.id }}/
+<aside name="terminal">Whenever you see the terminal icon, try the example at home!</aside>
+<span name="terminal">
+{% terminal %}
+# In a source folder somewhere on your machine, e.g.
+# mkdir -p ~/src{{ site.baseurl }}/{{ page.series.id }}/{{ page.id }}/ && cd $_
 $ git clone -b {{ page.id }} https://github.com/d9n/{{ page.series.id }}.git .
 {% endterminal %}
+</span>
+
         {% endif %}
 
         {{ content }}

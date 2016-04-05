@@ -83,7 +83,7 @@ root_project/
         build.gradle
 {% endfiletree %}
 
-<figcaption class="title">build.gradle, a/build.gradle, b/guild.gradle, c/build.gradle</figcaption>
+<figcaption class="title">build.gradle<br>a/build.gradle<br>b/guild.gradle<br>c/build.gradle</figcaption>
 {% highlight groovy %}
 task printName << {
   println "My project name: '${project.name}'"

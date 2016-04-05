@@ -1,5 +1,5 @@
-* Issue? Link to github issue tracker + label
-  * Add special tracker for people who get to the nocontent page?
+* Change the top-right icon
+* Background color for "..."
 
 * Get a better favicon!
 * Finish gradle series
