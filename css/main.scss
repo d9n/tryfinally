@@ -1,5 +1,12 @@
 ---
 ---
+
+{% if jekyll.environment == "production" %}
+    $production: true;
+{% else %}
+    $production: false;
+{% endif %}
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
     "third-party/normalize",
