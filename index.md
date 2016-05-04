@@ -15,8 +15,7 @@ summary: <code>Try++</code> is my coding blog for chatting about game developmen
 
 <aside name="aside">Like this one!</aside>
 
-I chose the name `Try++` because I've encountered a good many concepts that seemed daunting to grasp at first but became trivial to understand with a bit of persistence. Perhaps if you expand this philosophy out a bit more, you'd get:
-
+I chose the name `Try++` because I've encountered a good many concepts that seemed daunting to grasp at first but became trivial to understand with a bit of persistence. To expand this coding philosphy out more completely:
 
 {% highlight c %}
 int try = 1;
