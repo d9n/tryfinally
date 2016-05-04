@@ -37,5 +37,7 @@ FileUtils.rm_r(fa_dir)
 
 # Copy jquery
 
-FileUtils.cp('bower_components/jquery/dist/jquery.min.js', 'js/third-party')
+js_dir = 'js/third-party'
+FileUtils.mkdir(js_dir) if !File.exists?(js_dir)
+FileUtils.cp('bower_components/jquery/dist/jquery.min.js', js_dir)
 
